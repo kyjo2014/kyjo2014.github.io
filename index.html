@@ -66,6 +66,219 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/09/13/进度条控件/">
+  <time datetime="2015-09-13T15:43:02.000Z">
+    2015-09-13
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/09/13/进度条控件/">进度条控件</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <pre><code><span class="keyword">var</span>  COREHTML5 = COREHTML5 || {};
+COREHTML5.RoundedRectangle = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent</span>)</span>{
+    <span class="keyword">this</span>.strokeStyle = strokeStyle ?strokeStyle :<span class="string">'gray'</span>;
+    <span class="keyword">this</span>.fillStyle = fillStyle? fillStyle :<span class="string">'skyblue'</span>;
+    horizontalSizePercent = horizontalSizePercent ||<span class="number">100</span>;
+    verticalSizePercent = verticalSizePercent ||<span class="number">100</span>;
+    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(100,100,100,0.8)'</span>;
+    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">3</span>;
+    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">3</span>;
+    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
+    <span class="keyword">this</span>.setSizePercents(horizontalSizePercent,verticalSizePercent);
+    <span class="keyword">this</span>.createCanvas();
+    <span class="keyword">this</span>.createDOMElement();
+    <span class="keyword">return</span> <span class="keyword">this</span>;
+
+}
+COREHTML5.RoundedRectangle.prototype = {
+    createCanvas: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);
+        <span class="keyword">this</span>.context = canvas.getContext(<span class="string">'2d'</span>);
+        <span class="keyword">return</span> canvas;
+    },
+    createDOMElement: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
+        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas);
+    },
+    appendTo : <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
+        element.appendChild(<span class="keyword">this</span>.domElement);
+        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth +<span class="string">'px'</span>;
+        <span class="keyword">this</span>.dimElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
+        <span class="keyword">this</span>.resize(element.offsetWidth,element.offsetHeight);
+    },
+    resize :<span class="function"><span class="keyword">function</span> (<span class="params">width,height</span>) </span>{
+        <span class="keyword">this</span>.HORIZONTAL_MARGIN = (width - width *<span class="keyword">this</span>.horizontalSizePercent)/<span class="number">2</span>;
+        <span class="keyword">this</span>.VERTICAL_MARGIN = (height - height *<span class="keyword">this</span>.verticalSizePercent)/<span class="number">2</span>;
+        <span class="keyword">this</span>.cornerRadius = (<span class="keyword">this</span>.context.canvas.height/<span class="number">2</span> - <span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN)/<span class="number">2</span>;
+        <span class="keyword">this</span>.top = <span class="keyword">this</span>.VERTICAL_MARGIN;
+        <span class="keyword">this</span>.left = <span class="keyword">this</span>.HORIZONTAL_MARGIN;
+        <span class="keyword">this</span>.right = <span class="keyword">this</span>.left + width- <span class="number">2</span>*<span class="keyword">this</span>.HORIZONTAL_MARGIN;
+        <span class="keyword">this</span>.bottom = <span class="keyword">this</span>.top + height -<span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN;
+        <span class="keyword">this</span>.context.canvas.width = width;
+        <span class="keyword">this</span>.context.canvas.height = height;
+    },
+    setSizePercents : <span class="function"><span class="keyword">function</span> (<span class="params">h,v</span>) </span>{
+        <span class="keyword">this</span>.horizontalSizePercent = h &gt;<span class="number">1</span>? h/<span class="number">100</span>:h;
+        <span class="keyword">this</span>.verticalSizePercent = v&gt;<span class="number">1</span> ?v/<span class="number">100</span>:v;
+
+    },
+    fill :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">var</span> radius = (<span class="keyword">this</span>.bottom - <span class="keyword">this</span>.top)/<span class="number">2</span>;
+        <span class="keyword">this</span>.context.save();
+        <span class="keyword">this</span>.context.shadowColor = <span class="keyword">this</span>.SHADOW_COLOR;
+        <span class="keyword">this</span>.context.shadowOffsetX = <span class="keyword">this</span>.SHADOW_OFFSET_X;
+        <span class="keyword">this</span>.context.shadowOffsetY = <span class="keyword">this</span>.SHADOW_OFFSET_Y;
+        <span class="keyword">this</span>.context.shadowBlur = <span class="number">6</span>;
+        <span class="keyword">this</span>.context.beginPath();
+        <span class="keyword">this</span>.context.moveTo(<span class="keyword">this</span>.left + radius ,<span class="keyword">this</span>.top);
+        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,radius);
+        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,radius);
+        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,radius);
+        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,radius);
+        <span class="keyword">this</span>.context.closePath();
+        <span class="keyword">this</span>.context.fillStyle = <span class="keyword">this</span>.fillStyle;
+        <span class="keyword">this</span>.context.fill();
+        <span class="keyword">this</span>.context.shadowColor = <span class="literal">undefined</span>;
+
+    },
+    overlayGradient: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(<span class="keyword">this</span>.left,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.bottom);
+        <span class="keyword">var</span> gradient = <span class="keyword">this</span>.context.createLinearGradient(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom);
+        gradient.addColorStop(<span class="number">0</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
+        gradient.addColorStop(<span class="number">0.2</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
+        gradient.addColorStop(<span class="number">0.25</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
+        gradient.addColorStop(<span class="number">0.3</span>,<span class="string">'rgba(255,255,255,0.9)'</span>);
+        gradient.addColorStop(<span class="number">0.4</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
+        gradient.addColorStop(<span class="number">0.45</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
+        gradient.addColorStop(<span class="number">0.6</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
+        gradient.addColorStop(<span class="number">1</span>,<span class="string">'rgba(255,255,255,0.1)'</span>);
+        <span class="keyword">this</span>.context.fillStyle = gradient;
+        <span class="keyword">this</span>.context.fill();
+        <span class="keyword">this</span>.context.lineWidth = <span class="number">0.4</span>;
+        <span class="keyword">this</span>.context.strokeStyle = <span class="keyword">this</span>.strokeStyle;
+        <span class="keyword">this</span>.context.stroke();
+        <span class="keyword">this</span>.context.restore();
+    },
+    draw: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
+        <span class="keyword">var</span> originalContext;
+        <span class="keyword">if</span> (context) {
+            originalContext = <span class="keyword">this</span>.context;
+            <span class="keyword">this</span>.context =context;
+
+        } 
+        <span class="keyword">this</span>.fill();
+        <span class="keyword">this</span>.overlayGradient();
+        <span class="keyword">if</span> (context) {
+            <span class="keyword">this</span>.context = originalContext;
+        }
+    },
+    erase: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
+    }
+
+};
+COREHTML5.Progressbar = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent</span>) </span>{
+    <span class="keyword">this</span>.trough = <span class="keyword">new</span> COREHTML5.RoundedRectangle(strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent);
+    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(255,255,255,0.5)'</span>;
+    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
+    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">2</span>;
+    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">2</span>;
+    <span class="keyword">this</span>.percentComplete = <span class="number">0</span>;
+    <span class="keyword">this</span>.createCanvas();
+    <span class="keyword">this</span>.createDOMElement();
+
+    <span class="keyword">return</span> <span class="keyword">this</span>;
+}
+COREHTML5.Progressbar.prototype = {
+    createDOMElement:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
+        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
+        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas)
+    },
+    createCanvas :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">this</span>.context = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
+        <span class="keyword">this</span>.offscreen = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
+    },
+    appendTo: <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
+        element.appendChild(<span class="keyword">this</span>.domElement);
+        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth + <span class="string">'px'</span> ;
+        <span class="keyword">this</span>.domElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
+        <span class="keyword">this</span>.resize();
+        <span class="keyword">this</span>.trough.resize(element.offsetWidth,element.offsetHeight);
+        <span class="keyword">this</span>.trough.draw(<span class="keyword">this</span>.offscreen);
+    },
+    setCanvasSize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode;
+        <span class="keyword">this</span>.context.canvas.width = domElementParent.offsetWidth;
+        <span class="keyword">this</span>.context.canvas.height = domElementParent.offsetHeight;
+    },
+    resize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode,
+        w = domElementParent.offsetWidth,
+        h = domElementParent.offsetHeight;
+        <span class="keyword">this</span>.setCanvasSize();
+        <span class="keyword">this</span>.context.canvas.width = w;
+        <span class="keyword">this</span>.context.canvas.height = h;
+        <span class="keyword">this</span>.offscreen.canvas.width = w;
+        <span class="keyword">this</span>.offscreen.canvas.height = h;
+
+
+    },
+    draw:<span class="function"><span class="keyword">function</span> (<span class="params">percentComplete</span>) </span>{
+        <span class="keyword">if</span>(percentComplete &gt; <span class="number">0</span>){
+            <span class="keyword">this</span>.context.drawImage(<span class="keyword">this</span>.offscreen.canvas,<span class="number">0</span>,<span class="number">0</span>,
+                <span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height);
+
+        }
+    },
+    erase:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
+        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
+    },
+};
+<span class="keyword">var</span> startButton = <span class="built_in">document</span>.getElementById(<span class="string">'startButton'</span>),
+    loadingSpan = <span class="built_in">document</span>.getElementById(<span class="string">'loadingSpan'</span>),
+    progressbar = <span class="keyword">new</span> COREHTML5.Progressbar(<span class="string">'rgba(0,0,0,0.2)'</span>,<span class="string">'teal'</span>,<span class="number">90</span>,<span class="number">70</span>),
+    percentComplete = <span class="number">0</span>;
+    startButton.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>{
+        loadingSpan.style.display = <span class="string">'inline'</span>;
+        startButton.style.display = <span class="string">'none'</span>;
+        percentComplete += <span class="number">1.0</span>;
+        <span class="keyword">if</span>( percentComplete &gt;<span class="number">100</span>) {
+            percentComplete = <span class="number">0</span>;
+            loadingSpan.style.display = <span class="string">'none'</span>;
+            startButton.style.display = <span class="string">'inline'</span>;
+        }
+        <span class="keyword">else</span>{
+            progressbar.erase();
+            progressbar.draw(percentComplete);
+            requestAnimationFrame(startButton.onclick);
+        }
+    };
+    progressbar.appendTo(<span class="built_in">document</span>.getElementById(<span class="string">'progressbarDiv'</span>));
+</code></pre>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/09/10/google浏览器控制台debug/">
   <time datetime="2015-09-10T15:54:40.000Z">
     2015-09-10
@@ -1093,40 +1306,6 @@ alert<span class="list">(<span class="keyword">this</span>)</span><span class="c
       <p>save是保存当前绘图状态，并把它压入一个堆栈 </p>
 <p>restore是恢复上次保存的绘图状态，从堆栈弹出。 </p>
 <p>关键在于绘图状态，它是指Canvas的平移、放缩、旋转、错切、裁剪等操作或者颜色、线条等样式。<br>堆栈原理，restore次数不能多于save。</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="[layout]">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/14/postName/">
-  <time datetime="2015-08-14T13:50:49.000Z">
-    2015-08-14
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/08/14/postName/">postName</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>well come to my world</p>
 
     
   </div>
