@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>js中！！的作用 | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="双感叹号可用作对于表达式的强制类型转换，简单例子：    !!(a &amp;amp; 16）在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。在下例中    function isHostMethod(object,property) {    var t = typeof object[property];    return t==’function’ || (!!(t==’">
+  
+  <meta name="description" content="双感叹号可用作对于表达式的强制类型转换，简单例子：    !!(a &amp;amp; 16）在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。在下例中    function isHostMethod(object,property) {    var t = typeof object[property];    return t==’function’ || (!!(t==’">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js中！！的作用">
+<meta property="og:url" content="http://yoursite.com/2015/09/20/js中！！的作用/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="双感叹号可用作对于表达式的强制类型转换，简单例子：    !!(a &amp;amp; 16）在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。在下例中    function isHostMethod(object,property) {    var t = typeof object[property];    return t==’function’ || (!!(t==’">
+<meta property="og:updated_time" content="2015-09-20T12:02:57.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js中！！的作用">
+<meta name="twitter:description" content="双感叹号可用作对于表达式的强制类型转换，简单例子：    !!(a &amp;amp; 16）在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。在下例中    function isHostMethod(object,property) {    var t = typeof object[property];    return t==’function’ || (!!(t==’">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/09/20/js中！！的作用/">
+  <time datetime="2015-09-20T09:21:26.000Z">
+    2015-09-20
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">js中！！的作用</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>双感叹号可用作对于表达式的强制类型转换，简单例子：<br>    !!(a &amp; 16）<br>在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。<br>在下例中<br>    function isHostMethod(object,property) {<br>    var t = typeof object[property];<br>    return t==’function’ || (!!(t==’object’&amp;&amp;object[property]))||t == ‘unknown’;<br>    }<br>而且，检测的时候通过使用双逻辑非操作符来得到布尔值会比先存储后访问的效果更好。<br>解释：在执行逻辑表达式的时候，由逻辑表达式的规则可得出：<br>1.如果第一个操作数是对象，那么就返回第二个操作数；<br>2.如果两个操作数都是对象，则返回第二个操作数（意味着逻辑表达式不一定返回TF）；<br>而第一个！可以根据非得规则，把返回的对象或者NAN，undefined，转变为TF。</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

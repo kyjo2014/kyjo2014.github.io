@@ -66,6 +66,40 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/09/20/js中！！的作用/">
+  <time datetime="2015-09-20T09:21:26.000Z">
+    2015-09-20
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/09/20/js中！！的作用/">js中！！的作用</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>双感叹号可用作对于表达式的强制类型转换，简单例子：<br>    !!(a &amp; 16）<br>在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。<br>在下例中<br>    function isHostMethod(object,property) {<br>    var t = typeof object[property];<br>    return t==’function’ || (!!(t==’object’&amp;&amp;object[property]))||t == ‘unknown’;<br>    }<br>而且，检测的时候通过使用双逻辑非操作符来得到布尔值会比先存储后访问的效果更好。<br>解释：在执行逻辑表达式的时候，由逻辑表达式的规则可得出：<br>1.如果第一个操作数是对象，那么就返回第二个操作数；<br>2.如果两个操作数都是对象，则返回第二个操作数（意味着逻辑表达式不一定返回TF）；<br>而第一个！可以根据非得规则，把返回的对象或者NAN，undefined，转变为TF。</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/09/13/进度条控件/">
   <time datetime="2015-09-13T15:43:02.000Z">
     2015-09-13
@@ -1270,42 +1304,6 @@ alert<span class="list">(<span class="keyword">this</span>)</span><span class="c
 <p>也就是说，后者返回的是一个html对象(本例中是遍历HTML的img对象，所以为 HTMLImageElement)。很多人在使用jquery的时候，经常this.attr(‘src’);   这时会报错“对象不支持此属性或方法”，这又是为什么呢？其实看明白上面的例子，就知道错在哪里了：</p>
 <p>很简单，this操作的是HTML对象，那么，HTML对象中怎么会有val()方法了，所以，在使用中，我们不能直接用this来直接调用jquery的方法或者属性。</p>
 <p>转自：Tekkaman 的blog</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/15/HTML5-canvas/">
-  <time datetime="2015-08-15T15:00:45.000Z">
-    2015-08-15
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/08/15/HTML5-canvas/">HTML5-canvas</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>save是保存当前绘图状态，并把它压入一个堆栈 </p>
-<p>restore是恢复上次保存的绘图状态，从堆栈弹出。 </p>
-<p>关键在于绘图状态，它是指Canvas的平移、放缩、旋转、错切、裁剪等操作或者颜色、线条等样式。<br>堆栈原理，restore次数不能多于save。</p>
 
     
   </div>
