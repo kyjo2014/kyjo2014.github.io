@@ -66,6 +66,54 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/08/16/this-与this的区别/">
+  <time datetime="2015-08-16T02:04:39.000Z">
+    2015-08-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/08/16/this-与this的区别/">$(this)与this的区别</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？</p>
+<pre><code>首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(<span class="keyword">this</span>)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(<span class="string">'#id'</span>));时，会弹出一个[object <span class="built_in">Object</span> ]，这个object对象，也就是jquery对象了。
+
+那么，我们再回过头来说$(<span class="keyword">this</span>)，这个<span class="keyword">this</span>是什么呢？假设我们有如下的代码：
+</code></pre><p>$(“#desktop a img”).each(function(index){</p>
+<pre><code>alert<span class="list">($<span class="list">(<span class="keyword">this</span>)</span>)</span><span class="comment">;</span>
+
+alert<span class="list">(<span class="keyword">this</span>)</span><span class="comment">;</span>
+</code></pre><p>}</p>
+<p>那么，这时候可以看出来：</p>
+<p>alert($(this));  弹出的结果是[object Object ]</p>
+<p>alert(this);        弹出来的是[object HTMLImageElement]</p>
+<p>也就是说，后者返回的是一个html对象(本例中是遍历HTML的img对象，所以为 HTMLImageElement)。很多人在使用jquery的时候，经常this.attr(‘src’);   这时会报错“对象不支持此属性或方法”，这又是为什么呢？其实看明白上面的例子，就知道错在哪里了：</p>
+<p>很简单，this操作的是HTML对象，那么，HTML对象中怎么会有val()方法了，所以，在使用中，我们不能直接用this来直接调用jquery的方法或者属性。</p>
+<p>转自：Tekkaman 的blog</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/08/15/HTML5-canvas/">
   <time datetime="2015-08-15T15:00:45.000Z">
     2015-08-15
