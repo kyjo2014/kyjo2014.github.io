@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>《H5核心技术》梗概 | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="##canvas画布画布的大小不要用css调整，一定要在标签中定义，否则会导致缩放问题。
+
+##由canvas创建一幅可另存为到本地的图片利用toDataURL()接口，向网页中加入一个不可见的图像元素，有id值但是没有src属性。用css调整图像的位置与大小，让其覆盖在canvas上，提供截图按钮。要截图的时候，用该接口向img的src提供值，同时img变可见，隐藏canvas。
+
+##创建离屏">
+  
+  <meta name="description" content="##canvas画布画布的大小不要用css调整，一定要在标签中定义，否则会导致缩放问题。
+
+##由canvas创建一幅可另存为到本地的图片利用toDataURL()接口，向网页中加入一个不可见的图像元素，有id值但是没有src属性。用css调整图像的位置与大小，让其覆盖在canvas上，提供截图按钮。要截图的时候，用该接口向img的src提供值，同时img变可见，隐藏canvas。
+
+##创建离屏">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《H5核心技术》梗概">
+<meta property="og:url" content="http://yoursite.com/2015/09/24/《H5核心技术》梗概/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="##canvas画布画布的大小不要用css调整，一定要在标签中定义，否则会导致缩放问题。
+
+##由canvas创建一幅可另存为到本地的图片利用toDataURL()接口，向网页中加入一个不可见的图像元素，有id值但是没有src属性。用css调整图像的位置与大小，让其覆盖在canvas上，提供截图按钮。要截图的时候，用该接口向img的src提供值，同时img变可见，隐藏canvas。
+
+##创建离屏">
+<meta property="og:updated_time" content="2015-09-24T13:10:37.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《H5核心技术》梗概">
+<meta name="twitter:description" content="##canvas画布画布的大小不要用css调整，一定要在标签中定义，否则会导致缩放问题。
+
+##由canvas创建一幅可另存为到本地的图片利用toDataURL()接口，向网页中加入一个不可见的图像元素，有id值但是没有src属性。用css调整图像的位置与大小，让其覆盖在canvas上，提供截图按钮。要截图的时候，用该接口向img的src提供值，同时img变可见，隐藏canvas。
+
+##创建离屏">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2015/09/24/《H5核心技术》梗概/">
+  <time datetime="2015-09-24T08:39:41.000Z">
+    2015-09-24
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">《H5核心技术》梗概</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>##canvas画布<br>画布的大小不要用css调整，一定要在标签中定义，否则会导致缩放问题。</p>
+<hr>
+<p>##由canvas创建一幅可另存为到本地的图片<br>利用<code>toDataURL()</code>接口，向网页中加入一个不可见的图像元素，有id值但是没有src属性。用css调整图像的位置与大小，让其覆盖在canvas上，提供<br>截图按钮。要截图的时候，用该接口向img的src提供值，同时img变可见，隐藏canvas。</p>
+<hr>
+<p>##创建离屏canvas<br>优势，把背景存放在<code>display:none</code>的canvas中提高动画的运行效率。</p>
+<hr>
+<p>##渐变色与图案<br><code>createLinearGradient()</code>(线性)和<code>createRadialGradient()</code>(放射性)中的addcolorstop即可设置颜色停止点在渐变线上的位置。</p>
+<hr>
+<p>##路径的闭合<br>要用beginpath()或者clearRect()来清除路径，否则rect()，lineTO()新开的路径会自动连接到上一次创建的路径的末端。用closePath则可以吧<br>有缺口的路径自动进行闭合。arc()方法默认以逆时针来进行绘制路径，arcTo()可以画一段圆角，以所给的两个点以及画的圆角的半径来作为参数。而在进行fill()的时候<br>路径会自动闭合而且会以逆时针的方式顺着线，然后在左边进行填充。</p>
+<hr>
+<p>##剪辑区域制作动画<br>利用clip()来调整需要剪辑的区域，然后使用clearRect()来清除掉内容。注意：调用clip()的时候记住要用save()和restore()来包裹住<br>他，否则由于clip()具有把剪辑区域设置为当前剪辑区域与当前路径的交集，那么剪辑区域会变得越来越小，而这是无法改变的。</p>
+<hr>
+<p>##文本编辑<br>文本编辑的时候光标的位置不要用measureText()来确定位置，因为这样只是测量了文本的宽度，而事实上用fillText()来渲染的时候可能会超出<br>文本的宽度。而在需要精确文本坐标的时候（要实现橡皮擦，删除文字的时候），最好是把该区域用clip()直接把整个区域的内容都擦除。</p>
+<hr>
+<p>##图像绘制的安全问题<br>canvas会通过设置origin-clean的标志位，如果用过drawImage()的话这个标志位就会变成false，在再次调用<code>toDataURL()</code>的时候就会出错。<br>而且为了防止网页中的恶意代码会篡改本地的文件系统，浏览器会把用户的文件系统与运行程序环境进行隔离，而在开发的时候可以通过设置在命令行中<br>以“–allow-file-access-from-files”参数来启动chrome浏览器让其绕开绘图安全机制。</p>
+<hr>
+<p>##性能对比</p>
+<p>###使用getImageData()和drawImageData()时<br>1.不要频繁的使用getImageData()来获取少量数据，这样会使网页加载缓慢。<br>2.避免在循环体内直接访问对象的属性而应该将其存在局部变量中。<br>3.应该是用循环计数器来遍历完整的像素，而不是像素分量（红绿蓝，Alpha）。<br>4.不必使用逆向遍历和移位技巧。</p>
+<hr>
+<p>##绘制动画<br>通过使用“polyfill”方法（即另外写一个实现动画函数其中要包括（requestAnimationFrame||window.webkitRequestAnimationFrame||<br>window.mozRequestAnimationFrame||window.MsRequestAnimationFrame||一个使用settimeout的函数））来实现动画，这样才能避免由于浏览器兼容性问题。<br>浏览器会自动使用双缓冲区模式来绘制动画，所以不要重复手动创建一个所有内容都重新绘制的缓冲区。但是，在一些小部件上使用多重缓冲区依然能够使效率得到提升。</p>
+<hr>
+<p>##碰撞检测<br>外界矩形判别法，即两个凸多边形的话从每条边上作发现为投影轴，检测每个多边形在投影轴上的投影是否有分离，如有分离则未碰撞。<br>外界圆判别法，直接计算圆心距。<br>最小平移法：直接求定点到边的最小距离。</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/HTML5/">HTML5</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2015 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
