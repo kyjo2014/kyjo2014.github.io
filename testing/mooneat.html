@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	<style type="text/css">
+	body {
+		background-color: black;
+	}
+		#burst-12 {
+			top: 200px;
+			left: 50%;
+    background: yellow;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    border-radius: 50%;
+}
+#burst-12:before, #burst-12:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200px;
+    width: 200px;
+   
+}
+#burst-12:before {
+	background-color: black;
+	border-radius: 50%;
+	-webkit-animation: 5s mooneat linear infinite ;
+    
+}
+#burst-12:after {
+	
+    
+}
+
+@-webkit-keyframes mooneat{
+	from{
+		-webkit-transform: translate(-200px,-200px);
+	}
+	to{
+		-webkit-transform: translate(200px,200px);
+		}
+}
+
+	</style>
+	</head>
+	<body>
+		<div id="burst-12"></div>
+	</body>
+</html>
