@@ -68,6 +68,194 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/03/14/创建六边形div/">
+  <time datetime="2016-03-14T15:41:26.000Z">
+    2016-03-14
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/03/14/创建六边形div/">创建六边形div</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#如何创建一个六边形的div<br>要创建一个六边形的div就要求使用到CSS3<br>中的旋转属性。六边形的div可以被分解为3个矩形重叠而成。<br><img src="../img/1.png" alt=""><br>通过图片可以发现，由于div之间的层叠遮挡关系，实际上能展示出来的区域<br>只有大概其中的1/2。<br><img src="../img/2.png" alt=""><br>所以在设置div的大笑的时候首先，要比预计的六边形要大2倍。第二长宽比要保证是在4:3否则便就对不齐了。<br>当前提都做好后，就要开始应用旋转了。通过计算得出，每两个矩形div之间要形成60度的夹角。</p>
+<pre><code>
+    transform: rotate(120deg);
+</code></pre>
+在使用css3时记住要进行兼容性检查，通过添加-webkit-等后缀避免页面出错。
+继续话题，如果3个div是各自独立的话，那么可以想象出在最表面的那个div会不受限制，把其中的所有内容都展现出来，为了解决这个问题，就要将这些div嵌套起来。
+<pre><code>
+        <div class="box box-first ">
+                        <div class="boxF">
+                            <div class="boxS">
+                                <div class="boxT ">
+                                    <div class="border borderF "></div>
+                                    <div class="border borderS "></div>
+                                    <div class="border borderT "></div>
+                                    <img src="" style="height: 100%;" class="blur background">
+                                    <div class="overlay col-xs-3">
+                                        <a href="#"></a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+</div></code></pre>
+通过嵌套的div+css设置为overflow：hidden，就能起到了父div在一个方向上限制子div的内容展现。从而达成最内部的div只能显示为一个6边形。
+PS。为了帮div设置边框也是在耗费了一定的时间，由于是通过各div间互相制约制作的，所以要帮其添加边框就不能够采取直接在div上添加border属性，只能够在其内部另外在设置3个只有短边有border的div来形成边框效果。
+css：<pre><code>
+       .clear {
+                clear: both;
+            }
+
+            .background {
+                display: inline-block;
+            }
+
+            .box {
+                float: left;
+                z-index: 6;
+                display: none;
+            }
+
+            .lineF,
+            .lineS {
+                position: absolute;
+                visibility: visible;
+                z-index: 5;
+            }
+
+            .box-first,
+            .box-second {
+                margin-left: -webkit-calc(50% - 300px);
+                margin-left: -moz-calc(50% - 300px);
+                margin-left: calc(50% - 300px);
+            }
+
+            .boxMore {
+                margin-left: -webkit-calc(50% - 200px);
+                margin-left: -moz-calc(50% - 200px);
+                margin-left: calc(50% - 200px);
+            }
+
+            .lineS {
+                top: 172px;
+                left: 116px;
+            }
+
+            .boxF,
+            .boxS,
+            .boxT,
+            .overlay {
+                width: 200px;
+                height: 250px;
+                overflow: hidden;
+            }
+
+            .boxF,
+            .boxS {
+                visibility: hidden;
+            }
+
+            .boxF {
+                transform: rotate(120deg);
+                float: left;
+                margin-left: 0px;
+                -ms-transform: rotate(120deg);
+                -moz-transform: rotate(120deg);
+                -webkit-transform: rotate(120deg);
+            }
+
+            .boxS {
+                transform: rotate(-60deg);
+                -ms-transform: rotate(-60deg);
+                -moz-transform: rotate(-60deg);
+                -webkit-transform: rotate(-60deg);
+            }
+
+            .boxT {
+                transform: rotate(-60deg);
+                background: no-repeat 50% center;
+                background-size: cover;
+                -ms-transform: rotate(-60deg);
+                -moz-transform: rotate(-60deg);
+                -webkit-transform: rotate(-60deg);
+                visibility: visible;
+            }
+
+            .overlay {
+                transition: all 250ms ease-in-out 0s;
+                display: inline-block;
+                position: absolute;
+                z-index: 7;
+                text-align: center;
+                top: 0px;
+            }
+
+            .overlay a {
+                display: none;
+                border-radius: 3px;
+                line-height: 32px;
+                text-decoration: none;
+                color: White;
+                font-size: 18px;
+                font-weight: bolder;
+                margin-top: 110px;
+            }
+
+            .overlay:hover a {
+                color: white;
+                display: inline-block;
+            }
+
+            .border {
+                border-top: 0px;
+                border-bottom: 0px;
+                border-left: 3px solid white;
+                border-right: 3px solid white;
+                position: absolute;
+                z-index: 6;
+                width: 200px;
+                height: 115px;
+                top: 27%;
+            }
+
+            .borderS {
+                transform: rotate(60deg);
+                -ms-transform: rotate(60deg);
+                -moz-transform: rotate(60deg);
+                -webkit-transform: rotate(60deg);
+            }
+
+            .borderT {
+                transform: rotate(120deg);
+                -ms-transform: rotate(120deg);
+                -moz-transform: rotate(120deg);
+                -webkit-transform: rotate(120deg);
+            }
+</code></pre>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/11/22/js中的call和apply的作用/">
   <time datetime="2015-11-22T11:39:57.000Z">
     2015-11-22
@@ -1283,40 +1471,6 @@ Polygon.prototype.move = <span class="function"><span class="keyword">function</
 
 ’
 </code></pre>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/21/手机上安装node/">
-  <time datetime="2015-08-21T15:01:52.000Z">
-    2015-08-21
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/08/21/手机上安装node/">手机上安装node</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p><a href="http://www.soulteary.com/2014/05/09/how-to-install-nodejs-on-mobile.html" target="_blank" rel="external">http://www.soulteary.com/2014/05/09/how-to-install-nodejs-on-mobile.html</a><br>又是转的文章。不过这样子就能够在手机上往博客推文章了。</p>
-
     
   </div>
   <footer class="end-sep">
