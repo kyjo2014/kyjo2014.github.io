@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>gulp的使用方法 | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
+// shell$ gulp foo基本 APIgulp.">
+  
+  <meta name="description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
+// shell$ gulp foo基本 APIgulp.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp的使用方法">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/gulp的使用方法/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
+// shell$ gulp foo基本 APIgulp.">
+<meta property="og:updated_time" content="2016-03-15T15:51:41.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp的使用方法">
+<meta name="twitter:description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
+// shell$ gulp foo基本 APIgulp.">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/testing">TestArea</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/03/15/gulp的使用方法/">
+  <time datetime="2016-03-15T15:40:24.000Z">
+    2016-03-15
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">gulp的使用方法</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>基本用法<br>// gulpfile.js<br>gulp.task(‘foo’, function() {<br>    gulp.src(glob)<br>        .pipe(…)<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>});</p>
+<p>// shell<br>$ gulp foo<br>基本 API<br>gulp.src(glob[, options])<br>根据 glob 匹配文件，返回 stream，可以通过 .pipe() 方法传递给后续的插件。<br>gulp.dest(path[, options])<br>一般用法 .pipe(gulp.dest(path))，把 pipe 中的内容按照指定的 path 写成文件，会自动创建不存在的文件夹。<br>注意，可以通过 .pipe 多次指定输出的地方，具体请看 这里<br>gulp.task(name[, deps], fn)<br>定义名为 name 的任务，定义之后就可以在命令行中使用 gulp xxx 来执行任务。<br>deps 里面的任务全部完成后才会执行 fn<br>deps 里面的任务都是并行执行的，如果需要顺序执行，需要特殊写法。具体看 这里<br>gulp.watch(glob[, opts, cb])<br>监听文件变化<br>不会监听新文件（目录），所以一般你会需要 gulp-watch<br>常用命令 （自定义）</p>
+<h1 id="for_development_mode">for development mode</h1><p>gulp server</p>
+<h1 id="run_test">run test</h1><p>gulp test</p>
+<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>gulp.task(‘clean:css’, function () {<br>    del.sync(‘app/styles/*.css’);<br>});</p>
+<p>gulp.task(‘less’, [‘clean:css’], function () {<br>    var stream = gulp<br>            .src(‘app/styles/main.less’)<br>            .pipe(less())<br>            .pipe(gulp.dest(‘app/styles/‘));<br>    return stream;<br>});</p>
+<p>gulp.task(‘connect’, function () {<br>    connect.server({<br>        root: ‘./app’,<br>        port: 9000,<br>        livereload: true,<br>        middleware: function (connect, o) {<br>            return [<br>                (function () {<br>                    var url = require(‘url’);<br>                    var proxy = require(‘proxy-middleware’);<br>                    var options = url.parse(‘<a href="http://localhost:3000/api" target="_blank" rel="external">http://localhost:3000/api</a>‘);<br>                    options.route = ‘/api’;<br>                    return proxy(options);<br>                })(),<br>                modRewrite([<br>                    ‘!\.html|\.js|\.css|\.swf|\.jp(e?)g|\.png|\.gif|\.eot|\.woff|\.ttf|\.svg$ /index.html’<br>                ])<br>            ];<br>        }<br>    });<br>});</p>
+<p>gulp.task(‘watch’, function () {<br>    gulp<br>        .src(‘app/styles/<strong>/*.less’, {read: false})<br>        .pipe(watch(‘app/styles/</strong>/*.less’, function () {<br>            return gulp<br>                .src(‘app/styles/main.less’)<br>                .pipe(less())<br>                .pipe(gulp.dest(‘app/styles/‘))<br>                .pipe(connect.reload());<br>        }));</p>
+<pre><code>gulp
+    .src(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html'])
+    .pipe(watch(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html']))
+    .pipe(plumber())
+    .pipe(connect.reload());
+</code></pre><p>});</p>
+<p>gulp.task(‘server’, [‘less’, ‘connect’, ‘watch’]);<br>gulp build 流程<br>清理 dist/ 文件夹<br>del，根据 glob 来删除文件/目录<br>压缩文件<br>gulp-htmlmin，压缩 html 文件<br>gulp-minify-html，同上<br>gulp-cssmin，压缩 css 文件<br>gulp-minify-css，同上，封装了 clean-css，star 比上面的多<br>gulp-uglify，混淆 JavaScript 代码<br>gulp-usemin，合并指定 block 中的文件<br>gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js<br>复制其他文件到 dist/<br>gulp.src(…).pipe(gulp.dest(…))<br>实例代码<br>gulp.task(‘clean:build’, function () {<br>    del.sync(‘dist/‘, {force: true});<br>});</p>
+<p>gulp.task(‘minify’, [‘clean:build’, ‘less’], function () {<br>    gulp<br>        .src(‘app/views/<em>*/</em>.html’)<br>        .pipe(htmlmin({collapseWhitespace: true}))<br>        .pipe(gulp.dest(‘dist/views’));</p>
+<pre><code><span class="tag">gulp</span>
+    <span class="class">.src</span>(<span class="string">'app/index.html'</span>)
+    <span class="class">.pipe</span>(<span class="function">usemin</span>({
+        <span class="attribute">js</span>: [<span class="function">uglify</span>(), <span class="function">rev</span>()],
+        <span class="attribute">css</span>: [<span class="function">minifyCss</span>(), <span class="string">'concat'</span>, <span class="function">rev</span>()]
+    }))
+    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'dist/'</span>));
+</code></pre><p>});</p>
+<p>gulp.task(‘copyfonts’, function () {<br>    gulp<br>        .src(‘app/styles/fonts/*’)<br>        .pipe(gulp.dest(‘dist/fonts/‘));<br>});</p>
+<p>gulp.task(‘build’, [‘clean:build’, ‘minify’, ‘copyfonts’]);</p>
+<p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/gulp/">gulp</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

@@ -68,6 +68,66 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/03/15/gulp的使用方法/">
+  <time datetime="2016-03-15T15:40:24.000Z">
+    2016-03-15
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/03/15/gulp的使用方法/">gulp的使用方法</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>基本用法<br>// gulpfile.js<br>gulp.task(‘foo’, function() {<br>    gulp.src(glob)<br>        .pipe(…)<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>});</p>
+<p>// shell<br>$ gulp foo<br>基本 API<br>gulp.src(glob[, options])<br>根据 glob 匹配文件，返回 stream，可以通过 .pipe() 方法传递给后续的插件。<br>gulp.dest(path[, options])<br>一般用法 .pipe(gulp.dest(path))，把 pipe 中的内容按照指定的 path 写成文件，会自动创建不存在的文件夹。<br>注意，可以通过 .pipe 多次指定输出的地方，具体请看 这里<br>gulp.task(name[, deps], fn)<br>定义名为 name 的任务，定义之后就可以在命令行中使用 gulp xxx 来执行任务。<br>deps 里面的任务全部完成后才会执行 fn<br>deps 里面的任务都是并行执行的，如果需要顺序执行，需要特殊写法。具体看 这里<br>gulp.watch(glob[, opts, cb])<br>监听文件变化<br>不会监听新文件（目录），所以一般你会需要 gulp-watch<br>常用命令 （自定义）</p>
+<h1 id="for_development_mode">for development mode</h1><p>gulp server</p>
+<h1 id="run_test">run test</h1><p>gulp test</p>
+<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>gulp.task(‘clean:css’, function () {<br>    del.sync(‘app/styles/*.css’);<br>});</p>
+<p>gulp.task(‘less’, [‘clean:css’], function () {<br>    var stream = gulp<br>            .src(‘app/styles/main.less’)<br>            .pipe(less())<br>            .pipe(gulp.dest(‘app/styles/‘));<br>    return stream;<br>});</p>
+<p>gulp.task(‘connect’, function () {<br>    connect.server({<br>        root: ‘./app’,<br>        port: 9000,<br>        livereload: true,<br>        middleware: function (connect, o) {<br>            return [<br>                (function () {<br>                    var url = require(‘url’);<br>                    var proxy = require(‘proxy-middleware’);<br>                    var options = url.parse(‘<a href="http://localhost:3000/api" target="_blank" rel="external">http://localhost:3000/api</a>‘);<br>                    options.route = ‘/api’;<br>                    return proxy(options);<br>                })(),<br>                modRewrite([<br>                    ‘!\.html|\.js|\.css|\.swf|\.jp(e?)g|\.png|\.gif|\.eot|\.woff|\.ttf|\.svg$ /index.html’<br>                ])<br>            ];<br>        }<br>    });<br>});</p>
+<p>gulp.task(‘watch’, function () {<br>    gulp<br>        .src(‘app/styles/<strong>/*.less’, {read: false})<br>        .pipe(watch(‘app/styles/</strong>/*.less’, function () {<br>            return gulp<br>                .src(‘app/styles/main.less’)<br>                .pipe(less())<br>                .pipe(gulp.dest(‘app/styles/‘))<br>                .pipe(connect.reload());<br>        }));</p>
+<pre><code>gulp
+    .src(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html'])
+    .pipe(watch(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html']))
+    .pipe(plumber())
+    .pipe(connect.reload());
+</code></pre><p>});</p>
+<p>gulp.task(‘server’, [‘less’, ‘connect’, ‘watch’]);<br>gulp build 流程<br>清理 dist/ 文件夹<br>del，根据 glob 来删除文件/目录<br>压缩文件<br>gulp-htmlmin，压缩 html 文件<br>gulp-minify-html，同上<br>gulp-cssmin，压缩 css 文件<br>gulp-minify-css，同上，封装了 clean-css，star 比上面的多<br>gulp-uglify，混淆 JavaScript 代码<br>gulp-usemin，合并指定 block 中的文件<br>gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js<br>复制其他文件到 dist/<br>gulp.src(…).pipe(gulp.dest(…))<br>实例代码<br>gulp.task(‘clean:build’, function () {<br>    del.sync(‘dist/‘, {force: true});<br>});</p>
+<p>gulp.task(‘minify’, [‘clean:build’, ‘less’], function () {<br>    gulp<br>        .src(‘app/views/<em>*/</em>.html’)<br>        .pipe(htmlmin({collapseWhitespace: true}))<br>        .pipe(gulp.dest(‘dist/views’));</p>
+<pre><code><span class="tag">gulp</span>
+    <span class="class">.src</span>(<span class="string">'app/index.html'</span>)
+    <span class="class">.pipe</span>(<span class="function">usemin</span>({
+        <span class="attribute">js</span>: [<span class="function">uglify</span>(), <span class="function">rev</span>()],
+        <span class="attribute">css</span>: [<span class="function">minifyCss</span>(), <span class="string">'concat'</span>, <span class="function">rev</span>()]
+    }))
+    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'dist/'</span>));
+</code></pre><p>});</p>
+<p>gulp.task(‘copyfonts’, function () {<br>    gulp<br>        .src(‘app/styles/fonts/*’)<br>        .pipe(gulp.dest(‘dist/fonts/‘));<br>});</p>
+<p>gulp.task(‘build’, [‘clean:build’, ‘minify’, ‘copyfonts’]);</p>
+<p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2016/03/14/创建六边形div/">
   <time datetime="2016-03-14T15:41:26.000Z">
     2016-03-14
@@ -1121,355 +1181,6 @@ context.fillStyle = 'cornflowerblue'<span class="comment">;</span>
 context.font = '24px Arial'<span class="comment">;</span>
 context.fillText('Drag shapes over each other',10,25)<span class="comment">;</span>
 context.restore()<span class="comment">;</span>
-</code></pre>
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/28/碰撞检测案列/">
-  <time datetime="2015-08-28T14:26:46.000Z">
-    2015-08-28
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/08/28/碰撞检测案列/">碰撞检测案列</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <pre><code><span class="keyword">var</span> Vector = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>)</span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-};
-Vector.prototype = {
-getMagnitude:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(<span class="built_in">Math</span>.pow(<span class="keyword">this</span>.x,<span class="number">2</span>)+<span class="built_in">Math</span>.pow(<span class="keyword">this</span>.y,<span class="number">2</span>));
-},
-add: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.x+vector.x;
-    v.y = <span class="keyword">this</span>.y+vector.y;
-    <span class="keyword">return</span> v;
-},
-substract: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">var</span> v= <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.x - vector.x;
-    v.y = <span class="keyword">this</span>.y - vector.y;
-    <span class="keyword">return</span> v;
-
-},
-dotProduct: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">return</span> <span class="keyword">this</span>.x*vector.x+ <span class="keyword">this</span>.y*vector.y;
-},
-edge: <span class="function"><span class="keyword">function</span>(<span class="params">vector</span>) </span>{
-    <span class="keyword">return</span> <span class="keyword">this</span>.substract(vector);
-},
-prependicular:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.y;
-    v.y = <span class="number">0</span> - <span class="keyword">this</span>.x;
-    <span class="keyword">return</span> v;
-},
-normalize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector(<span class="number">0</span>,<span class="number">0</span>),
-    m = <span class="keyword">this</span>.getMagnitude();
-    <span class="keyword">if</span> (m!=<span class="number">0</span>){
-        v.x = <span class="keyword">this</span>.x/m;
-        v.y = <span class="keyword">this</span>.y/m;
-    }
-    <span class="keyword">return</span> v;
-},
-normal:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> p = <span class="keyword">this</span>.prependicular();
-    <span class="keyword">return</span> p.normalize();
-}
-};
-
-
-
-
-
-
-<span class="keyword">var</span> Projection = <span class="function"><span class="keyword">function</span> (<span class="params">min,max</span>)</span>{
-    <span class="keyword">this</span>.min = min;
-    <span class="keyword">this</span>.max = max;
-
-};
-Projection.prototype = {
-    overlaps:<span class="function"><span class="keyword">function</span> (<span class="params">projection</span>)</span>{
-        <span class="keyword">return</span> <span class="keyword">this</span>.max&gt;projection.min&amp;&amp;projection.max&gt;<span class="keyword">this</span>.min;
-    }
-};
-
-
-
-
-<span class="keyword">var</span> Shape = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">this</span>.x = <span class="literal">undefined</span>;
-    <span class="keyword">this</span>.y = <span class="literal">undefined</span>;
-    <span class="keyword">this</span>.strokeStyle = <span class="string">'rgba(255,253,208,0.9)'</span>;
-    <span class="keyword">this</span>.fillStyle = <span class="string">'rgba(147,197,114,0.8)'</span>;
-};
-
-Shape.prototype = {
-    collidesWith: <span class="function"><span class="keyword">function</span> (<span class="params">shape</span>)</span>{
-
-        <span class="keyword">var</span> axes = <span class="keyword">this</span>.getAxes().concat(shape.getAxes());
-        <span class="keyword">return</span> !<span class="keyword">this</span>.separationOnAxes(axes,shape);
-    },
-    separationOnAxes:<span class="function"><span class="keyword">function</span> (<span class="params">axes,shape</span>)</span>{
-        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;axes.length;++i) {
-            axis = axes[i];
-            projection1 = shape.project(axis);
-            projection2 = <span class="keyword">this</span>.project(axis);
-            <span class="keyword">if</span> (! projection1.overlaps(projection2)) {
-                <span class="keyword">return</span> <span class="literal">true</span>;
-            }
-        }
-        <span class="keyword">return</span> <span class="literal">false</span>;
-    },
-    project:<span class="function"><span class="keyword">function</span> (<span class="params">axis</span>) </span>{
-        <span class="keyword">throw</span> <span class="string">'project(axis) not implemented'</span>;
-    },
-    getAxes:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">throw</span> <span class="string">'getAxes() not implemented'</span>;
-    },
-    move :<span class="function"><span class="keyword">function</span> (<span class="params">dx,dy</span>)</span>{
-        <span class="keyword">throw</span> <span class="string">'move(dx,dy)not implemented'</span>;
-    },
-    createPath: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-        <span class="keyword">throw</span> <span class="string">'createPath(context) not implemented'</span>;
-    },
-    fill : <span class="function"><span class="keyword">function</span> (<span class="params">context</span>)</span>{
-        context.save();
-        context.fillStyle = <span class="keyword">this</span>.fillStyle;
-        <span class="keyword">this</span>.createPath(context);
-        context.fill();
-        context.restore();
-    },
-    stroke: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>)</span>{
-        context.save();
-        context.strokeStyle = <span class="keyword">this</span>.strokeStyle;
-        <span class="keyword">this</span>.createPath(context);
-        context.stroke();
-        context.restore();
-    },
-    isPointInPath: <span class="function"><span class="keyword">function</span> (<span class="params">context,x,y</span>) </span>{
-        <span class="keyword">this</span>.createPath(context);
-        <span class="keyword">return</span> context.isPointInPath(x,y);
-    },
-
-
-};
-
-
-
-<span class="function"><span class="keyword">function</span> <span class="title">detectCollisions</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> textY = <span class="number">30</span>,
-    numShapes = shapes.length,
-    shape,i;
-    <span class="keyword">if</span> (shapeBeingDragged) {
-        <span class="keyword">for</span> (i =<span class="number">0</span>;i&lt;numShapes;++i) {
-            shape = shapes[i];
-            <span class="keyword">if</span> (shape!==shapeBeingDragged) {
-                <span class="keyword">if</span> (shapeBeingDragged.collidesWith(shape)) {
-                    context.fillStyle = shape.fillStyle;
-                    context.fillText(<span class="string">'collision'</span>,<span class="number">20</span>,textY);
-                    textY +=<span class="number">40</span>;
-                }
-            }
-        }
-    }
-}
-<span class="keyword">var</span> Point = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-
-};
-<span class="keyword">var</span> Polygon = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">this</span>.points = [];
-    <span class="keyword">this</span>.strokeStyle = <span class="string">'blue'</span>;
-    <span class="keyword">this</span>.fillStyle = <span class="string">'white'</span>;
-};
-Polygon.prototype = <span class="keyword">new</span> Shape();
-Polygon.prototype.getAxes = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v1 = <span class="keyword">new</span> Vector(),
-        v2 = <span class="keyword">new</span> Vector(),
-        axes = [];
-    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>.points.length-<span class="number">1</span>;i++) {
-        v1.x = <span class="keyword">this</span>.points[i].x;
-        v1.y = <span class="keyword">this</span>.points[i].y;
-        v2.x = <span class="keyword">this</span>.points[i+<span class="number">1</span>].x;
-        v2.y = <span class="keyword">this</span>.points[i+<span class="number">1</span>].y;
-        axes.push(v1.edge(v2).normal());
-    }
-    v1.x = <span class="keyword">this</span>.points[<span class="keyword">this</span>.points.length-<span class="number">1</span>].x;
-    v1.y = <span class="keyword">this</span>.points[<span class="keyword">this</span>.points.length-<span class="number">1</span>].y;
-
-    v2.x = <span class="keyword">this</span>.points[<span class="number">0</span>].x;
-    v2.y = <span class="keyword">this</span>.points[<span class="number">0</span>].y;
-    axes.push(v1.edge(v2).normal());
-    <span class="keyword">return</span> axes;
-};
-Polygon.prototype.project = <span class="function"><span class="keyword">function</span> (<span class="params">axis</span>)</span>{
-    <span class="keyword">var</span> scalars = [],
-    v = <span class="keyword">new</span> Vector();
-    <span class="keyword">this</span>.points.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">point</span>)</span>{
-        v.x = point.x;
-        v.y = point.y;
-        scalars.push(v.dotProduct(axis));
-    });
-    <span class="keyword">return</span> <span class="keyword">new</span> Projection(<span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>,scalars),<span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>,scalars));
-};
-Polygon.prototype.addPoint = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>)</span>{
-    <span class="keyword">this</span>.points.push(<span class="keyword">new</span> Point(x,y));
-};
-Polygon.prototype.createPath = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-<span class="keyword">if</span> (<span class="keyword">this</span>.points.length == <span class="number">0</span>) {
-    <span class="keyword">return</span> ;
-
-}
-context.beginPath();
-context.moveTo(<span class="keyword">this</span>.points[<span class="number">0</span>].x,<span class="keyword">this</span>.points[<span class="number">0</span>].y);
-<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.points.length;++i) {
-    context.lineTo(<span class="keyword">this</span>.points[i].x,<span class="keyword">this</span>.points[i].y);
-}
-context.closePath();
-};
-Polygon.prototype.move = <span class="function"><span class="keyword">function</span> (<span class="params">dx,dy</span>)</span>{
-    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span> ,point;i&lt;<span class="keyword">this</span>.points.length;++i) {
-        point = <span class="keyword">this</span>.points[i];
-        point.x += dx;
-        point.y += dy;
-    }
-};
-
-
-
-
-
-
-
-
-
-
-<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);
-    context = canvas.getContext(<span class="string">'2d'</span>);
-    shapes = [];
-    polygonPoints = [
-    [<span class="keyword">new</span> Point(<span class="number">250</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">250</span>,<span class="number">250</span>),<span class="keyword">new</span> Point(<span class="number">350</span>,<span class="number">250</span>)],
-    [<span class="keyword">new</span> Point(<span class="number">100</span>,<span class="number">100</span>),<span class="keyword">new</span> Point(<span class="number">100</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">150</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">150</span>,<span class="number">100</span>)],
-    [<span class="keyword">new</span> Point(<span class="number">400</span>,<span class="number">100</span>),<span class="keyword">new</span> Point(<span class="number">380</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">500</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">520</span>,<span class="number">100</span>)],[<span class="keyword">new</span> Point(<span class="number">300</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">280</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">400</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">420</span>,<span class="number">100</span>)]
-    ],
-    polygonStrokeStyles = [<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'red'</span>],
-    polygonFillStyle = [<span class="string">'rgba(255,255,0,0.7)'</span>,<span class="string">'rgba(100,140230,0.6)'</span>,<span class="string">'rgba(255,255,255,0.8)'</span>],
-    mousedown = { x:<span class="number">0</span>,y:<span class="number">0</span>},
-    lastdrag = {x:<span class="number">0</span>,y:<span class="number">0</span>},
-    shapeBeingDragged = <span class="literal">undefined</span>;
-    <span class="function"><span class="keyword">function</span> <span class="title">windowToCanvas</span>(<span class="params">x,y</span>)</span>{
-        <span class="keyword">var</span> bbox = canvas.getBoundingClientRect();
-        <span class="keyword">return</span> {
-            x: x-bbox.left*(canvas.width/bbox.width),
-            y: y-bbox.top *(canvas.height/bbox.height)
-        };
-    }
-    <span class="function"><span class="keyword">function</span> <span class="title">drawShapes</span> (<span class="params"></span>)</span>{
-        shapes.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">shape</span>)</span>{
-            shape.stroke(context);shape.fill(context);
-        });
-    }
-    <span class="function"><span class="keyword">function</span> <span class="title">detectCollisions</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> textY = <span class="number">30</span>,
-    numShapes = shapes.length,
-    shape,i;
-    <span class="keyword">if</span> (shapeBeingDragged) {
-        <span class="keyword">for</span> (i =<span class="number">0</span>;i&lt;numShapes;++i) {
-            shape = shapes[i];
-            <span class="keyword">if</span> (shape!==shapeBeingDragged) {
-                <span class="keyword">if</span> (shapeBeingDragged.collidesWith(shape)) {
-                    context.fillStyle = shape.fillStyle;
-                    context.fillText(<span class="string">'collision'</span>,<span class="number">20</span>,textY);
-                    textY +=<span class="number">40</span>;
-                }
-            }
-        }
-    }
-}
-    canvas.onmousedown = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>)</span>{
-        <span class="keyword">var</span> location = windowToCanvas(e.clientX,e.clientY);
-        shapes.forEach( <span class="function"><span class="keyword">function</span>(<span class="params">shape</span>)</span>{
-            <span class="keyword">if</span>(shape.isPointInPath(context,location.x,location.y)){
-                shapeBeingDragged = shape;
-                mousedown.x = location.x;
-                mousedown.y = location.y;
-                lastdrag.x = location.x;
-                lastdrag.y = location.y;
-
-            }
-        });
-    };
-    canvas.onmousemove = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>{
-        <span class="keyword">var</span> location,
-        dragVector;
-        <span class="keyword">if</span>(shapeBeingDragged !== <span class="literal">undefined</span>) {
-            location = windowToCanvas(e.clientX,e.clientY);
-            dragVector = {
-                x:location.x - lastdrag.x,
-                y: location.y - lastdrag.y
-
-            };
-            shapeBeingDragged.move(dragVector.x,dragVector.y);
-            lastdrag.x = location.x;
-            lastdrag.y = location.y;
-            context.clearRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);
-            drawShapes();
-            detectCollisions();
-        }
-    };
-    canvas.onmouseup = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>{
-        shapeBeingDragged = <span class="literal">undefined</span>;
-    }
-    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;polygonPoints.length;++i) {
-        <span class="keyword">var</span> polygon = <span class="keyword">new</span> Polygon();
-        points = polygonPoints[i];
-        polygon.strokeStyle = polygonStrokeStyles[i];
-        points.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">point</span>)</span>{
-            polygon.addPoint(point.x,point.y);
-        });
-        shapes.push(polygon);
-
-
-    }
-    context.shadowColor = <span class="string">'rgba(100,140,255,0.5)'</span>;
-    context.shadowBlur = <span class="number">4</span>;
-    context.shadowOffsetX = <span class="number">2</span>;
-    context.shadowOffsetY = <span class="number">2</span>;
-    context.font = <span class="string">'38px Arial'</span>;
-    drawShapes();
-    context.save();
-    context.fillStyle = <span class="string">'cornflowerblue'</span>;
-    context.font = <span class="string">'24px Arial'</span>;
-    context.fillText(<span class="string">'Drag shapes over each other'</span>,<span class="number">10</span>,<span class="number">25</span>);
-    context.restore();
-
-’
 </code></pre>
     
   </div>
