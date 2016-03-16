@@ -85,34 +85,34 @@
     
       <p>##详细介绍请看：<br>–<a href="http://www.ccjk.com/html5%E6%96%B0%E5%A2%9E%E6%A0%87%E7%AD%BE%E7%9A%84%E6%B1%87%E6%80%BB%E4%B8%8E%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">http://www.ccjk.com/html5%E6%96%B0%E5%A2%9E%E6%A0%87%E7%AD%BE%E7%9A%84%E6%B1%87%E6%80%BB%E4%B8%8E%E8%AF%A6%E8%A7%A3/</a></p>
 <ol>
-<li>‘<article>‘  定义独立的内容，如论坛帖子、报纸文章、博客条目、用户评论等内容。</article></li>
-<li>‘<aside>‘定义两栏或多栏页面的侧边栏内容，如联系我们、客服、网站公告等内容。</aside></li>
-<li>‘<audio>‘定义音频内容，如音乐或其他音频流。<br>autoplay    autoplay    自动播放。<br>controls    controls    显示控件。<br>loop    loop    自动重播。<br>preload preload 预备播放。如果使用 “autoplay”，则忽略该属性。<br>src url 音频的URL。<br>支持HTML5的全局属性和事件属性。<br>‘<br>&lt;!– <audio src="”audio.wav”"><br>您的浏览器不支持 audio 标签。（注：可以在开始标签和结束标签之间加上此文本内容，这样若浏览器不支持此元素，就可以显示出这个信息。）</audio></audio></li>
+<li><code>&lt;article&gt;</code>  定义独立的内容，如论坛帖子、报纸文章、博客条目、用户评论等内容。</li>
+<li><code>&lt;aside&gt;</code>定义两栏或多栏页面的侧边栏内容，如联系我们、客服、网站公告等内容。</li>
+<li><code>&lt;audio&gt;</code>定义音频内容，如音乐或其他音频流。<br>autoplay    autoplay    自动播放。<br>controls    controls    显示控件。<br>loop    loop    自动重播。<br>preload preload 预备播放。如果使用 “autoplay”，则忽略该属性。<br>src url 音频的URL。<br>支持HTML5的全局属性和事件属性。<br>`<br>&lt;!– <audio src="”audio.wav”"><br>您的浏览器不支持 audio 标签。（注：可以在开始标签和结束标签之间加上此文本内容，这样若浏览器不支持此元素，就可以显示出这个信息。）</audio></li>
 </ol>
-<p> –&gt;’</p>
+<p> –&gt;`</p>
 <ol>
-<li>‘<code><!-- <canvas> --></code>‘定义图形，如图表和其他图像。（注：<canvas> 只是图形容器，我们必须使用脚本来绘制图形。）</canvas></li>
-<li>‘<code><!-- <command> --></code>‘标记定义一个命令按钮，比如单选按钮、复选框或按钮。只有当 command 元素位于 menu 元素内时，该元素才是可见的。否则不会显示这个元素，但是可以用它规定键盘快捷键。</li>
-<li>‘<code><!-- <datalist> --></code>‘定义选项列表，需与 input 元素配合使用，通过input 元素的 list 属性来绑定，用来定义 input 可能的值。datalist 及其选项不会被显示出来，它仅仅是合法的输入值列表。</li>
-<li>‘<code><details></details></code>‘用于描述文档或文档某个部分的细节。</li>
-<li>‘ <code><embed></code>‘定义外部的可交互的内容或插件。</li>
-<li>‘<code><figure></figure></code>‘定义一组媒体内容（图像、图表、照片、代码等）以及它们的标题。如果被删除，则不应对文档流产生影响。</li>
-<li>‘<code><footer></footer></code>‘定义一个页面或一个区域的页脚。可包含文档的作者姓名、创作日期或者联系信息。</li>
-<li>‘<code><header></header></code>‘定义一个页面或一个区域的头部。</li>
-<li>‘<code><hgroup></hgroup></code>‘定义文件中一个区块的相关信息，使用 <hgroup> 标签对网页或区段（section）的标题进行组合。</hgroup></li>
-<li>‘<code><keygen></code>‘定义表单里一个生成的键值。规定用于表单的密钥对生成器字段。当提交表单时，私钥存储在本地，公钥发送到服务器。</li>
-<li>‘<code><mark></mark></code>‘定义有标记的文本。请在需要突出显示文本时使用此标签。</li>
-<li>‘<code><meter></meter></code>‘定义度量衡。仅用于已知最大和最小值的度量。（注：必须定义度量的范围，既可以在元素的文本中，也可以在 min/max 属性中定义。）</li>
-<li>‘<code><nav></nav></code>‘定义导航链接。（注：如果文档中有“前后”按钮，则应该把它放到 <nav> 元素中。）</nav></li>
-<li>‘<code><output></output></code>‘定义不同类型的输出，比如脚本的输出。</li>
-<li>‘<code><progress></progress></code>‘定义任务（如下载）的过程，可以使用此标签来显示 JavaScript 中耗费时间的函数的进度。</li>
-<li>‘<code><section></section></code>‘定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。</li>
-<li>‘<code><source></code>‘为媒介元素（比如 <video> 和 <audio>）定义媒介资源。</audio></video></li>
-<li>‘<code><time></time></code>‘定义一个日期/时间，该元素能够以机器可读的方式对日期和时间进行编码，举例说，用户代理能够把生日提醒或排定的事件添加到用户日程表中，搜索引擎也能够生成更智能的搜索结果。</li>
-<li>‘<code><address></address></code>‘ 表明作者的名字等详细信息</li>
-<li>‘<code><legend></legend></code>‘表单的标题</li>
-<li>‘<code><fieldset></fieldset></code>‘带标题的表单框要配合legend使用</li>
-<li>‘<code><tbody><tfoot></tfoot></tbody></code>‘表格的时候使用，搭配th来表明表格的表头，身体，尾部</li>
+<li><code>&lt;code&gt;&lt;!-- &lt;canvas&gt; --&gt;&lt;/code&gt;</code>定义图形，如图表和其他图像。（注：<canvas> 只是图形容器，我们必须使用脚本来绘制图形。）</canvas></li>
+<li><code>&lt;code&gt;&lt;!-- &lt;command&gt; --&gt;&lt;/code&gt;</code>标记定义一个命令按钮，比如单选按钮、复选框或按钮。只有当 command 元素位于 menu 元素内时，该元素才是可见的。否则不会显示这个元素，但是可以用它规定键盘快捷键。</li>
+<li><code>&lt;code&gt;&lt;!-- &lt;datalist&gt; --&gt;&lt;/code&gt;</code>定义选项列表，需与 input 元素配合使用，通过input 元素的 list 属性来绑定，用来定义 input 可能的值。datalist 及其选项不会被显示出来，它仅仅是合法的输入值列表。</li>
+<li><code>&lt;code&gt;&lt;details&gt;&lt;/code&gt;</code>用于描述文档或文档某个部分的细节。</li>
+<li><code>&lt;code&gt;&lt;embed&gt;&lt;/code&gt;</code>定义外部的可交互的内容或插件。</li>
+<li><code>&lt;code&gt;&lt;figure&gt;&lt;/code&gt;</code>定义一组媒体内容（图像、图表、照片、代码等）以及它们的标题。如果被删除，则不应对文档流产生影响。</li>
+<li><code>&lt;code&gt;&lt;footer&gt;&lt;/code&gt;</code>定义一个页面或一个区域的页脚。可包含文档的作者姓名、创作日期或者联系信息。</li>
+<li><code>&lt;code&gt;&lt;header&gt;&lt;/code&gt;</code>定义一个页面或一个区域的头部。</li>
+<li><code>&lt;code&gt;&lt;hgroup&gt;&lt;/code&gt;</code>定义文件中一个区块的相关信息，使用 <hgroup> 标签对网页或区段（section）的标题进行组合。</hgroup></li>
+<li><code>&lt;code&gt;&lt;keygen&gt;&lt;/code&gt;</code>定义表单里一个生成的键值。规定用于表单的密钥对生成器字段。当提交表单时，私钥存储在本地，公钥发送到服务器。</li>
+<li><code>&lt;code&gt;&lt;mark&gt;&lt;/code&gt;</code>定义有标记的文本。请在需要突出显示文本时使用此标签。</li>
+<li><code>&lt;code&gt;&lt;meter&gt;&lt;/code&gt;</code>定义度量衡。仅用于已知最大和最小值的度量。（注：必须定义度量的范围，既可以在元素的文本中，也可以在 min/max 属性中定义。）</li>
+<li><code>&lt;code&gt;&lt;nav&gt;&lt;/code&gt;</code>定义导航链接。（注：如果文档中有“前后”按钮，则应该把它放到 <nav> 元素中。）</nav></li>
+<li><code>&lt;code&gt;&lt;output&gt;&lt;/code&gt;</code>定义不同类型的输出，比如脚本的输出。</li>
+<li><code>&lt;code&gt;&lt;progress&gt;&lt;/code&gt;</code>定义任务（如下载）的过程，可以使用此标签来显示 JavaScript 中耗费时间的函数的进度。</li>
+<li><code>&lt;code&gt;&lt;section&gt;&lt;/code&gt;</code>定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。</li>
+<li><code>&lt;code&gt;&lt;source&gt;&lt;/code&gt;</code>为媒介元素（比如 <video> 和 <audio>）定义媒介资源。</audio></video></li>
+<li><code>&lt;code&gt;&lt;time&gt;&lt;/code&gt;</code>定义一个日期/时间，该元素能够以机器可读的方式对日期和时间进行编码，举例说，用户代理能够把生日提醒或排定的事件添加到用户日程表中，搜索引擎也能够生成更智能的搜索结果。</li>
+<li><code>&lt;code&gt;&lt;address&gt;&lt;/code&gt;</code> 表明作者的名字等详细信息</li>
+<li><code>&lt;code&gt;&lt;legend&gt;&lt;/code&gt;</code>表单的标题</li>
+<li><code>&lt;code&gt;&lt;fieldset&gt;&lt;/code&gt;</code>带标题的表单框要配合legend使用</li>
+<li><code>&lt;code&gt;&lt;tbody&gt;&lt;tfoot&gt;&lt;/code&gt;</code>表格的时候使用，搭配th来表明表格的表头，身体，尾部</li>
 </ol>
 
     
@@ -151,29 +151,97 @@
 <p>// shell<br>$ gulp foo<br>基本 API<br>gulp.src(glob[, options])<br>根据 glob 匹配文件，返回 stream，可以通过 .pipe() 方法传递给后续的插件。<br>gulp.dest(path[, options])<br>一般用法 .pipe(gulp.dest(path))，把 pipe 中的内容按照指定的 path 写成文件，会自动创建不存在的文件夹。<br>注意，可以通过 .pipe 多次指定输出的地方，具体请看 这里<br>gulp.task(name[, deps], fn)<br>定义名为 name 的任务，定义之后就可以在命令行中使用 gulp xxx 来执行任务。<br>deps 里面的任务全部完成后才会执行 fn<br>deps 里面的任务都是并行执行的，如果需要顺序执行，需要特殊写法。具体看 这里<br>gulp.watch(glob[, opts, cb])<br>监听文件变化<br>不会监听新文件（目录），所以一般你会需要 gulp-watch<br>常用命令 （自定义）</p>
 <h1 id="for_development_mode">for development mode</h1><p>gulp server</p>
 <h1 id="run_test">run test</h1><p>gulp test</p>
-<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>gulp.task(‘clean:css’, function () {<br>    del.sync(‘app/styles/*.css’);<br>});</p>
-<p>gulp.task(‘less’, [‘clean:css’], function () {<br>    var stream = gulp<br>            .src(‘app/styles/main.less’)<br>            .pipe(less())<br>            .pipe(gulp.dest(‘app/styles/‘));<br>    return stream;<br>});</p>
-<p>gulp.task(‘connect’, function () {<br>    connect.server({<br>        root: ‘./app’,<br>        port: 9000,<br>        livereload: true,<br>        middleware: function (connect, o) {<br>            return [<br>                (function () {<br>                    var url = require(‘url’);<br>                    var proxy = require(‘proxy-middleware’);<br>                    var options = url.parse(‘<a href="http://localhost:3000/api" target="_blank" rel="external">http://localhost:3000/api</a>‘);<br>                    options.route = ‘/api’;<br>                    return proxy(options);<br>                })(),<br>                modRewrite([<br>                    ‘!\.html|\.js|\.css|\.swf|\.jp(e?)g|\.png|\.gif|\.eot|\.woff|\.ttf|\.svg$ /index.html’<br>                ])<br>            ];<br>        }<br>    });<br>});</p>
-<p>gulp.task(‘watch’, function () {<br>    gulp<br>        .src(‘app/styles/<strong>/*.less’, {read: false})<br>        .pipe(watch(‘app/styles/</strong>/*.less’, function () {<br>            return gulp<br>                .src(‘app/styles/main.less’)<br>                .pipe(less())<br>                .pipe(gulp.dest(‘app/styles/‘))<br>                .pipe(connect.reload());<br>        }));</p>
-<pre><code>gulp
-    .src(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html'])
-    .pipe(watch(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html']))
+<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>    gulp.task(‘clean:css’, function () {<br>        del.sync(‘app/styles/*.css’);<br>    });</p>
+<pre><code>gulp.task(<span class="string">'less'</span>, [<span class="string">'clean:css'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> stream = gulp
+            .src(<span class="string">'app/styles/main.less'</span>)
+            .pipe(less())
+            .pipe(gulp.dest(<span class="string">'app/styles/'</span>));
+    <span class="keyword">return</span> stream;
+});
+
+gulp.task(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    connect.server({
+        root: <span class="string">'./app'</span>,
+        port: <span class="number">9000</span>,
+        livereload: <span class="literal">true</span>,
+        middleware: <span class="function"><span class="keyword">function</span> (<span class="params">connect, o</span>) </span>{
+            <span class="keyword">return</span> [
+                (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+                    <span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);
+                    <span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">'proxy-middleware'</span>);
+                    <span class="keyword">var</span> options = url.parse(<span class="string">'http://localhost:3000/api'</span>);
+                    options.route = <span class="string">'/api'</span>;
+                    <span class="keyword">return</span> proxy(options);
+                })(),
+                modRewrite([
+                    <span class="string">'!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html'</span>
+                ])
+            ];
+        }
+    });
+});
+
+gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/styles/**/*.less'</span>, {read: <span class="literal">false</span>})
+        .pipe(watch(<span class="string">'app/styles/**/*.less'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+            <span class="keyword">return</span> gulp
+                .src(<span class="string">'app/styles/main.less'</span>)
+                .pipe(less())
+                .pipe(gulp.dest(<span class="string">'app/styles/'</span>))
+                .pipe(connect.reload());
+        }));
+
+gulp
+    .src([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>])
+    .pipe(watch([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>]))
     .pipe(plumber())
     .pipe(connect.reload());
-</code></pre><p>});</p>
-<p>gulp.task(‘server’, [‘less’, ‘connect’, ‘watch’]);<br>gulp build 流程<br>清理 dist/ 文件夹<br>del，根据 glob 来删除文件/目录<br>压缩文件<br>gulp-htmlmin，压缩 html 文件<br>gulp-minify-html，同上<br>gulp-cssmin，压缩 css 文件<br>gulp-minify-css，同上，封装了 clean-css，star 比上面的多<br>gulp-uglify，混淆 JavaScript 代码<br>gulp-usemin，合并指定 block 中的文件<br>gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js<br>复制其他文件到 dist/<br>gulp.src(…).pipe(gulp.dest(…))<br>实例代码<br>gulp.task(‘clean:build’, function () {<br>    del.sync(‘dist/‘, {force: true});<br>});</p>
-<p>gulp.task(‘minify’, [‘clean:build’, ‘less’], function () {<br>    gulp<br>        .src(‘app/views/<em>*/</em>.html’)<br>        .pipe(htmlmin({collapseWhitespace: true}))<br>        .pipe(gulp.dest(‘dist/views’));</p>
-<pre><code><span class="tag">gulp</span>
-    <span class="class">.src</span>(<span class="string">'app/index.html'</span>)
-    <span class="class">.pipe</span>(<span class="function">usemin</span>({
-        <span class="attribute">js</span>: [<span class="function">uglify</span>(), <span class="function">rev</span>()],
-        <span class="attribute">css</span>: [<span class="function">minifyCss</span>(), <span class="string">'concat'</span>, <span class="function">rev</span>()]
-    }))
-    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'dist/'</span>));
-</code></pre><p>});</p>
-<p>gulp.task(‘copyfonts’, function () {<br>    gulp<br>        .src(‘app/styles/fonts/*’)<br>        .pipe(gulp.dest(‘dist/fonts/‘));<br>});</p>
-<p>gulp.task(‘build’, [‘clean:build’, ‘minify’, ‘copyfonts’]);</p>
-<p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
+});
+
+gulp.task(<span class="string">'server'</span>, [<span class="string">'less'</span>, <span class="string">'connect'</span>, <span class="string">'watch'</span>]);
+gulp build 流程
+清理 dist/ 文件夹
+del，根据 glob 来删除文件/目录
+压缩文件
+gulp-htmlmin，压缩 html 文件
+gulp-minify-html，同上
+gulp-cssmin，压缩 css 文件
+gulp-minify-css，同上，封装了 clean-css，star 比上面的多
+gulp-uglify，混淆 JavaScript 代码
+gulp-usemin，合并指定 block 中的文件
+gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js
+复制其他文件到 dist/
+gulp.src(...).pipe(gulp.dest(...))
+实例代码
+gulp.task(<span class="string">'clean:build'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    del.sync(<span class="string">'dist/'</span>, {force: <span class="literal">true</span>});
+});
+
+gulp.task(<span class="string">'minify'</span>, [<span class="string">'clean:build'</span>, <span class="string">'less'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/views/**/*.html'</span>)
+        .pipe(htmlmin({collapseWhitespace: <span class="literal">true</span>}))
+        .pipe(gulp.dest(<span class="string">'dist/views'</span>));
+
+    gulp
+        .src(<span class="string">'app/index.html'</span>)
+        .pipe(usemin({
+            js: [uglify(), rev()],
+            css: [minifyCss(), <span class="string">'concat'</span>, rev()]
+        }))
+        .pipe(gulp.dest(<span class="string">'dist/'</span>));
+});
+
+gulp.task(<span class="string">'copyfonts'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/styles/fonts/*'</span>)
+        .pipe(gulp.dest(<span class="string">'dist/fonts/'</span>));
+});
+
+gulp.task(<span class="string">'build'</span>, [<span class="string">'clean:build'</span>, <span class="string">'minify'</span>, <span class="string">'copyfonts'</span>]);
+</code></pre><p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
 
     
   </div>

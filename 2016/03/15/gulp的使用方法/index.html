@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
 // shell$ gulp foo基本 APIgulp.">
-<meta property="og:updated_time" content="2016-03-15T15:51:41.035Z">
+<meta property="og:updated_time" content="2016-03-16T16:39:51.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gulp的使用方法">
 <meta name="twitter:description" content="基本用法// gulpfile.jsgulp.task(‘foo’, function() {    gulp.src(glob)        .pipe(…)        .pipe(…)        .pipe(gulp.dest(…))        .pipe(…)        .pipe(gulp.dest(…))});
@@ -88,29 +88,97 @@
 <p>// shell<br>$ gulp foo<br>基本 API<br>gulp.src(glob[, options])<br>根据 glob 匹配文件，返回 stream，可以通过 .pipe() 方法传递给后续的插件。<br>gulp.dest(path[, options])<br>一般用法 .pipe(gulp.dest(path))，把 pipe 中的内容按照指定的 path 写成文件，会自动创建不存在的文件夹。<br>注意，可以通过 .pipe 多次指定输出的地方，具体请看 这里<br>gulp.task(name[, deps], fn)<br>定义名为 name 的任务，定义之后就可以在命令行中使用 gulp xxx 来执行任务。<br>deps 里面的任务全部完成后才会执行 fn<br>deps 里面的任务都是并行执行的，如果需要顺序执行，需要特殊写法。具体看 这里<br>gulp.watch(glob[, opts, cb])<br>监听文件变化<br>不会监听新文件（目录），所以一般你会需要 gulp-watch<br>常用命令 （自定义）</p>
 <h1 id="for_development_mode">for development mode</h1><p>gulp server</p>
 <h1 id="run_test">run test</h1><p>gulp test</p>
-<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>gulp.task(‘clean:css’, function () {<br>    del.sync(‘app/styles/*.css’);<br>});</p>
-<p>gulp.task(‘less’, [‘clean:css’], function () {<br>    var stream = gulp<br>            .src(‘app/styles/main.less’)<br>            .pipe(less())<br>            .pipe(gulp.dest(‘app/styles/‘));<br>    return stream;<br>});</p>
-<p>gulp.task(‘connect’, function () {<br>    connect.server({<br>        root: ‘./app’,<br>        port: 9000,<br>        livereload: true,<br>        middleware: function (connect, o) {<br>            return [<br>                (function () {<br>                    var url = require(‘url’);<br>                    var proxy = require(‘proxy-middleware’);<br>                    var options = url.parse(‘<a href="http://localhost:3000/api" target="_blank" rel="external">http://localhost:3000/api</a>‘);<br>                    options.route = ‘/api’;<br>                    return proxy(options);<br>                })(),<br>                modRewrite([<br>                    ‘!\.html|\.js|\.css|\.swf|\.jp(e?)g|\.png|\.gif|\.eot|\.woff|\.ttf|\.svg$ /index.html’<br>                ])<br>            ];<br>        }<br>    });<br>});</p>
-<p>gulp.task(‘watch’, function () {<br>    gulp<br>        .src(‘app/styles/<strong>/*.less’, {read: false})<br>        .pipe(watch(‘app/styles/</strong>/*.less’, function () {<br>            return gulp<br>                .src(‘app/styles/main.less’)<br>                .pipe(less())<br>                .pipe(gulp.dest(‘app/styles/‘))<br>                .pipe(connect.reload());<br>        }));</p>
-<pre><code>gulp
-    .src(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html'])
-    .pipe(watch(['app/scripts/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.js', 'app/<span class="keyword">*</span><span class="keyword">*</span>/<span class="keyword">*</span>.html']))
+<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>    gulp.task(‘clean:css’, function () {<br>        del.sync(‘app/styles/*.css’);<br>    });</p>
+<pre><code>gulp.task(<span class="string">'less'</span>, [<span class="string">'clean:css'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="keyword">var</span> stream = gulp
+            .src(<span class="string">'app/styles/main.less'</span>)
+            .pipe(less())
+            .pipe(gulp.dest(<span class="string">'app/styles/'</span>));
+    <span class="keyword">return</span> stream;
+});
+
+gulp.task(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    connect.server({
+        root: <span class="string">'./app'</span>,
+        port: <span class="number">9000</span>,
+        livereload: <span class="literal">true</span>,
+        middleware: <span class="function"><span class="keyword">function</span> (<span class="params">connect, o</span>) </span>{
+            <span class="keyword">return</span> [
+                (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+                    <span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);
+                    <span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">'proxy-middleware'</span>);
+                    <span class="keyword">var</span> options = url.parse(<span class="string">'http://localhost:3000/api'</span>);
+                    options.route = <span class="string">'/api'</span>;
+                    <span class="keyword">return</span> proxy(options);
+                })(),
+                modRewrite([
+                    <span class="string">'!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html'</span>
+                ])
+            ];
+        }
+    });
+});
+
+gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/styles/**/*.less'</span>, {read: <span class="literal">false</span>})
+        .pipe(watch(<span class="string">'app/styles/**/*.less'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+            <span class="keyword">return</span> gulp
+                .src(<span class="string">'app/styles/main.less'</span>)
+                .pipe(less())
+                .pipe(gulp.dest(<span class="string">'app/styles/'</span>))
+                .pipe(connect.reload());
+        }));
+
+gulp
+    .src([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>])
+    .pipe(watch([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>]))
     .pipe(plumber())
     .pipe(connect.reload());
-</code></pre><p>});</p>
-<p>gulp.task(‘server’, [‘less’, ‘connect’, ‘watch’]);<br>gulp build 流程<br>清理 dist/ 文件夹<br>del，根据 glob 来删除文件/目录<br>压缩文件<br>gulp-htmlmin，压缩 html 文件<br>gulp-minify-html，同上<br>gulp-cssmin，压缩 css 文件<br>gulp-minify-css，同上，封装了 clean-css，star 比上面的多<br>gulp-uglify，混淆 JavaScript 代码<br>gulp-usemin，合并指定 block 中的文件<br>gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js<br>复制其他文件到 dist/<br>gulp.src(…).pipe(gulp.dest(…))<br>实例代码<br>gulp.task(‘clean:build’, function () {<br>    del.sync(‘dist/‘, {force: true});<br>});</p>
-<p>gulp.task(‘minify’, [‘clean:build’, ‘less’], function () {<br>    gulp<br>        .src(‘app/views/<em>*/</em>.html’)<br>        .pipe(htmlmin({collapseWhitespace: true}))<br>        .pipe(gulp.dest(‘dist/views’));</p>
-<pre><code><span class="tag">gulp</span>
-    <span class="class">.src</span>(<span class="string">'app/index.html'</span>)
-    <span class="class">.pipe</span>(<span class="function">usemin</span>({
-        <span class="attribute">js</span>: [<span class="function">uglify</span>(), <span class="function">rev</span>()],
-        <span class="attribute">css</span>: [<span class="function">minifyCss</span>(), <span class="string">'concat'</span>, <span class="function">rev</span>()]
-    }))
-    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'dist/'</span>));
-</code></pre><p>});</p>
-<p>gulp.task(‘copyfonts’, function () {<br>    gulp<br>        .src(‘app/styles/fonts/*’)<br>        .pipe(gulp.dest(‘dist/fonts/‘));<br>});</p>
-<p>gulp.task(‘build’, [‘clean:build’, ‘minify’, ‘copyfonts’]);</p>
-<p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
+});
+
+gulp.task(<span class="string">'server'</span>, [<span class="string">'less'</span>, <span class="string">'connect'</span>, <span class="string">'watch'</span>]);
+gulp build 流程
+清理 dist/ 文件夹
+del，根据 glob 来删除文件/目录
+压缩文件
+gulp-htmlmin，压缩 html 文件
+gulp-minify-html，同上
+gulp-cssmin，压缩 css 文件
+gulp-minify-css，同上，封装了 clean-css，star 比上面的多
+gulp-uglify，混淆 JavaScript 代码
+gulp-usemin，合并指定 block 中的文件
+gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js
+复制其他文件到 dist/
+gulp.src(...).pipe(gulp.dest(...))
+实例代码
+gulp.task(<span class="string">'clean:build'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    del.sync(<span class="string">'dist/'</span>, {force: <span class="literal">true</span>});
+});
+
+gulp.task(<span class="string">'minify'</span>, [<span class="string">'clean:build'</span>, <span class="string">'less'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/views/**/*.html'</span>)
+        .pipe(htmlmin({collapseWhitespace: <span class="literal">true</span>}))
+        .pipe(gulp.dest(<span class="string">'dist/views'</span>));
+
+    gulp
+        .src(<span class="string">'app/index.html'</span>)
+        .pipe(usemin({
+            js: [uglify(), rev()],
+            css: [minifyCss(), <span class="string">'concat'</span>, rev()]
+        }))
+        .pipe(gulp.dest(<span class="string">'dist/'</span>));
+});
+
+gulp.task(<span class="string">'copyfonts'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    gulp
+        .src(<span class="string">'app/styles/fonts/*'</span>)
+        .pipe(gulp.dest(<span class="string">'dist/fonts/'</span>));
+});
+
+gulp.task(<span class="string">'build'</span>, [<span class="string">'clean:build'</span>, <span class="string">'minify'</span>, <span class="string">'copyfonts'</span>]);
+</code></pre><p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
 
     
   </div>
