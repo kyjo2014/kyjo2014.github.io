@@ -68,6 +68,115 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2016/07/19/effective-JS/">
+  <time datetime="2016-07-19T01:45:58.000Z">
+    2016-07-19
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/07/19/effective-JS/">effective JS</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#了解你使用的JS版本<br>1.确定你的应用程序支持JS的哪些版本。<br>2.确保你使用的任何Js的特性对于应用程序将要运行的所有环境都是支持的。<br>3.总是在执行严格模式检查的环境中测试严格代码。<br>4.当心链接那些在不同严格模式下有不同预期的脚本。</p>
+<p>#理解JS的浮点数<br>1.JS的数字都是双精度浮点数。<br>2.js中的证书仅仅是双精度浮点数的一个子集，而不是一个单独的数据类型。<br>3.位运算符将数字视为32位的有符号整数。<br>4.当心浮点运算中的精度陷阱。</p>
+<p>#当心隐式的强制类型转换<br>1.类型错误可能被隐式的强制转换所隐藏<br>2.重载的运算符+是进行加法运算还是字符串连接操作取决于其参数类型。<br>3.对象通过valueof方法强制转换为数字，通过toString方法强制转换为字符串。<br>4.对象通过valueOf方法强制转换为数字，通过toString方法强制转换为字符串。<br>5.具有valueOf方法的对象应该实现toString方法，返回一个valueOf方法产生的数字的字符串表示。<br>6.测试一个值是否为未定义的值,应该使用typeof或者与undefined进行比较而不是使用真值运算。</p>
+<p>#原始类型由于封装对象<br>1.当做相等比较时，原始类型的封装对象预期原是指行为不一样。<br>2.获取和设置原始类型值的属性会隐式地创建封装对象。</p>
+<p>#避免对混合类型使用==运算符<br>1.当参数类型不同时， ==运算符应用了一套难以理解的隐式强制转换就能明白的比较运算。<br>2.使用===运算符，使读者不需要涉及任何的隐式强制转换就能明白你的比较运算符。<br>3.当比较不同类型的值时，使用你自己的现实强制转换是程序的行为更清晰。</p>
+<p>#了解分号插入的局限</p>
+<p>1.仅在“}”标记之前、一行的结束和程序的结束处推导分号。<br>2.仅在紧接着的标记不能被解析的时候推导分号。</p>
+<ol>
+<li>在以（、[、+、-或/字符开头的语句前绝不能省略分号。</li>
+<li>当脚本链接的时候，在脚本之间显示地插入分号。<br>5.在return、throw、break\continue、或–的参数之前绝不能换行。<br>6.分号不能作为for循环的头部或空语句的分隔符而被推导出。</li>
+</ol>
+<p>#视字符串为16位的代码单元序列</p>
+<p>1.JS字符串由16的代码单元组成，而不是由Unicode代码点组成。<br>2.js使用两个代码单元表示2^16，及其以上的Unicode代码点。这两个代码单元被称为代理对。<br>3.代理对甩开了字符串元素计数，length，charAt、charCodeAt方法以及正则表达式（例如“.”）受到了影响。<br>4.使用第三方的库编写可识别代码点的字符串操作。<br>5.每当你使用一个含有字符串操作的库时，你都需要查询该库的文档，看他如何处理代码点的整个范围</p>
+<p>#尽量少用全局对象</p>
+<p>1.避免声明全局变量<br>2.尽量声明局部变量<br>3.避免对全局对象添加属性、<br>4.使用全局对象类做平台特性检测。</p>
+<p>#始终声明局部的变量<br>1.始终使用var声明新的局部变量。<br>2.考虑使用lint工具帮助检查为绑定的变量。</p>
+<p>#避免使用with<br>1.避免使用with语句<br>2.使用简短的变量名代替重复访问的对象。<br>3.显示地绑定局部变量到对象属性上，而不要使用with语句隐式地绑定他们。</p>
+<p>#熟练掌握闭包</p>
+<p>1.函数可以引用定义在其外部作用域的变量<br>2.闭包比创建它们的函数具有更长的生命周期<br>3.闭包在内部存储其外部变量的引用，并能读写这些变量</p>
+<p>#理解变量提升</p>
+<p>1.在代码块中的变量声明会被隐式地提升到函数的顶部。<br>2.重声明变量被视为单个变量<br>3.考虑手动提升局部变量的声明，从而避免混肴。</p>
+<p>#使用立即调用的函数表达式创建局部作用域</p>
+<p>1，理解绑定与复制的区别。<br>2.闭包通过引用而不是值捕获它们的外部变量。<br>3.使用立即调用的函数表达式来创建局部作用域。<br>4.当心在立即调用的函数表达式中包裹代码块可能改变其行为的情形。</p>
+<p>#当心命名函数表达式笨拙的作用域</p>
+<p>1.在error对象和调试器中使用命名函数表达式改进栈跟踪<br>2.在ES3和有问题的JavaScript环境中谨记函数表达式作用域会被Object.prototype污染<br>3.谨记在错误百出的JavaScript环境中会提升命名函数声明，并导致命名函数表达式的重复存储。<br>4.考虑避免使用命名函数表达式或在发布前删除函数名<br>5.如果你将代码发布到正确实现的ES5环境中，那么你没有什么好担心的。</p>
+<p>#当心局部快函数声明笨拙的作用域</p>
+<p>1.始终将函数声明之雨程序或被包含的函数的自耦外层以避免不可抑制的行为。<br>2.使用var声明和有田间的赋值语句代替有条件的函数声明。</p>
+<p>#避免使用eval创建局部变量</p>
+<p>1.避免使用eval函数创建的变量污染调用者的作用域。<br>2.如果eval函数代码可能创建全局变量，将此调用封装到嵌套的函数中以防止作用域污染。</p>
+<p>#间接调用eval函数优于直接调用<br>1.将eval函数同毫无意义的一个字面量包裹在序列表达式中以达到强制使用间接调用eval的目的<br>2.尽可能间接地调用eval函数，而不要直接调用eval函数。</p>
+<p>#理解函数调用、方法调用及构造函数调用之间的不同<br>1.方法调用将被查找方法属性的对象作为调用接受者。<br>2.函数调用将全局对象（处于严格模式下则为undefined）作为其接收者。一般很少使用函数调用语法来调用方法。<br>3.构造函数需要通过new运算符调用，并产生一个新的对象作为其接收者。</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/04/13/设计模式读后感/">
+  <time datetime="2016-04-13T15:04:38.000Z">
+    2016-04-13
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/04/13/设计模式读后感/">设计模式读后感</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#“组合优于继承！！！”</p>
+<p>##Facade（门面）模式：<br>意图：希望简化原有系统的使用方式。需要定义自己的借口。<br>问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。<br>解决方案： facade为原有系统的客户提供了一个新的接口。<br>参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。<br>效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能无法使用某些功能。<br>实现： 定义一个或多个具备所需接口的新类。<br>      让新的类使用原有的系统。<br>感悟：就是把原先的多个接口所返回的数据用一个新的类包装起来，在新类中可以对这些数据进行整合。使其能够被更方便的运用。</p>
+<hr>
+<p>##Adapter（适配者）模式：<br>意图：是控制范围外的一个原有对象与某个接口匹配。<br>问题：系统的数据和行为都正确，单接口不服。通常用于必须从抽象类派生时。<br>解决方案：Adapter模式提供了具有所需接口的包装类。<br>参与者与协作者：Adapter改变了Adaptee的接口，使Adaptee与Adapter的基础类型Target匹配。<br>这样用户就可以使用Adaptee了，好像它是Target类型。<br>效果：Adapter模式使原有对象能够适应新的类结构，不受其接口的限制。<br>实现：将原有的类包含在另一个类之中。让曝韩磊与需要的接口匹配，调用被包容类的方法。<br>感悟：就是原有的接口所返回的数据可能是有冗余或者格式不符合使用者的要求，这时候就需要建立一个中间层，来把这些数据进行适当的转换。</p>
+<hr>
+<p>##Strategy（策略）模式：<br>意图：可以根据所处上下文，使用不同的业务规则或算法。<br>问题：对所需算法的选择取决于发出请求的客户或者要处理的数据。如果只有一些不会变化的算法，就不需要strategy模式。<br>解决方案： 将对算法的选择和算法的实现相分离。允许根据上下文进行选择。<br>参与者与协作者： strategy制定了如何使用不同的算法。<br>                各个ConcreteStrategy实现了这些不同的算法。<br>                Context 通过类型为Strategy的引用使用具体的Concrete-strategy。strategy与context相互作用以实现所选的算法<br>                （有时候strategy必须查询context）。context将来自client的请求转发给strategy。<br>效果： strategy模式定义了一系列的算法。<br>      可以不使用switch语句或条件语句。<br>      必须以相同的方式调用所有的算法（他们必须拥有相同的接口）。各concretestrategy与context之间的相互作用可能需要在context中加入获取<br>      状态的方法。<br>实现： 让实用算法的类（context）包含一个抽象类（strategy），该抽象类有一个抽吸那个方法指定如何调用算法，每个派生类氨溴要实现算法。注意，在圆形strategy<br>模式中，选择所用具体实现的职责由client对象承担，并转给strategy模式的context对象。<br>感悟： 有点像后面所说的工厂模式，只不过工厂模式是用来创造所需对象，而策略模式则是返回对应的算法；工厂模式是创建型模式，策略模式是行为型模式。<br>其更关注行为的封装，追求的时返回的值。</p>
+<hr>
+<p>##Bridge模式：<br>意图：将一组实现与另一组使用它们的对象分离。<br>问题：一个抽象类的派生类必须使用多个实现，单不能出现类数量爆炸性增长。<br>解决方案： 为所有事先定义一个接口，供抽象类的所有派生类使用。<br>参与者与协作者: Abstraction 为要实现的对象定义接口，implementor为具体的实现类定义接口。abstraction的派生类使用Implement的<br>派生类，却无需知道自己具体使用哪一个concreteimplementor。<br>效果： 实现与使用实现的对象解耦，提供了可扩展性，客户对象无需操心实现问题。<br>实现：将实现封装在一个抽象类中。<br>     在要实现的抽象的基类中包含一个实现的句柄。注意：在Java中，你可以在实现中使用接口来代替抽象类。<br>感悟：把具体实现跟其抽象类分离，这样子就能使得具体实现在其他场合的时候能够轻易的使用其他的抽象类。</p>
+<hr>
+<p>##Abstract Factory模式<br>意图 需要为特定的客户（或情况 提供对象组。<br>问题 需要实例化一组相关的对象<br>解决方案 协调对象组的创建。提供一种方式，将如何执行对象实例化的规则从使用这些对象的客户对象提取出来。<br>参与者与协作者 AbstractFactory为如何创建对象组的每个成员定义接口。一般每个组都有独立的ConcreteFactory 进行创建。<br>效果 这个模式将 使用哪些对象 的规则与 如何使用这些对象 的逻辑分离开来。<br>实现 定义一个抽象类来制定创建那些对象。然后为每个组实现一个具体类。可以用表或文件完成同样的任务。</p>
+<hr>
+<p>##Decorator 模式<br>意图 动态地给一个对象添加职责<br>问题 要使用的对象将执行所需的基本功能。 但是，可能需要为这个对象将添加某些功能，这些附加功能可能发生在对象的基础功能之前或之后<br>。<br>解决方案 可以无需创建子类，而扩展一个对象的功能<br>参与者与协作者 concreteComonent让Decorator对形象为自己添加功能。有时候用ConcreteComonent的爱生类提供核心功能，在这种情况加ConcreteComonent累就不再是具体的，而是抽象的，comonentlei<br>comonent类定义了在所有这些类所使用的接口。<br>效果 所添加的功能放在小对象中。好处是可以在concretecomonent对象的功能之前或之后动态添加功能。单对象连总是终与concretecomonent对象。<br>实现 创建一个抽象类来表示原类喝药要添加到这个类的新功能。在装饰类中，将对新功能的调用放在对紧随其后对象的之后，以获得正确的顺序。</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2016/03/18/div居中技巧/">
   <time datetime="2016-03-17T16:22:32.000Z">
     2016-03-18
@@ -641,253 +750,6 @@ cat.showName();
   <div class="entry">
     
       
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/09/20/js中！！的作用/">
-  <time datetime="2015-09-20T09:21:26.000Z">
-    2015-09-20
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/09/20/js中！！的作用/">js中！！的作用</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>双感叹号可用作对于表达式的强制类型转换，简单例子：<br>    !!(a &amp; 16）<br>在这里这个表达式返回的是数值，但是经过双感叹号的转换后就能够变成true。<br>在下例中<br>    function isHostMethod(object,property) {<br>    var t = typeof object[property];<br>    return t==’function’ || (!!(t==’object’&amp;&amp;object[property]))||t == ‘unknown’;<br>    }<br>而且，检测的时候通过使用双逻辑非操作符来得到布尔值会比先存储后访问的效果更好。<br>解释：在执行逻辑表达式的时候，由逻辑表达式的规则可得出：<br>1.如果第一个操作数是对象，那么就返回第二个操作数；<br>2.如果两个操作数都是对象，则返回第二个操作数（意味着逻辑表达式不一定返回TF）；<br>而第一个！可以根据非得规则，把返回的对象或者NAN，undefined，转变为TF。</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/09/13/进度条控件/">
-  <time datetime="2015-09-13T15:43:02.000Z">
-    2015-09-13
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/09/13/进度条控件/">进度条控件</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <pre><code><span class="keyword">var</span>  COREHTML5 = COREHTML5 || {};
-COREHTML5.RoundedRectangle = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent</span>)</span>{
-    <span class="keyword">this</span>.strokeStyle = strokeStyle ?strokeStyle :<span class="string">'gray'</span>;
-    <span class="keyword">this</span>.fillStyle = fillStyle? fillStyle :<span class="string">'skyblue'</span>;
-    horizontalSizePercent = horizontalSizePercent ||<span class="number">100</span>;
-    verticalSizePercent = verticalSizePercent ||<span class="number">100</span>;
-    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(100,100,100,0.8)'</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
-    <span class="keyword">this</span>.setSizePercents(horizontalSizePercent,verticalSizePercent);
-    <span class="keyword">this</span>.createCanvas();
-    <span class="keyword">this</span>.createDOMElement();
-    <span class="keyword">return</span> <span class="keyword">this</span>;
-
-}
-COREHTML5.RoundedRectangle.prototype = {
-    createCanvas: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);
-        <span class="keyword">this</span>.context = canvas.getContext(<span class="string">'2d'</span>);
-        <span class="keyword">return</span> canvas;
-    },
-    createDOMElement: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
-        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas);
-    },
-    appendTo : <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
-        element.appendChild(<span class="keyword">this</span>.domElement);
-        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth +<span class="string">'px'</span>;
-        <span class="keyword">this</span>.dimElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
-        <span class="keyword">this</span>.resize(element.offsetWidth,element.offsetHeight);
-    },
-    resize :<span class="function"><span class="keyword">function</span> (<span class="params">width,height</span>) </span>{
-        <span class="keyword">this</span>.HORIZONTAL_MARGIN = (width - width *<span class="keyword">this</span>.horizontalSizePercent)/<span class="number">2</span>;
-        <span class="keyword">this</span>.VERTICAL_MARGIN = (height - height *<span class="keyword">this</span>.verticalSizePercent)/<span class="number">2</span>;
-        <span class="keyword">this</span>.cornerRadius = (<span class="keyword">this</span>.context.canvas.height/<span class="number">2</span> - <span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN)/<span class="number">2</span>;
-        <span class="keyword">this</span>.top = <span class="keyword">this</span>.VERTICAL_MARGIN;
-        <span class="keyword">this</span>.left = <span class="keyword">this</span>.HORIZONTAL_MARGIN;
-        <span class="keyword">this</span>.right = <span class="keyword">this</span>.left + width- <span class="number">2</span>*<span class="keyword">this</span>.HORIZONTAL_MARGIN;
-        <span class="keyword">this</span>.bottom = <span class="keyword">this</span>.top + height -<span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN;
-        <span class="keyword">this</span>.context.canvas.width = width;
-        <span class="keyword">this</span>.context.canvas.height = height;
-    },
-    setSizePercents : <span class="function"><span class="keyword">function</span> (<span class="params">h,v</span>) </span>{
-        <span class="keyword">this</span>.horizontalSizePercent = h &gt;<span class="number">1</span>? h/<span class="number">100</span>:h;
-        <span class="keyword">this</span>.verticalSizePercent = v&gt;<span class="number">1</span> ?v/<span class="number">100</span>:v;
-
-    },
-    fill :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> radius = (<span class="keyword">this</span>.bottom - <span class="keyword">this</span>.top)/<span class="number">2</span>;
-        <span class="keyword">this</span>.context.save();
-        <span class="keyword">this</span>.context.shadowColor = <span class="keyword">this</span>.SHADOW_COLOR;
-        <span class="keyword">this</span>.context.shadowOffsetX = <span class="keyword">this</span>.SHADOW_OFFSET_X;
-        <span class="keyword">this</span>.context.shadowOffsetY = <span class="keyword">this</span>.SHADOW_OFFSET_Y;
-        <span class="keyword">this</span>.context.shadowBlur = <span class="number">6</span>;
-        <span class="keyword">this</span>.context.beginPath();
-        <span class="keyword">this</span>.context.moveTo(<span class="keyword">this</span>.left + radius ,<span class="keyword">this</span>.top);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,radius);
-        <span class="keyword">this</span>.context.closePath();
-        <span class="keyword">this</span>.context.fillStyle = <span class="keyword">this</span>.fillStyle;
-        <span class="keyword">this</span>.context.fill();
-        <span class="keyword">this</span>.context.shadowColor = <span class="literal">undefined</span>;
-
-    },
-    overlayGradient: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="built_in">console</span>.log(<span class="keyword">this</span>.left,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.bottom);
-        <span class="keyword">var</span> gradient = <span class="keyword">this</span>.context.createLinearGradient(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom);
-        gradient.addColorStop(<span class="number">0</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
-        gradient.addColorStop(<span class="number">0.2</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
-        gradient.addColorStop(<span class="number">0.25</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
-        gradient.addColorStop(<span class="number">0.3</span>,<span class="string">'rgba(255,255,255,0.9)'</span>);
-        gradient.addColorStop(<span class="number">0.4</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
-        gradient.addColorStop(<span class="number">0.45</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
-        gradient.addColorStop(<span class="number">0.6</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
-        gradient.addColorStop(<span class="number">1</span>,<span class="string">'rgba(255,255,255,0.1)'</span>);
-        <span class="keyword">this</span>.context.fillStyle = gradient;
-        <span class="keyword">this</span>.context.fill();
-        <span class="keyword">this</span>.context.lineWidth = <span class="number">0.4</span>;
-        <span class="keyword">this</span>.context.strokeStyle = <span class="keyword">this</span>.strokeStyle;
-        <span class="keyword">this</span>.context.stroke();
-        <span class="keyword">this</span>.context.restore();
-    },
-    draw: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-        <span class="keyword">var</span> originalContext;
-        <span class="keyword">if</span> (context) {
-            originalContext = <span class="keyword">this</span>.context;
-            <span class="keyword">this</span>.context =context;
-
-        } 
-        <span class="keyword">this</span>.fill();
-        <span class="keyword">this</span>.overlayGradient();
-        <span class="keyword">if</span> (context) {
-            <span class="keyword">this</span>.context = originalContext;
-        }
-    },
-    erase: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
-    }
-
-};
-COREHTML5.Progressbar = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent</span>) </span>{
-    <span class="keyword">this</span>.trough = <span class="keyword">new</span> COREHTML5.RoundedRectangle(strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent);
-    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(255,255,255,0.5)'</span>;
-    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">2</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">2</span>;
-    <span class="keyword">this</span>.percentComplete = <span class="number">0</span>;
-    <span class="keyword">this</span>.createCanvas();
-    <span class="keyword">this</span>.createDOMElement();
-
-    <span class="keyword">return</span> <span class="keyword">this</span>;
-}
-COREHTML5.Progressbar.prototype = {
-    createDOMElement:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
-        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas)
-    },
-    createCanvas :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
-        <span class="keyword">this</span>.offscreen = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
-    },
-    appendTo: <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
-        element.appendChild(<span class="keyword">this</span>.domElement);
-        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth + <span class="string">'px'</span> ;
-        <span class="keyword">this</span>.domElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
-        <span class="keyword">this</span>.resize();
-        <span class="keyword">this</span>.trough.resize(element.offsetWidth,element.offsetHeight);
-        <span class="keyword">this</span>.trough.draw(<span class="keyword">this</span>.offscreen);
-    },
-    setCanvasSize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode;
-        <span class="keyword">this</span>.context.canvas.width = domElementParent.offsetWidth;
-        <span class="keyword">this</span>.context.canvas.height = domElementParent.offsetHeight;
-    },
-    resize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode,
-        w = domElementParent.offsetWidth,
-        h = domElementParent.offsetHeight;
-        <span class="keyword">this</span>.setCanvasSize();
-        <span class="keyword">this</span>.context.canvas.width = w;
-        <span class="keyword">this</span>.context.canvas.height = h;
-        <span class="keyword">this</span>.offscreen.canvas.width = w;
-        <span class="keyword">this</span>.offscreen.canvas.height = h;
-
-
-    },
-    draw:<span class="function"><span class="keyword">function</span> (<span class="params">percentComplete</span>) </span>{
-        <span class="keyword">if</span>(percentComplete &gt; <span class="number">0</span>){
-            <span class="keyword">this</span>.context.drawImage(<span class="keyword">this</span>.offscreen.canvas,<span class="number">0</span>,<span class="number">0</span>,
-                <span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height);
-
-        }
-    },
-    erase:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
-    },
-};
-<span class="keyword">var</span> startButton = <span class="built_in">document</span>.getElementById(<span class="string">'startButton'</span>),
-    loadingSpan = <span class="built_in">document</span>.getElementById(<span class="string">'loadingSpan'</span>),
-    progressbar = <span class="keyword">new</span> COREHTML5.Progressbar(<span class="string">'rgba(0,0,0,0.2)'</span>,<span class="string">'teal'</span>,<span class="number">90</span>,<span class="number">70</span>),
-    percentComplete = <span class="number">0</span>;
-    startButton.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>{
-        loadingSpan.style.display = <span class="string">'inline'</span>;
-        startButton.style.display = <span class="string">'none'</span>;
-        percentComplete += <span class="number">1.0</span>;
-        <span class="keyword">if</span>( percentComplete &gt;<span class="number">100</span>) {
-            percentComplete = <span class="number">0</span>;
-            loadingSpan.style.display = <span class="string">'none'</span>;
-            startButton.style.display = <span class="string">'inline'</span>;
-        }
-        <span class="keyword">else</span>{
-            progressbar.erase();
-            progressbar.draw(percentComplete);
-            requestAnimationFrame(startButton.onclick);
-        }
-    };
-    progressbar.appendTo(<span class="built_in">document</span>.getElementById(<span class="string">'progressbarDiv'</span>));
-</code></pre>
     
   </div>
   <footer class="end-sep">

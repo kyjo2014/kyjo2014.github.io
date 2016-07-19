@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>设计模式读后感 | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="#“组合优于继承！！！”
+##Facade（门面）模式：意图：希望简化原有系统的使用方式。需要定义自己的借口。问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。解决方案： facade为原有系统的客户提供了一个新的接口。参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能">
+  
+  <meta name="description" content="#“组合优于继承！！！”
+##Facade（门面）模式：意图：希望简化原有系统的使用方式。需要定义自己的借口。问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。解决方案： facade为原有系统的客户提供了一个新的接口。参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式读后感">
+<meta property="og:url" content="http://yoursite.com/2016/04/13/设计模式读后感/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="#“组合优于继承！！！”
+##Facade（门面）模式：意图：希望简化原有系统的使用方式。需要定义自己的借口。问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。解决方案： facade为原有系统的客户提供了一个新的接口。参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能">
+<meta property="og:updated_time" content="2016-06-01T16:21:13.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式读后感">
+<meta name="twitter:description" content="#“组合优于继承！！！”
+##Facade（门面）模式：意图：希望简化原有系统的使用方式。需要定义自己的借口。问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。解决方案： facade为原有系统的客户提供了一个新的接口。参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/testing">TestArea</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/04/13/设计模式读后感/">
+  <time datetime="2016-04-13T15:04:38.000Z">
+    2016-04-13
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">设计模式读后感</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#“组合优于继承！！！”</p>
+<p>##Facade（门面）模式：<br>意图：希望简化原有系统的使用方式。需要定义自己的借口。<br>问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。<br>解决方案： facade为原有系统的客户提供了一个新的接口。<br>参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。<br>效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能无法使用某些功能。<br>实现： 定义一个或多个具备所需接口的新类。<br>      让新的类使用原有的系统。<br>感悟：就是把原先的多个接口所返回的数据用一个新的类包装起来，在新类中可以对这些数据进行整合。使其能够被更方便的运用。</p>
+<hr>
+<p>##Adapter（适配者）模式：<br>意图：是控制范围外的一个原有对象与某个接口匹配。<br>问题：系统的数据和行为都正确，单接口不服。通常用于必须从抽象类派生时。<br>解决方案：Adapter模式提供了具有所需接口的包装类。<br>参与者与协作者：Adapter改变了Adaptee的接口，使Adaptee与Adapter的基础类型Target匹配。<br>这样用户就可以使用Adaptee了，好像它是Target类型。<br>效果：Adapter模式使原有对象能够适应新的类结构，不受其接口的限制。<br>实现：将原有的类包含在另一个类之中。让曝韩磊与需要的接口匹配，调用被包容类的方法。<br>感悟：就是原有的接口所返回的数据可能是有冗余或者格式不符合使用者的要求，这时候就需要建立一个中间层，来把这些数据进行适当的转换。</p>
+<hr>
+<p>##Strategy（策略）模式：<br>意图：可以根据所处上下文，使用不同的业务规则或算法。<br>问题：对所需算法的选择取决于发出请求的客户或者要处理的数据。如果只有一些不会变化的算法，就不需要strategy模式。<br>解决方案： 将对算法的选择和算法的实现相分离。允许根据上下文进行选择。<br>参与者与协作者： strategy制定了如何使用不同的算法。<br>                各个ConcreteStrategy实现了这些不同的算法。<br>                Context 通过类型为Strategy的引用使用具体的Concrete-strategy。strategy与context相互作用以实现所选的算法<br>                （有时候strategy必须查询context）。context将来自client的请求转发给strategy。<br>效果： strategy模式定义了一系列的算法。<br>      可以不使用switch语句或条件语句。<br>      必须以相同的方式调用所有的算法（他们必须拥有相同的接口）。各concretestrategy与context之间的相互作用可能需要在context中加入获取<br>      状态的方法。<br>实现： 让实用算法的类（context）包含一个抽象类（strategy），该抽象类有一个抽吸那个方法指定如何调用算法，每个派生类氨溴要实现算法。注意，在圆形strategy<br>模式中，选择所用具体实现的职责由client对象承担，并转给strategy模式的context对象。<br>感悟： 有点像后面所说的工厂模式，只不过工厂模式是用来创造所需对象，而策略模式则是返回对应的算法；工厂模式是创建型模式，策略模式是行为型模式。<br>其更关注行为的封装，追求的时返回的值。</p>
+<hr>
+<p>##Bridge模式：<br>意图：将一组实现与另一组使用它们的对象分离。<br>问题：一个抽象类的派生类必须使用多个实现，单不能出现类数量爆炸性增长。<br>解决方案： 为所有事先定义一个接口，供抽象类的所有派生类使用。<br>参与者与协作者: Abstraction 为要实现的对象定义接口，implementor为具体的实现类定义接口。abstraction的派生类使用Implement的<br>派生类，却无需知道自己具体使用哪一个concreteimplementor。<br>效果： 实现与使用实现的对象解耦，提供了可扩展性，客户对象无需操心实现问题。<br>实现：将实现封装在一个抽象类中。<br>     在要实现的抽象的基类中包含一个实现的句柄。注意：在Java中，你可以在实现中使用接口来代替抽象类。<br>感悟：把具体实现跟其抽象类分离，这样子就能使得具体实现在其他场合的时候能够轻易的使用其他的抽象类。</p>
+<hr>
+<p>##Abstract Factory模式<br>意图 需要为特定的客户（或情况 提供对象组。<br>问题 需要实例化一组相关的对象<br>解决方案 协调对象组的创建。提供一种方式，将如何执行对象实例化的规则从使用这些对象的客户对象提取出来。<br>参与者与协作者 AbstractFactory为如何创建对象组的每个成员定义接口。一般每个组都有独立的ConcreteFactory 进行创建。<br>效果 这个模式将 使用哪些对象 的规则与 如何使用这些对象 的逻辑分离开来。<br>实现 定义一个抽象类来制定创建那些对象。然后为每个组实现一个具体类。可以用表或文件完成同样的任务。</p>
+<hr>
+<p>##Decorator 模式<br>意图 动态地给一个对象添加职责<br>问题 要使用的对象将执行所需的基本功能。 但是，可能需要为这个对象将添加某些功能，这些附加功能可能发生在对象的基础功能之前或之后<br>。<br>解决方案 可以无需创建子类，而扩展一个对象的功能<br>参与者与协作者 concreteComonent让Decorator对形象为自己添加功能。有时候用ConcreteComonent的爱生类提供核心功能，在这种情况加ConcreteComonent累就不再是具体的，而是抽象的，comonentlei<br>comonent类定义了在所有这些类所使用的接口。<br>效果 所添加的功能放在小对象中。好处是可以在concretecomonent对象的功能之前或之后动态添加功能。单对象连总是终与concretecomonent对象。<br>实现 创建一个抽象类来表示原类喝药要添加到这个类的新功能。在装饰类中，将对新功能的调用放在对紧随其后对象的之后，以获得正确的顺序。</p>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/设计模式/">设计模式</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2016 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
