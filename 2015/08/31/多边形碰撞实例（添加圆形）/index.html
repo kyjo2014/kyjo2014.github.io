@@ -18,7 +18,7 @@ Vector.prototype = {
 getMagnitude:function (){
     return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
 },
-add: function (vector){">
+add: function (vector">
   
   <meta name="description" content="var Vector = function (x,y){
     this.x = x;
@@ -28,7 +28,7 @@ Vector.prototype = {
 getMagnitude:function (){
     return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
 },
-add: function (vector){">
+add: function (vector">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多边形碰撞实例（添加圆形）">
 <meta property="og:url" content="http://yoursite.com/2015/08/31/多边形碰撞实例（添加圆形）/index.html">
@@ -41,7 +41,7 @@ Vector.prototype = {
 getMagnitude:function (){
     return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
 },
-add: function (vector){">
+add: function (vector">
 <meta property="og:updated_time" content="2015-08-31T12:41:08.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多边形碰撞实例（添加圆形）">
@@ -53,14 +53,14 @@ Vector.prototype = {
 getMagnitude:function (){
     return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
 },
-add: function (vector){">
+add: function (vector">
   
     <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -112,51 +112,51 @@ add: function (vector){">
   
   <div class="entry">
     
-      <pre><code>    <span class="keyword">var</span> Vector = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>)</span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
+      <pre><code>    var Vector = function (x,y){
+    this.x = x;
+    this.y = y;
 };
 Vector.prototype = {
-getMagnitude:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(<span class="built_in">Math</span>.pow(<span class="keyword">this</span>.x,<span class="number">2</span>)+<span class="built_in">Math</span>.pow(<span class="keyword">this</span>.y,<span class="number">2</span>));
+getMagnitude:function (){
+    return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
 },
-add: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.x+vector.x;
-    v.y = <span class="keyword">this</span>.y+vector.y;
-    <span class="keyword">return</span> v;
+add: function (vector){
+    var v = new Vector();
+    v.x = this.x+vector.x;
+    v.y = this.y+vector.y;
+    return v;
 },
-substract: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">var</span> v= <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.x - vector.x;
-    v.y = <span class="keyword">this</span>.y - vector.y;
-    <span class="keyword">return</span> v;
+substract: function (vector){
+    var v= new Vector();
+    v.x = this.x - vector.x;
+    v.y = this.y - vector.y;
+    return v;
 
 },
-dotProduct: <span class="function"><span class="keyword">function</span> (<span class="params">vector</span>)</span>{
-    <span class="keyword">return</span> <span class="keyword">this</span>.x*vector.x+ <span class="keyword">this</span>.y*vector.y;
+dotProduct: function (vector){
+    return this.x*vector.x+ this.y*vector.y;
 },
-edge: <span class="function"><span class="keyword">function</span>(<span class="params">vector</span>) </span>{
-    <span class="keyword">return</span> <span class="keyword">this</span>.substract(vector);
+edge: function(vector) {
+    return this.substract(vector);
 },
-prependicular:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector();
-    v.x = <span class="keyword">this</span>.y;
-    v.y = <span class="number">0</span> - <span class="keyword">this</span>.x;
-    <span class="keyword">return</span> v;
+prependicular:function (){
+    var v = new Vector();
+    v.x = this.y;
+    v.y = 0 - this.x;
+    return v;
 },
-normalize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v = <span class="keyword">new</span> Vector(<span class="number">0</span>,<span class="number">0</span>),
-    m = <span class="keyword">this</span>.getMagnitude();
-    <span class="keyword">if</span> (m!=<span class="number">0</span>){
-        v.x = <span class="keyword">this</span>.x/m;
-        v.y = <span class="keyword">this</span>.y/m;
+normalize: function (){
+    var v = new Vector(0,0),
+    m = this.getMagnitude();
+    if (m!=0){
+        v.x = this.x/m;
+        v.y = this.y/m;
     }
-    <span class="keyword">return</span> v;
+    return v;
 },
-normal:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> p = <span class="keyword">this</span>.prependicular();
-    <span class="keyword">return</span> p.normalize();
+normal:function (){
+    var p = this.prependicular();
+    return p.normalize();
 }
 };
 
@@ -165,73 +165,73 @@ normal:<span class="function"><span class="keyword">function</span> (<span class
 
 
 
-<span class="keyword">var</span> Projection = <span class="function"><span class="keyword">function</span> (<span class="params">min,max</span>)</span>{
-    <span class="keyword">this</span>.min = min;
-    <span class="keyword">this</span>.max = max;
+var Projection = function (min,max){
+    this.min = min;
+    this.max = max;
 
 };
 Projection.prototype = {
-    overlaps:<span class="function"><span class="keyword">function</span> (<span class="params">projection</span>)</span>{
-        <span class="keyword">return</span> <span class="keyword">this</span>.max&gt;projection.min&amp;&amp;projection.max&gt;<span class="keyword">this</span>.min;
+    overlaps:function (projection){
+        return this.max&gt;projection.min&amp;&amp;projection.max&gt;this.min;
     }
 };
 
 
 
 
-<span class="keyword">var</span> Shape = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">this</span>.x = <span class="literal">undefined</span>;
-    <span class="keyword">this</span>.y = <span class="literal">undefined</span>;
-    <span class="keyword">this</span>.strokeStyle = <span class="string">'rgba(255,253,208,0.9)'</span>;
-    <span class="keyword">this</span>.fillStyle = <span class="string">'rgba(147,197,114,0.8)'</span>;
+var Shape = function (){
+    this.x = undefined;
+    this.y = undefined;
+    this.strokeStyle = &apos;rgba(255,253,208,0.9)&apos;;
+    this.fillStyle = &apos;rgba(147,197,114,0.8)&apos;;
 };
 
 Shape.prototype = {
-    collidesWith: <span class="function"><span class="keyword">function</span> (<span class="params">shape</span>)</span>{
+    collidesWith: function (shape){
 
-        <span class="keyword">var</span> axes = <span class="keyword">this</span>.getAxes().concat(shape.getAxes());
-        <span class="keyword">return</span> !<span class="keyword">this</span>.separationOnAxes(axes,shape);
+        var axes = this.getAxes().concat(shape.getAxes());
+        return !this.separationOnAxes(axes,shape);
     },
-    separationOnAxes:<span class="function"><span class="keyword">function</span> (<span class="params">axes,shape</span>)</span>{
-        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;axes.length;++i) {
+    separationOnAxes:function (axes,shape){
+        for (var i=0;i&lt;axes.length;++i) {
             axis = axes[i];
             projection1 = shape.project(axis);
-            projection2 = <span class="keyword">this</span>.project(axis);
-            <span class="keyword">if</span> (! projection1.overlaps(projection2)) {
-                <span class="keyword">return</span> <span class="literal">true</span>;
+            projection2 = this.project(axis);
+            if (! projection1.overlaps(projection2)) {
+                return true;
             }
         }
-        <span class="keyword">return</span> <span class="literal">false</span>;
+        return false;
     },
-    project:<span class="function"><span class="keyword">function</span> (<span class="params">axis</span>) </span>{
-        <span class="keyword">throw</span> <span class="string">'project(axis) not implemented'</span>;
+    project:function (axis) {
+        throw &apos;project(axis) not implemented&apos;;
     },
-    getAxes:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">throw</span> <span class="string">'getAxes() not implemented'</span>;
+    getAxes:function (){
+        throw &apos;getAxes() not implemented&apos;;
     },
-    move :<span class="function"><span class="keyword">function</span> (<span class="params">dx,dy</span>)</span>{
-        <span class="keyword">throw</span> <span class="string">'move(dx,dy)not implemented'</span>;
+    move :function (dx,dy){
+        throw &apos;move(dx,dy)not implemented&apos;;
     },
-    createPath: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-        <span class="keyword">throw</span> <span class="string">'createPath(context) not implemented'</span>;
+    createPath: function (context) {
+        throw &apos;createPath(context) not implemented&apos;;
     },
-    fill : <span class="function"><span class="keyword">function</span> (<span class="params">context</span>)</span>{
+    fill : function (context){
         context.save();
-        context.fillStyle = <span class="keyword">this</span>.fillStyle;
-        <span class="keyword">this</span>.createPath(context);
+        context.fillStyle = this.fillStyle;
+        this.createPath(context);
         context.fill();
         context.restore();
     },
-    stroke: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>)</span>{
+    stroke: function (context){
         context.save();
-        context.strokeStyle = <span class="keyword">this</span>.strokeStyle;
-        <span class="keyword">this</span>.createPath(context);
+        context.strokeStyle = this.strokeStyle;
+        this.createPath(context);
         context.stroke();
         context.restore();
     },
-    isPointInPath: <span class="function"><span class="keyword">function</span> (<span class="params">context,x,y</span>) </span>{
-        <span class="keyword">this</span>.createPath(context);
-        <span class="keyword">return</span> context.isPointInPath(x,y);
+    isPointInPath: function (context,x,y) {
+        this.createPath(context);
+        return context.isPointInPath(x,y);
     },
 
 
@@ -239,81 +239,81 @@ Shape.prototype = {
 
 
 
-<span class="function"><span class="keyword">function</span> <span class="title">detectCollisions</span>(<span class="params"></span>)</span>{
-    <span class="keyword">var</span> textY = <span class="number">30</span>,
+function detectCollisions(){
+    var textY = 30,
     numShapes = shapes.length,
     shape,i;
-    <span class="keyword">if</span> (shapeBeingDragged) {
-        <span class="keyword">for</span> (i =<span class="number">0</span>;i&lt;numShapes;++i) {
+    if (shapeBeingDragged) {
+        for (i =0;i&lt;numShapes;++i) {
             shape = shapes[i];
-            <span class="keyword">if</span> (shape!==shapeBeingDragged) {
-                <span class="keyword">if</span> (shapeBeingDragged.collidesWith(shape)) {
+            if (shape!==shapeBeingDragged) {
+                if (shapeBeingDragged.collidesWith(shape)) {
                     context.fillStyle = shape.fillStyle;
-                    context.fillText(<span class="string">'collision'</span>,<span class="number">20</span>,textY);
-                    textY +=<span class="number">40</span>;
+                    context.fillText(&apos;collision&apos;,20,textY);
+                    textY +=40;
                 }
             }
         }
     }
 }
-<span class="keyword">var</span> Point = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
+var Point = function (x,y) {
+    this.x = x;
+    this.y = y;
 
 };
-<span class="keyword">var</span> Polygon = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">this</span>.points = [];
-    <span class="keyword">this</span>.strokeStyle = <span class="string">'blue'</span>;
-    <span class="keyword">this</span>.fillStyle = <span class="string">'white'</span>;
+var Polygon = function (){
+    this.points = [];
+    this.strokeStyle = &apos;blue&apos;;
+    this.fillStyle = &apos;white&apos;;
 };
-Polygon.prototype = <span class="keyword">new</span> Shape();
-Polygon.prototype.getAxes = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">var</span> v1 = <span class="keyword">new</span> Vector(),
-        v2 = <span class="keyword">new</span> Vector(),
+Polygon.prototype = new Shape();
+Polygon.prototype.getAxes = function (){
+    var v1 = new Vector(),
+        v2 = new Vector(),
         axes = [];
-    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;<span class="keyword">this</span>.points.length-<span class="number">1</span>;i++) {
-        v1.x = <span class="keyword">this</span>.points[i].x;
-        v1.y = <span class="keyword">this</span>.points[i].y;
-        v2.x = <span class="keyword">this</span>.points[i+<span class="number">1</span>].x;
-        v2.y = <span class="keyword">this</span>.points[i+<span class="number">1</span>].y;
+    for (var i=0; i&lt;this.points.length-1;i++) {
+        v1.x = this.points[i].x;
+        v1.y = this.points[i].y;
+        v2.x = this.points[i+1].x;
+        v2.y = this.points[i+1].y;
         axes.push(v1.edge(v2).normal());
     }
-    v1.x = <span class="keyword">this</span>.points[<span class="keyword">this</span>.points.length-<span class="number">1</span>].x;
-    v1.y = <span class="keyword">this</span>.points[<span class="keyword">this</span>.points.length-<span class="number">1</span>].y;
+    v1.x = this.points[this.points.length-1].x;
+    v1.y = this.points[this.points.length-1].y;
 
-    v2.x = <span class="keyword">this</span>.points[<span class="number">0</span>].x;
-    v2.y = <span class="keyword">this</span>.points[<span class="number">0</span>].y;
+    v2.x = this.points[0].x;
+    v2.y = this.points[0].y;
     axes.push(v1.edge(v2).normal());
-    <span class="keyword">return</span> axes;
+    return axes;
 };
-Polygon.prototype.project = <span class="function"><span class="keyword">function</span> (<span class="params">axis</span>)</span>{
-    <span class="keyword">var</span> scalars = [],
-    v = <span class="keyword">new</span> Vector();
-    <span class="keyword">this</span>.points.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">point</span>)</span>{
+Polygon.prototype.project = function (axis){
+    var scalars = [],
+    v = new Vector();
+    this.points.forEach(function (point){
         v.x = point.x;
         v.y = point.y;
         scalars.push(v.dotProduct(axis));
     });
-    <span class="keyword">return</span> <span class="keyword">new</span> Projection(<span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>,scalars),<span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>,scalars));
+    return new Projection(Math.min.apply(Math,scalars),Math.max.apply(Math,scalars));
 };
-Polygon.prototype.addPoint = <span class="function"><span class="keyword">function</span> (<span class="params">x,y</span>)</span>{
-    <span class="keyword">this</span>.points.push(<span class="keyword">new</span> Point(x,y));
+Polygon.prototype.addPoint = function (x,y){
+    this.points.push(new Point(x,y));
 };
-Polygon.prototype.createPath = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-<span class="keyword">if</span> (<span class="keyword">this</span>.points.length == <span class="number">0</span>) {
-    <span class="keyword">return</span> ;
+Polygon.prototype.createPath = function (context) {
+if (this.points.length == 0) {
+    return ;
 
 }
 context.beginPath();
-context.moveTo(<span class="keyword">this</span>.points[<span class="number">0</span>].x,<span class="keyword">this</span>.points[<span class="number">0</span>].y);
-<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.points.length;++i) {
-    context.lineTo(<span class="keyword">this</span>.points[i].x,<span class="keyword">this</span>.points[i].y);
+context.moveTo(this.points[0].x,this.points[0].y);
+for (var i=0;i&lt;this.points.length;++i) {
+    context.lineTo(this.points[i].x,this.points[i].y);
 }
 context.closePath();
 };
-Polygon.prototype.move = <span class="function"><span class="keyword">function</span> (<span class="params">dx,dy</span>)</span>{
-    <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span> ,point;i&lt;<span class="keyword">this</span>.points.length;++i) {
-        point = <span class="keyword">this</span>.points[i];
+Polygon.prototype.move = function (dx,dy){
+    for (var i=0 ,point;i&lt;this.points.length;++i) {
+        point = this.points[i];
         point.x += dx;
         point.y += dy;
     }
@@ -323,86 +323,86 @@ Polygon.prototype.move = <span class="function"><span class="keyword">function</
 
 
 
-<span class="comment">//圆形参数</span>
-<span class="keyword">var</span> Circle = <span class="function"><span class="keyword">function</span> (<span class="params">x,y,radius</span>) </span>{
-    <span class="keyword">this</span>.x = x;
-    <span class="keyword">this</span>.y = y;
-    <span class="keyword">this</span>.radius = radius;
-    <span class="keyword">this</span>.stroketype = <span class="string">'rgba(255,253,208,0.9)'</span>;
-    <span class="keyword">this</span>.fillStyle = <span class="string">'rgba(147,197,114,0.8)'</span>;
+//圆形参数
+var Circle = function (x,y,radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.stroketype = &apos;rgba(255,253,208,0.9)&apos;;
+    this.fillStyle = &apos;rgba(147,197,114,0.8)&apos;;
 }
-Circle.prototype = <span class="keyword">new</span> Shape();
-Circle.prototype.collidesWith = <span class="function"><span class="keyword">function</span> (<span class="params">shape</span>) </span>{
-    <span class="keyword">var</span> point ,length,min =<span class="number">10000</span>,v1,v2,edge,perpendicular,normal,
+Circle.prototype = new Shape();
+Circle.prototype.collidesWith = function (shape) {
+    var point ,length,min =10000,v1,v2,edge,perpendicular,normal,
     axes = shape.getAxes(),distance;
-    <span class="keyword">if</span>(axes === <span class="literal">undefined</span>) {
-        distance = <span class="built_in">Math</span>.sqrt(<span class="built_in">Math</span>.pow(shape.x-<span class="keyword">this</span>.x,<span class="number">2</span>)+<span class="built_in">Math</span>.pow(shape.y-<span class="keyword">this</span>.y,<span class="number">2</span>));
-        <span class="keyword">return</span> distance&lt;<span class="built_in">Math</span>.abs(<span class="keyword">this</span>.radius +shape.radius);
+    if(axes === undefined) {
+        distance = Math.sqrt(Math.pow(shape.x-this.x,2)+Math.pow(shape.y-this.y,2));
+        return distance&lt;Math.abs(this.radius +shape.radius);
     }
-    <span class="keyword">else</span> {
-        <span class="keyword">return</span> polygonCollidesWithCircle(shape,<span class="keyword">this</span>);
+    else {
+        return polygonCollidesWithCircle(shape,this);
     }
 };
-Circle.prototype.getAxes = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-    <span class="keyword">return</span> <span class="literal">undefined</span>;<span class="comment">//圆形没有固定的投影轴</span>
+Circle.prototype.getAxes = function (){
+    return undefined;//圆形没有固定的投影轴
 };
-Circle.prototype.project = <span class="function"><span class="keyword">function</span> (<span class="params">axis</span>) </span>{
-    <span class="keyword">var</span> scalars = [],
-    point = <span class="keyword">new</span> Point(<span class="keyword">this</span>.x,<span class="keyword">this</span>.y);
-    dotProduct = <span class="keyword">new</span> Vector(point).dotProduct(axis);
+Circle.prototype.project = function (axis) {
+    var scalars = [],
+    point = new Point(this.x,this.y);
+    dotProduct = new Vector(point).dotProduct(axis);
     scalars.push(dotProduct);
-    scalars.push(dotProduct + <span class="keyword">this</span>.radius);
-    scalars.push(dotProduct - <span class="keyword">this</span>.radius);
-    <span class="keyword">return</span> <span class="keyword">new</span> Projection(<span class="built_in">Math</span>.min.apply(<span class="built_in">Math</span>,scalars),
-    <span class="built_in">Math</span>.max.apply(<span class="built_in">Math</span>,scalars));
+    scalars.push(dotProduct + this.radius);
+    scalars.push(dotProduct - this.radius);
+    return new Projection(Math.min.apply(Math,scalars),
+    Math.max.apply(Math,scalars));
 };
-Circle .prototype.move = <span class="function"><span class="keyword">function</span> (<span class="params">dx,dy</span>) </span>{
-    <span class="keyword">this</span>.x +=dx;
-    <span class="keyword">this</span>.y +=dy;
+Circle .prototype.move = function (dx,dy) {
+    this.x +=dx;
+    this.y +=dy;
 
 };
-Circle.prototype.createPath = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
+Circle.prototype.createPath = function (context) {
     context.beginPath();
-    context.arc(<span class="keyword">this</span>.x,<span class="keyword">this</span>.y,<span class="keyword">this</span>.radius,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">false</span>);
+    context.arc(this.x,this.y,this.radius,0,Math.PI*2,false);
 };
-<span class="function"><span class="keyword">function</span> <span class="title">getPolygonPointClosestToCircle</span> (<span class="params">polygon,circle</span>) </span>{
-    <span class="keyword">var</span> min = <span class="number">10000</span>,
+function getPolygonPointClosestToCircle (polygon,circle) {
+    var min = 10000,
     length,
     testPoint,
     closestPoint;
-    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;polygon.points.length;++i) {
+    for(var i=0; i&lt;polygon.points.length;++i) {
         testPoint = polygon.points[i];
 
-        length = <span class="built_in">Math</span>.sqrt(<span class="built_in">Math</span>.pow(testPoint.x - circle.x,<span class="number">2</span>),<span class="built_in">Math</span>.pow(testPoint.y-circle.y,<span class="number">2</span>));
-        <span class="keyword">if</span> (length &lt;min) {
+        length = Math.sqrt(Math.pow(testPoint.x - circle.x,2),Math.pow(testPoint.y-circle.y,2));
+        if (length &lt;min) {
             min = length;
             closestPoint = testPoint;
         }
     }
 
-    <span class="keyword">return</span> closestPoint;
+    return closestPoint;
 };
-<span class="function"><span class="keyword">function</span> <span class="title">polygonCollidesWithCircle</span> (<span class="params">polygon,circle</span>) </span>{
-    <span class="keyword">var</span> min = <span class="number">100000</span>,v1,v2,
+function polygonCollidesWithCircle (polygon,circle) {
+    var min = 100000,v1,v2,
     edge,perpendicular,normal,
     axes = polygon.getAxes();
     closestPoint = getPolygonPointClosestToCircle(polygon,circle);
-    <span class="comment">//console.log(typeof closestPoint);</span>
-    v1 = <span class="keyword">new</span> Vector(<span class="keyword">new</span> Point(circle.x,circle.y));
-    v2 = <span class="keyword">new</span> Vector(<span class="keyword">new</span> Point(closestPoint.x,closestPoint.y));
+    //console.log(typeof closestPoint);
+    v1 = new Vector(new Point(circle.x,circle.y));
+    v2 = new Vector(new Point(closestPoint.x,closestPoint.y));
     axes.push(v1.substract(v2).normalize());
-    <span class="keyword">return</span> !polygon.separationOnAxes(axes,circle);
+    return !polygon.separationOnAxes(axes,circle);
 };
 
 
-Polygon.prototype.collidesWith = <span class="function"><span class="keyword">function</span> (<span class="params">shape</span>)</span>{
-    <span class="keyword">var</span> axes = shape.getAxes();
-    <span class="keyword">if</span> (axes === <span class="literal">undefined</span>) {
-        <span class="keyword">return</span> polygonCollidesWithCircle(<span class="keyword">this</span>,shape);
+Polygon.prototype.collidesWith = function (shape){
+    var axes = shape.getAxes();
+    if (axes === undefined) {
+        return polygonCollidesWithCircle(this,shape);
     }
-    <span class="keyword">else</span> {
-        axes.concat(<span class="keyword">this</span>.getAxes());
-        <span class="keyword">return</span> !<span class="keyword">this</span>.separationOnAxes(axes,shape);
+    else {
+        axes.concat(this.getAxes());
+        return !this.separationOnAxes(axes,shape);
     }
 };
 
@@ -410,99 +410,99 @@ Polygon.prototype.collidesWith = <span class="function"><span class="keyword">fu
 
 
 
-<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);
-context = canvas.getContext(<span class="string">'2d'</span>);
+var canvas = document.getElementById(&apos;canvas&apos;);
+context = canvas.getContext(&apos;2d&apos;);
 shapes = [];
 polygonPoints = [
-[<span class="keyword">new</span> Point(<span class="number">250</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">250</span>,<span class="number">250</span>),<span class="keyword">new</span> Point(<span class="number">350</span>,<span class="number">250</span>)],
-[<span class="keyword">new</span> Point(<span class="number">100</span>,<span class="number">100</span>),<span class="keyword">new</span> Point(<span class="number">100</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">150</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">150</span>,<span class="number">100</span>)],
-[<span class="keyword">new</span> Point(<span class="number">400</span>,<span class="number">100</span>),<span class="keyword">new</span> Point(<span class="number">380</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">500</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">520</span>,<span class="number">100</span>)],[<span class="keyword">new</span> Point(<span class="number">300</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">280</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">400</span>,<span class="number">150</span>),<span class="keyword">new</span> Point(<span class="number">420</span>,<span class="number">100</span>)]
+[new Point(250,150),new Point(250,250),new Point(350,250)],
+[new Point(100,100),new Point(100,150),new Point(150,150),new Point(150,100)],
+[new Point(400,100),new Point(380,150),new Point(500,150),new Point(520,100)],[new Point(300,150),new Point(280,150),new Point(400,150),new Point(420,100)]
 ],
-polygonStrokeStyles = [<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'red'</span>],
-polygonFillStyle = [<span class="string">'rgba(255,255,0,0.7)'</span>,<span class="string">'rgba(100,140230,0.6)'</span>,<span class="string">'rgba(255,255,255,0.8)'</span>],
-mousedown = { x:<span class="number">0</span>,y:<span class="number">0</span>},
-lastdrag = {x:<span class="number">0</span>,y:<span class="number">0</span>},
-shapeBeingDragged = <span class="literal">undefined</span>;
-circle1 = <span class="keyword">new</span> Circle(<span class="number">150</span>,<span class="number">75</span>,<span class="number">20</span>);
-circlr2 = <span class="keyword">new</span> Circle(<span class="number">350</span>,<span class="number">25</span>,<span class="number">30</span>);
+polygonStrokeStyles = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;],
+polygonFillStyle = [&apos;rgba(255,255,0,0.7)&apos;,&apos;rgba(100,140230,0.6)&apos;,&apos;rgba(255,255,255,0.8)&apos;],
+mousedown = { x:0,y:0},
+lastdrag = {x:0,y:0},
+shapeBeingDragged = undefined;
+circle1 = new Circle(150,75,20);
+circlr2 = new Circle(350,25,30);
 shapes.push(circle1);
 shapes.push(circlr2);
 
-<span class="function"><span class="keyword">function</span> <span class="title">windowToCanvas</span>(<span class="params">x,y</span>)</span>{
-    <span class="keyword">var</span> bbox = canvas.getBoundingClientRect();
-    <span class="keyword">return</span> {
+function windowToCanvas(x,y){
+    var bbox = canvas.getBoundingClientRect();
+    return {
         x: x-bbox.left*(canvas.width/bbox.width),
         y: y-bbox.top *(canvas.height/bbox.height)
     };
 }
-<span class="function"><span class="keyword">function</span> <span class="title">drawShapes</span> (<span class="params"></span>)</span>{
-    shapes.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">shape</span>)</span>{
+function drawShapes (){
+    shapes.forEach(function(shape){
         shape.stroke(context);shape.fill(context);
     });
 }
-<span class="function"><span class="keyword">function</span> <span class="title">detectCollisions</span>(<span class="params"></span>)</span>{
-<span class="keyword">var</span> textY = <span class="number">30</span>,
+function detectCollisions(){
+var textY = 30,
 numShapes = shapes.length,
 shape,i;
-<span class="keyword">if</span> (shapeBeingDragged) {
-    <span class="keyword">for</span> (i =<span class="number">0</span>;i&lt;numShapes;++i) {
+if (shapeBeingDragged) {
+    for (i =0;i&lt;numShapes;++i) {
         shape = shapes[i];
-        <span class="keyword">if</span> (shape!==shapeBeingDragged) {
-            <span class="keyword">if</span> (shapeBeingDragged.collidesWith(shape)) {
+        if (shape!==shapeBeingDragged) {
+            if (shapeBeingDragged.collidesWith(shape)) {
                 context.fillStyle = shape.fillStyle;
-                context.fillText(<span class="string">'collision'</span>,<span class="number">20</span>,textY);
-                textY +=<span class="number">40</span>;
+                context.fillText(&apos;collision&apos;,20,textY);
+                textY +=40;
             }
         }
     }
 }
 </code></pre><p>}<br>    canvas.onmousedown = function (e){<br>        var location = windowToCanvas(e.clientX,e.clientY);<br>        shapes.forEach( function(shape){<br>            if(shape.isPointInPath(context,location.x,location.y)){<br>                shapeBeingDragged = shape;<br>                mousedown.x = location.x;<br>                mousedown.y = location.y;<br>                lastdrag.x = location.x;<br>                lastdrag.y = location.y;</p>
 <pre><code>        }
-    })<span class="comment">;</span>
-}<span class="comment">;</span>
+    });
+};
 canvas.onmousemove = function (e) {
     var location,
-    dragVector<span class="comment">;</span>
+    dragVector;
     if(shapeBeingDragged !== undefined) {
-        location = windowToCanvas(e.clientX,e.clientY)<span class="comment">;</span>
+        location = windowToCanvas(e.clientX,e.clientY);
         dragVector = {
             x:location.x - lastdrag.x,
             y: location.y - lastdrag.y
 
-        }<span class="comment">;</span>
-        shapeBeingDragged.move(dragVector.x,dragVector.y)<span class="comment">;</span>
-        lastdrag.x = location.x<span class="comment">;</span>
-        lastdrag.y = location.y<span class="comment">;</span>
-        context.clearRect(0,0,canvas.width,canvas.height)<span class="comment">;</span>
-        drawShapes()<span class="comment">;</span>
-        detectCollisions()<span class="comment">;</span>
+        };
+        shapeBeingDragged.move(dragVector.x,dragVector.y);
+        lastdrag.x = location.x;
+        lastdrag.y = location.y;
+        context.clearRect(0,0,canvas.width,canvas.height);
+        drawShapes();
+        detectCollisions();
     }
-}<span class="comment">;</span>
+};
 canvas.onmouseup = function (e) {
-    shapeBeingDragged = undefined<span class="comment">;</span>
+    shapeBeingDragged = undefined;
 }
-for (var i=0<span class="comment">;i&lt;polygonPoints.length;++i) {</span>
-    var polygon = new Polygon()<span class="comment">;</span>
-    points = polygonPoints[i]<span class="comment">;</span>
-    polygon.strokeStyle = polygonStrokeStyles[i]<span class="comment">;</span>
+for (var i=0;i&lt;polygonPoints.length;++i) {
+    var polygon = new Polygon();
+    points = polygonPoints[i];
+    polygon.strokeStyle = polygonStrokeStyles[i];
     points.forEach(function (point){
-        polygon.addPoint(point.x,point.y)<span class="comment">;</span>
-    })<span class="comment">;</span>
-    shapes.push(polygon)<span class="comment">;</span>
+        polygon.addPoint(point.x,point.y);
+    });
+    shapes.push(polygon);
 
 
 }
-context.shadowColor = 'rgba(<span class="number">100,140,255,0</span>.5)'<span class="comment">;</span>
-context.shadowBlur = 4<span class="comment">;</span>
-context.shadowOffsetX = 2<span class="comment">;</span>
-context.shadowOffsetY = 2<span class="comment">;</span>
-context.font = '38px Arial'<span class="comment">;</span>
-drawShapes()<span class="comment">;</span>
-context.save()<span class="comment">;</span>
-context.fillStyle = 'cornflowerblue'<span class="comment">;</span>
-context.font = '24px Arial'<span class="comment">;</span>
-context.fillText('Drag shapes over each other',10,25)<span class="comment">;</span>
-context.restore()<span class="comment">;</span>
+context.shadowColor = &apos;rgba(100,140,255,0.5)&apos;;
+context.shadowBlur = 4;
+context.shadowOffsetX = 2;
+context.shadowOffsetY = 2;
+context.font = &apos;38px Arial&apos;;
+drawShapes();
+context.save();
+context.fillStyle = &apos;cornflowerblue&apos;;
+context.font = &apos;24px Arial&apos;;
+context.fillText(&apos;Drag shapes over each other&apos;,10,25);
+context.restore();
 </code></pre>
     
   </div>

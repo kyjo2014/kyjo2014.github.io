@@ -28,7 +28,7 @@
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -82,21 +82,21 @@
     
       <p>这两个方法都是每个函数都自带的方法，用途都是在特定的时候调用函数，同时修改this的指向，<br>避免传入参数的不正确。同时还能够对一个原本不含有某个方法的函数，调用这个方法。<br>例子：<br>    function Animal(){<br>    this.name = “Animal”;<br>    this.showName = function(){<br>        alert(this.name);<br>    }<br>    }    </p>
 <pre><code>function Cat(){    
-    this.name = <span class="string">"Cat"</span>;    
+    this.name = &quot;Cat&quot;;    
 }    
 
-var <span class="keyword">animal</span> = new <span class="keyword">Animal</span>();    
+var animal = new Animal();    
 var cat = new Cat();    
 
-//输入结果为<span class="string">"Cat"</span>    
-<span class="keyword">animal</span>.showName.call(cat,<span class="string">","</span>);    
-//<span class="keyword">animal</span>.showName.apply(cat,<span class="comment">[]</span>);  
+//输入结果为&quot;Cat&quot;    
+animal.showName.call(cat,&quot;,&quot;);    
+//animal.showName.apply(cat,[]);  
 </code></pre><p>在这里，通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。<br>而且还能实现继承。<br>例子：<br>      function Animal(name){<br>        this.name = name;<br>        this.showName = function(){<br>            alert(this.name);<br>        }<br>    }      </p>
 <pre><code>function Cat(name){    
-    <span class="keyword">Animal</span>.call(this, name);    
+    Animal.call(this, name);    
 }      
 
-var cat = new Cat(<span class="string">"Black Cat"</span>);     
+var cat = new Cat(&quot;Black Cat&quot;);     
 cat.showName();
 </code></pre><p> Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么 Cat中不就有Animal的所有属性和方法了吗，Cat对象就能够直接调用Animal的方法以及属性了.<br>区别：apply()接收两个参数，一个是函数运行的作用域(this)，另一个是参数数组。<br>call()方法第一个参数与apply()方法相同，但传递给函数的参数必须列举出来。</p>
 

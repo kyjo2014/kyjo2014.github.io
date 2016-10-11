@@ -11,28 +11,28 @@
   
   
     <meta name="description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
-首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&#39;#id&#39;));时，会弹出一个[object Object ]，这个obj">
+首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
   
   <meta name="description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
-首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&apos;#id&apos;));时，会弹出一个[object Object ]，这个obj">
+首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
 <meta property="og:type" content="article">
 <meta property="og:title" content="$(this)与this的区别">
 <meta property="og:url" content="http://yoursite.com/2015/08/16/this-与this的区别/index.html">
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
-首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&apos;#id&apos;));时，会弹出一个[object Object ]，这个obj">
+首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
 <meta property="og:updated_time" content="2015-08-16T02:06:45.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="$(this)与this的区别">
 <meta name="twitter:description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
-首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&apos;#id&apos;));时，会弹出一个[object Object ]，这个obj">
+首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
   
     <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -85,13 +85,13 @@
   <div class="entry">
     
       <p>相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？</p>
-<pre><code>首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(<span class="keyword">this</span>)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(<span class="string">'#id'</span>));时，会弹出一个[object <span class="built_in">Object</span> ]，这个object对象，也就是jquery对象了。
+<pre><code>首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&apos;#id&apos;));时，会弹出一个[object Object ]，这个object对象，也就是jquery对象了。
 
-那么，我们再回过头来说$(<span class="keyword">this</span>)，这个<span class="keyword">this</span>是什么呢？假设我们有如下的代码：
+那么，我们再回过头来说$(this)，这个this是什么呢？假设我们有如下的代码：
 </code></pre><p>$(“#desktop a img”).each(function(index){</p>
-<pre><code>alert<span class="list">($<span class="list">(<span class="keyword">this</span>)</span>)</span><span class="comment">;</span>
+<pre><code>alert($(this));
 
-alert<span class="list">(<span class="keyword">this</span>)</span><span class="comment">;</span>
+alert(this);
 </code></pre><p>}</p>
 <p>那么，这时候可以看出来：</p>
 <p>alert($(this));  弹出的结果是[object Object ]</p>

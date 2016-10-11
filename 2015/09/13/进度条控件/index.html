@@ -12,31 +12,31 @@
   
     <meta name="description" content="var  COREHTML5 = COREHTML5 || {};
 COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent){
-    this.strokeStyle = strokeStyle ?strokeStyle :&#39;gray&#39;;">
+    this.strokeStyle = strokeStyle ?strokeStyle :&amp;apos;gray&amp;a">
   
   <meta name="description" content="var  COREHTML5 = COREHTML5 || {};
 COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent){
-    this.strokeStyle = strokeStyle ?strokeStyle :&apos;gray&apos;;">
+    this.strokeStyle = strokeStyle ?strokeStyle :&amp;apos;gray&amp;a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进度条控件">
 <meta property="og:url" content="http://yoursite.com/2015/09/13/进度条控件/index.html">
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="var  COREHTML5 = COREHTML5 || {};
 COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent){
-    this.strokeStyle = strokeStyle ?strokeStyle :&apos;gray&apos;;">
+    this.strokeStyle = strokeStyle ?strokeStyle :&amp;apos;gray&amp;a">
 <meta property="og:updated_time" content="2015-09-13T15:45:59.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进度条控件">
 <meta name="twitter:description" content="var  COREHTML5 = COREHTML5 || {};
 COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent){
-    this.strokeStyle = strokeStyle ?strokeStyle :&apos;gray&apos;;">
+    this.strokeStyle = strokeStyle ?strokeStyle :&amp;apos;gray&amp;a">
   
     <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -88,186 +88,186 @@ COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePerce
   
   <div class="entry">
     
-      <pre><code><span class="keyword">var</span>  COREHTML5 = COREHTML5 || {};
-COREHTML5.RoundedRectangle = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent</span>)</span>{
-    <span class="keyword">this</span>.strokeStyle = strokeStyle ?strokeStyle :<span class="string">'gray'</span>;
-    <span class="keyword">this</span>.fillStyle = fillStyle? fillStyle :<span class="string">'skyblue'</span>;
-    horizontalSizePercent = horizontalSizePercent ||<span class="number">100</span>;
-    verticalSizePercent = verticalSizePercent ||<span class="number">100</span>;
-    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(100,100,100,0.8)'</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
-    <span class="keyword">this</span>.setSizePercents(horizontalSizePercent,verticalSizePercent);
-    <span class="keyword">this</span>.createCanvas();
-    <span class="keyword">this</span>.createDOMElement();
-    <span class="keyword">return</span> <span class="keyword">this</span>;
+      <pre><code>var  COREHTML5 = COREHTML5 || {};
+COREHTML5.RoundedRectangle = function (strokeStyle,fillStyle,horizontalSizePercent,verticalSizePercent){
+    this.strokeStyle = strokeStyle ?strokeStyle :&apos;gray&apos;;
+    this.fillStyle = fillStyle? fillStyle :&apos;skyblue&apos;;
+    horizontalSizePercent = horizontalSizePercent ||100;
+    verticalSizePercent = verticalSizePercent ||100;
+    this.SHADOW_COLOR = &apos;rgba(100,100,100,0.8)&apos;;
+    this.SHADOW_OFFSET_X = 3;
+    this.SHADOW_OFFSET_Y = 3;
+    this.SHADOW_BLUR = 3;
+    this.setSizePercents(horizontalSizePercent,verticalSizePercent);
+    this.createCanvas();
+    this.createDOMElement();
+    return this;
 
 }
 COREHTML5.RoundedRectangle.prototype = {
-    createCanvas: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);
-        <span class="keyword">this</span>.context = canvas.getContext(<span class="string">'2d'</span>);
-        <span class="keyword">return</span> canvas;
+    createCanvas: function (){
+        var canvas = document.createElement(&apos;canvas&apos;);
+        this.context = canvas.getContext(&apos;2d&apos;);
+        return canvas;
     },
-    createDOMElement: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
-        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas);
+    createDOMElement: function (){
+        this.domElement = document.createElement(&apos;div&apos;);
+        this.domElement.appendChild(this.context.canvas);
     },
-    appendTo : <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
-        element.appendChild(<span class="keyword">this</span>.domElement);
-        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth +<span class="string">'px'</span>;
-        <span class="keyword">this</span>.dimElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
-        <span class="keyword">this</span>.resize(element.offsetWidth,element.offsetHeight);
+    appendTo : function (element){
+        element.appendChild(this.domElement);
+        this.domElement.style.width = element.offsetWidth +&apos;px&apos;;
+        this.dimElement.style.height = element.offsetHeight + &apos;px&apos;;
+        this.resize(element.offsetWidth,element.offsetHeight);
     },
-    resize :<span class="function"><span class="keyword">function</span> (<span class="params">width,height</span>) </span>{
-        <span class="keyword">this</span>.HORIZONTAL_MARGIN = (width - width *<span class="keyword">this</span>.horizontalSizePercent)/<span class="number">2</span>;
-        <span class="keyword">this</span>.VERTICAL_MARGIN = (height - height *<span class="keyword">this</span>.verticalSizePercent)/<span class="number">2</span>;
-        <span class="keyword">this</span>.cornerRadius = (<span class="keyword">this</span>.context.canvas.height/<span class="number">2</span> - <span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN)/<span class="number">2</span>;
-        <span class="keyword">this</span>.top = <span class="keyword">this</span>.VERTICAL_MARGIN;
-        <span class="keyword">this</span>.left = <span class="keyword">this</span>.HORIZONTAL_MARGIN;
-        <span class="keyword">this</span>.right = <span class="keyword">this</span>.left + width- <span class="number">2</span>*<span class="keyword">this</span>.HORIZONTAL_MARGIN;
-        <span class="keyword">this</span>.bottom = <span class="keyword">this</span>.top + height -<span class="number">2</span>*<span class="keyword">this</span>.VERTICAL_MARGIN;
-        <span class="keyword">this</span>.context.canvas.width = width;
-        <span class="keyword">this</span>.context.canvas.height = height;
+    resize :function (width,height) {
+        this.HORIZONTAL_MARGIN = (width - width *this.horizontalSizePercent)/2;
+        this.VERTICAL_MARGIN = (height - height *this.verticalSizePercent)/2;
+        this.cornerRadius = (this.context.canvas.height/2 - 2*this.VERTICAL_MARGIN)/2;
+        this.top = this.VERTICAL_MARGIN;
+        this.left = this.HORIZONTAL_MARGIN;
+        this.right = this.left + width- 2*this.HORIZONTAL_MARGIN;
+        this.bottom = this.top + height -2*this.VERTICAL_MARGIN;
+        this.context.canvas.width = width;
+        this.context.canvas.height = height;
     },
-    setSizePercents : <span class="function"><span class="keyword">function</span> (<span class="params">h,v</span>) </span>{
-        <span class="keyword">this</span>.horizontalSizePercent = h &gt;<span class="number">1</span>? h/<span class="number">100</span>:h;
-        <span class="keyword">this</span>.verticalSizePercent = v&gt;<span class="number">1</span> ?v/<span class="number">100</span>:v;
+    setSizePercents : function (h,v) {
+        this.horizontalSizePercent = h &gt;1? h/100:h;
+        this.verticalSizePercent = v&gt;1 ?v/100:v;
 
     },
-    fill :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> radius = (<span class="keyword">this</span>.bottom - <span class="keyword">this</span>.top)/<span class="number">2</span>;
-        <span class="keyword">this</span>.context.save();
-        <span class="keyword">this</span>.context.shadowColor = <span class="keyword">this</span>.SHADOW_COLOR;
-        <span class="keyword">this</span>.context.shadowOffsetX = <span class="keyword">this</span>.SHADOW_OFFSET_X;
-        <span class="keyword">this</span>.context.shadowOffsetY = <span class="keyword">this</span>.SHADOW_OFFSET_Y;
-        <span class="keyword">this</span>.context.shadowBlur = <span class="number">6</span>;
-        <span class="keyword">this</span>.context.beginPath();
-        <span class="keyword">this</span>.context.moveTo(<span class="keyword">this</span>.left + radius ,<span class="keyword">this</span>.top);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.right,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom,<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,radius);
-        <span class="keyword">this</span>.context.arcTo(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,radius);
-        <span class="keyword">this</span>.context.closePath();
-        <span class="keyword">this</span>.context.fillStyle = <span class="keyword">this</span>.fillStyle;
-        <span class="keyword">this</span>.context.fill();
-        <span class="keyword">this</span>.context.shadowColor = <span class="literal">undefined</span>;
+    fill :function (){
+        var radius = (this.bottom - this.top)/2;
+        this.context.save();
+        this.context.shadowColor = this.SHADOW_COLOR;
+        this.context.shadowOffsetX = this.SHADOW_OFFSET_X;
+        this.context.shadowOffsetY = this.SHADOW_OFFSET_Y;
+        this.context.shadowBlur = 6;
+        this.context.beginPath();
+        this.context.moveTo(this.left + radius ,this.top);
+        this.context.arcTo(this.right,this.top,this.right,this.bottom,radius);
+        this.context.arcTo(this.right,this.bottom,this.left,this.bottom,radius);
+        this.context.arcTo(this.left,this.bottom,this.left,this.top,radius);
+        this.context.arcTo(this.left,this.top,this.right,this.top,radius);
+        this.context.closePath();
+        this.context.fillStyle = this.fillStyle;
+        this.context.fill();
+        this.context.shadowColor = undefined;
 
     },
-    overlayGradient: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="built_in">console</span>.log(<span class="keyword">this</span>.left,<span class="keyword">this</span>.right,<span class="keyword">this</span>.top,<span class="keyword">this</span>.bottom);
-        <span class="keyword">var</span> gradient = <span class="keyword">this</span>.context.createLinearGradient(<span class="keyword">this</span>.left,<span class="keyword">this</span>.top,<span class="keyword">this</span>.left,<span class="keyword">this</span>.bottom);
-        gradient.addColorStop(<span class="number">0</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
-        gradient.addColorStop(<span class="number">0.2</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
-        gradient.addColorStop(<span class="number">0.25</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
-        gradient.addColorStop(<span class="number">0.3</span>,<span class="string">'rgba(255,255,255,0.9)'</span>);
-        gradient.addColorStop(<span class="number">0.4</span>,<span class="string">'rgba(255,255,255,0.7)'</span>);
-        gradient.addColorStop(<span class="number">0.45</span>,<span class="string">'rgba(255,255,255,0.6)'</span>);
-        gradient.addColorStop(<span class="number">0.6</span>,<span class="string">'rgba(255,255,255,0.4)'</span>);
-        gradient.addColorStop(<span class="number">1</span>,<span class="string">'rgba(255,255,255,0.1)'</span>);
-        <span class="keyword">this</span>.context.fillStyle = gradient;
-        <span class="keyword">this</span>.context.fill();
-        <span class="keyword">this</span>.context.lineWidth = <span class="number">0.4</span>;
-        <span class="keyword">this</span>.context.strokeStyle = <span class="keyword">this</span>.strokeStyle;
-        <span class="keyword">this</span>.context.stroke();
-        <span class="keyword">this</span>.context.restore();
+    overlayGradient: function (){
+        console.log(this.left,this.right,this.top,this.bottom);
+        var gradient = this.context.createLinearGradient(this.left,this.top,this.left,this.bottom);
+        gradient.addColorStop(0,&apos;rgba(255,255,255,0.4)&apos;);
+        gradient.addColorStop(0.2,&apos;rgba(255,255,255,0.6)&apos;);
+        gradient.addColorStop(0.25,&apos;rgba(255,255,255,0.7)&apos;);
+        gradient.addColorStop(0.3,&apos;rgba(255,255,255,0.9)&apos;);
+        gradient.addColorStop(0.4,&apos;rgba(255,255,255,0.7)&apos;);
+        gradient.addColorStop(0.45,&apos;rgba(255,255,255,0.6)&apos;);
+        gradient.addColorStop(0.6,&apos;rgba(255,255,255,0.4)&apos;);
+        gradient.addColorStop(1,&apos;rgba(255,255,255,0.1)&apos;);
+        this.context.fillStyle = gradient;
+        this.context.fill();
+        this.context.lineWidth = 0.4;
+        this.context.strokeStyle = this.strokeStyle;
+        this.context.stroke();
+        this.context.restore();
     },
-    draw: <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>{
-        <span class="keyword">var</span> originalContext;
-        <span class="keyword">if</span> (context) {
-            originalContext = <span class="keyword">this</span>.context;
-            <span class="keyword">this</span>.context =context;
+    draw: function (context) {
+        var originalContext;
+        if (context) {
+            originalContext = this.context;
+            this.context =context;
 
         } 
-        <span class="keyword">this</span>.fill();
-        <span class="keyword">this</span>.overlayGradient();
-        <span class="keyword">if</span> (context) {
-            <span class="keyword">this</span>.context = originalContext;
+        this.fill();
+        this.overlayGradient();
+        if (context) {
+            this.context = originalContext;
         }
     },
-    erase: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
+    erase: function (){
+        this.context.clearRect(0,0,this.context.canvas.width,this.context.canvas.height);
     }
 
 };
-COREHTML5.Progressbar = <span class="function"><span class="keyword">function</span> (<span class="params">strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent</span>) </span>{
-    <span class="keyword">this</span>.trough = <span class="keyword">new</span> COREHTML5.RoundedRectangle(strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent);
-    <span class="keyword">this</span>.SHADOW_COLOR = <span class="string">'rgba(255,255,255,0.5)'</span>;
-    <span class="keyword">this</span>.SHADOW_BLUR = <span class="number">3</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_X = <span class="number">2</span>;
-    <span class="keyword">this</span>.SHADOW_OFFSET_Y = <span class="number">2</span>;
-    <span class="keyword">this</span>.percentComplete = <span class="number">0</span>;
-    <span class="keyword">this</span>.createCanvas();
-    <span class="keyword">this</span>.createDOMElement();
+COREHTML5.Progressbar = function (strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent) {
+    this.trough = new COREHTML5.RoundedRectangle(strokeStyle,fillstyle,horizontalSizePercent,verticalSizePercent);
+    this.SHADOW_COLOR = &apos;rgba(255,255,255,0.5)&apos;;
+    this.SHADOW_BLUR = 3;
+    this.SHADOW_OFFSET_X = 2;
+    this.SHADOW_OFFSET_Y = 2;
+    this.percentComplete = 0;
+    this.createCanvas();
+    this.createDOMElement();
 
-    <span class="keyword">return</span> <span class="keyword">this</span>;
+    return this;
 }
 COREHTML5.Progressbar.prototype = {
-    createDOMElement:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>{
-        <span class="keyword">this</span>.domElement = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);
-        <span class="keyword">this</span>.domElement.appendChild(<span class="keyword">this</span>.context.canvas)
+    createDOMElement:function() {
+        this.domElement = document.createElement(&apos;div&apos;);
+        this.domElement.appendChild(this.context.canvas)
     },
-    createCanvas :<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
-        <span class="keyword">this</span>.offscreen = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);
+    createCanvas :function (){
+        this.context = document.createElement(&apos;canvas&apos;).getContext(&apos;2d&apos;);
+        this.offscreen = document.createElement(&apos;canvas&apos;).getContext(&apos;2d&apos;);
     },
-    appendTo: <span class="function"><span class="keyword">function</span> (<span class="params">element</span>)</span>{
-        element.appendChild(<span class="keyword">this</span>.domElement);
-        <span class="keyword">this</span>.domElement.style.width = element.offsetWidth + <span class="string">'px'</span> ;
-        <span class="keyword">this</span>.domElement.style.height = element.offsetHeight + <span class="string">'px'</span>;
-        <span class="keyword">this</span>.resize();
-        <span class="keyword">this</span>.trough.resize(element.offsetWidth,element.offsetHeight);
-        <span class="keyword">this</span>.trough.draw(<span class="keyword">this</span>.offscreen);
+    appendTo: function (element){
+        element.appendChild(this.domElement);
+        this.domElement.style.width = element.offsetWidth + &apos;px&apos; ;
+        this.domElement.style.height = element.offsetHeight + &apos;px&apos;;
+        this.resize();
+        this.trough.resize(element.offsetWidth,element.offsetHeight);
+        this.trough.draw(this.offscreen);
     },
-    setCanvasSize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode;
-        <span class="keyword">this</span>.context.canvas.width = domElementParent.offsetWidth;
-        <span class="keyword">this</span>.context.canvas.height = domElementParent.offsetHeight;
+    setCanvasSize: function (){
+        var domElementParent = this.domElement.parentNode;
+        this.context.canvas.width = domElementParent.offsetWidth;
+        this.context.canvas.height = domElementParent.offsetHeight;
     },
-    resize: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-        <span class="keyword">var</span> domElementParent = <span class="keyword">this</span>.domElement.parentNode,
+    resize: function(){
+        var domElementParent = this.domElement.parentNode,
         w = domElementParent.offsetWidth,
         h = domElementParent.offsetHeight;
-        <span class="keyword">this</span>.setCanvasSize();
-        <span class="keyword">this</span>.context.canvas.width = w;
-        <span class="keyword">this</span>.context.canvas.height = h;
-        <span class="keyword">this</span>.offscreen.canvas.width = w;
-        <span class="keyword">this</span>.offscreen.canvas.height = h;
+        this.setCanvasSize();
+        this.context.canvas.width = w;
+        this.context.canvas.height = h;
+        this.offscreen.canvas.width = w;
+        this.offscreen.canvas.height = h;
 
 
     },
-    draw:<span class="function"><span class="keyword">function</span> (<span class="params">percentComplete</span>) </span>{
-        <span class="keyword">if</span>(percentComplete &gt; <span class="number">0</span>){
-            <span class="keyword">this</span>.context.drawImage(<span class="keyword">this</span>.offscreen.canvas,<span class="number">0</span>,<span class="number">0</span>,
-                <span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height,<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.offscreen.canvas.width*(percentComplete/<span class="number">100</span>),<span class="keyword">this</span>.offscreen.canvas.height);
+    draw:function (percentComplete) {
+        if(percentComplete &gt; 0){
+            this.context.drawImage(this.offscreen.canvas,0,0,
+                this.offscreen.canvas.width*(percentComplete/100),this.offscreen.canvas.height,0,0,this.offscreen.canvas.width*(percentComplete/100),this.offscreen.canvas.height);
 
         }
     },
-    erase:<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>{
-        <span class="keyword">this</span>.context.clearRect(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.context.canvas.width,<span class="keyword">this</span>.context.canvas.height);
+    erase:function (){
+        this.context.clearRect(0,0,this.context.canvas.width,this.context.canvas.height);
     },
 };
-<span class="keyword">var</span> startButton = <span class="built_in">document</span>.getElementById(<span class="string">'startButton'</span>),
-    loadingSpan = <span class="built_in">document</span>.getElementById(<span class="string">'loadingSpan'</span>),
-    progressbar = <span class="keyword">new</span> COREHTML5.Progressbar(<span class="string">'rgba(0,0,0,0.2)'</span>,<span class="string">'teal'</span>,<span class="number">90</span>,<span class="number">70</span>),
-    percentComplete = <span class="number">0</span>;
-    startButton.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>{
-        loadingSpan.style.display = <span class="string">'inline'</span>;
-        startButton.style.display = <span class="string">'none'</span>;
-        percentComplete += <span class="number">1.0</span>;
-        <span class="keyword">if</span>( percentComplete &gt;<span class="number">100</span>) {
-            percentComplete = <span class="number">0</span>;
-            loadingSpan.style.display = <span class="string">'none'</span>;
-            startButton.style.display = <span class="string">'inline'</span>;
+var startButton = document.getElementById(&apos;startButton&apos;),
+    loadingSpan = document.getElementById(&apos;loadingSpan&apos;),
+    progressbar = new COREHTML5.Progressbar(&apos;rgba(0,0,0,0.2)&apos;,&apos;teal&apos;,90,70),
+    percentComplete = 0;
+    startButton.onclick = function (e) {
+        loadingSpan.style.display = &apos;inline&apos;;
+        startButton.style.display = &apos;none&apos;;
+        percentComplete += 1.0;
+        if( percentComplete &gt;100) {
+            percentComplete = 0;
+            loadingSpan.style.display = &apos;none&apos;;
+            startButton.style.display = &apos;inline&apos;;
         }
-        <span class="keyword">else</span>{
+        else{
             progressbar.erase();
             progressbar.draw(percentComplete);
             requestAnimationFrame(startButton.onclick);
         }
     };
-    progressbar.appendTo(<span class="built_in">document</span>.getElementById(<span class="string">'progressbarDiv'</span>));
+    progressbar.appendTo(document.getElementById(&apos;progressbarDiv&apos;));
 </code></pre>
     
   </div>

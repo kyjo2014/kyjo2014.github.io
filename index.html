@@ -25,7 +25,7 @@
   
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
 </head>
@@ -61,6 +61,90 @@
     <div class="content">
 
 
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2016/10/10/《web之变》读书笔记/">
+  <time datetime="2016-10-10T15:55:37.000Z">
+    2016-10-10
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2016/10/10/《web之变》读书笔记/">《web之变》读书笔记</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>#rules</p>
+<p>##浏览器内核种类</p>
+<p>###布局引擎<br>1.微软的Trident<br>    IE<br>2.基于开源项目的Webkit浏览器<br>    桌面端Safari、IOS端Safari、旧版Chrome、安卓默认浏览器、黑莓设备、微软收购前的诺基亚设备、<br>    PS3/4中的浏览器。<br>3.基于Blink开源项目的浏览器<br>    最新版本的chrome和opera的布局引擎<br>4.Mozilla的Gecko<br>    firefox的内核</p>
+<p>###Js解释引擎</p>
+<p>1.chakra<br>    IE<br>2.squirrelfish extreme/nitro<br>    webkit的Js引擎<br>3.V8<br>    chrome和基于blink的oprea，node.Js的解释引擎<br>    有点在执行前将js编译为原生代码的js引擎，性能明显提升。<br>4.spidermonkey<br>    firefox的内核</p>
+<p>##分析受众</p>
+<p>###了解受众使用的浏览器<br>利用<a><a href="http://caniuse.com" target="_blank" rel="external">http://caniuse.com</a></a>对浏览器进行支持性查询。</p>
+<p>###专注于最优，而不是绝对的解决方案<br>检测用户所处环境，给予在不同环境下最好的解决方案。如在wifi环境下<br>给予用户最清晰的图片和完美的动态效果。而在计时收费设备上所能看到的仅仅是一个logo和<br>无序列表</p>
+<p>###拥抱可访问性<br>确保残障人士也可以使用web，通过提供音频或者视频替代内容。<br>具体例子参（<a><a href="http://bit.ly/uw-accessibility" target="_blank" rel="external">http://bit.ly/uw-accessibility</a></a> </p>
+<p>###为非文字的内容提供可替代的文本<br>查看<a><a href="http://bit.ly/uw-alt-text" target="_blank" rel="external">http://bit.ly/uw-alt-text</a></a><br>注意！旧版安卓浏览器不会显示img标签中的title值或者替换文本</p>
+<p>###确保信息和结构与表现的分离<br>利用<a href="http://bit.ly/uw-html5-outliner" target="_blank" rel="external">http://bit.ly/uw-html5-outliner</a> 检测缩写网页的结构，如果看起来像一份很好的目录就可以了。</p>
+<p>###确保可以用键盘进行所有功能性操作</p>
+<p>###除非必须的定时或移动，否则用户应当可以暂停内容。</p>
+<p>###提供机制帮助用户找到内容、定位位置和导航页面</p>
+<p>###帮助用户避免犯错，以及让纠正错误变得简单</p>
+<p>###为现在和未来的UA提供兼容（包括辅助技术）</p>
+<p>##利用modernizr进行浏览器特征检测<br>modernizr库包含了许多不同插件用以检测浏览器的兼容性<br>但是注意！有些特征是不可检测的，例如modernizer-touch插件并不可以<br>用来测试用户是使用鼠标还是触屏，只能检测touch*系列的事件是否存在。</p>
+<p>##响应式设计与移动端体验设计</p>
+<p>###判断响应式设计是否真的适合所有的网站？<br>解决方案：<br>1.移动端优先<br>    设计与开发时优先考虑移动端的体验，采用渐进增强的方式去支持PC端</p>
+<p>2.RESS（服务器端组建的响应式设计）</p>
+<p>各方案优缺点分析<br>响应式设计：<br>好处：简化服务器端、更容易维护、降低应用的整体复杂性、只提供一个入口给搜索引擎、能够支持未知设备<br>缺点：性能差、代码冗余、限制应用的复杂性</p>
+<p>专用的移动端站点<br>优点：可以针对具体设备做性能优化、提高应用程序的灵活性<br>缺点：使服务器端变得更复杂、不利于维护、搜索引擎方面的缺陷、链接难以管理（不同页面跳转）<br>可能会兼容不到一些新的设备、用来检测并判断设备的用户代理很可能是伪造的。</p>
+<p>###用重定向解决逻辑问题<br>把桌面站点与移动端URL用重定向的方式，方便用户输入<br>在页面添加一个可被点击的句柄让用户手动跳转到移动站点、并在Sessionstorage中添加一个标志位，<br>用来记录用户选择了移动站点接着是跳转代码。同时在页面中应该用正则表达式去检测用户的UA</p>
+<p>###总是在你的移动站点上提供一个出口<br>能够让用户在合适的时候自由选择浏览桌面or移动端</p>
+<p>###尽可能保持流体设计<br>多运用flex布局</p>
+<p>###不要吝啬于是用断点<br>css媒体查询的时候用em作为单位，尽量多设置断点提供匹配常用尺寸</p>
+<p>###使用相对单位<br>em，rem，vh，vw</p>
+<p>##处理用户输入</p>
+<p>###不要对用户进行猜测<br> 用户可能同时是鼠标+触摸的使用者</p>
+<p>###为所有界面提供触摸功能<br>    iphone标准触摸尺寸是44像素</p>
+<h3 id="别依赖hover提供效果"><a href="#别依赖hover提供效果" class="headerlink" title="别依赖hover提供效果"></a>别依赖hover提供效果</h3><h3 id="模拟的click时间有300ms的延迟"><a href="#模拟的click时间有300ms的延迟" class="headerlink" title="模拟的click时间有300ms的延迟"></a>模拟的click时间有300ms的延迟</h3><p>解决方法：<br>1、如果页面不能被用户缩放、浏览器将取消这个延迟，给meta标签的viewport添加user-scalable=no<br>2、同时绑定click和touchstart事件，而且在调用的函数重要使用preventDefault阻止事件被多次触发。</p>
+<p>###处理*move事件<br>解决方案：<br>1.用e.clientY和e.client.X定位触摸点</p>
+<p>###pointer事件：一个事件模型囊括了鼠标、触摸以及其他<br>    未被良好的支持</p>
+<p>##出其复杂的Web图片</p>
+<p>###提供尽可能小的文件尺寸</p>
+<p>###利用浏览器的预加载</p>
+<p>###为各种分辨率提供尺寸合适的图片</p>
+<p>###为具备多种I型昂速比的设备提供正确尺寸的图片</p>
+<p>###在不同环境使用不同尺寸的图片或不同的图片</p>
+<p>###使用设计断电</p>
+<p>###提供正确的图片格式</p>
+<p>###图片很简单，并且应该保持简单</p>
+<p>##为web去优化图片</p>
+<p>###使用JPEG或者渐进式JPEG</p>
+<p>###GIF、PNG、SVG</p>
+<p>###WEBP是个趋势但支持不好</p>
+<p>###通过配置去解决问题<br>1.利用img标签的srcset属性（仅有webkit和blink支持）<br>2.利用picture元素和source标签<br>3.使用SVG</p>
+<p>##极其复杂的web视频</p>
+<p>###使用video元素</p>
+<p>###通过flash降级<br>通过在video标签内不添加flash视频（object&gt;param+embed）同时给flashvars参数复制的方式将视频源传给Flash插件，<br>必要时对视频做格式转换，确保内容能在各种浏览器上正确播放。</p>
+<p>##注意存储与编码</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
 
 
   
@@ -342,58 +426,58 @@
     
       <p>基本用法<br>// gulpfile.js<br>gulp.task(‘foo’, function() {<br>    gulp.src(glob)<br>        .pipe(…)<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>        .pipe(…)<br>        .pipe(gulp.dest(…))<br>});</p>
 <p>// shell<br>$ gulp foo<br>基本 API<br>gulp.src(glob[, options])<br>根据 glob 匹配文件，返回 stream，可以通过 .pipe() 方法传递给后续的插件。<br>gulp.dest(path[, options])<br>一般用法 .pipe(gulp.dest(path))，把 pipe 中的内容按照指定的 path 写成文件，会自动创建不存在的文件夹。<br>注意，可以通过 .pipe 多次指定输出的地方，具体请看 这里<br>gulp.task(name[, deps], fn)<br>定义名为 name 的任务，定义之后就可以在命令行中使用 gulp xxx 来执行任务。<br>deps 里面的任务全部完成后才会执行 fn<br>deps 里面的任务都是并行执行的，如果需要顺序执行，需要特殊写法。具体看 这里<br>gulp.watch(glob[, opts, cb])<br>监听文件变化<br>不会监听新文件（目录），所以一般你会需要 gulp-watch<br>常用命令 （自定义）</p>
-<h1 id="for_development_mode">for development mode</h1><p>gulp server</p>
-<h1 id="run_test">run test</h1><p>gulp test</p>
-<h1 id="for_production_mode">for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>    gulp.task(‘clean:css’, function () {<br>        del.sync(‘app/styles/*.css’);<br>    });</p>
-<pre><code>gulp.task(<span class="string">'less'</span>, [<span class="string">'clean:css'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-    <span class="keyword">var</span> stream = gulp
-            .src(<span class="string">'app/styles/main.less'</span>)
+<h1 id="for-development-mode"><a href="#for-development-mode" class="headerlink" title="for development mode"></a>for development mode</h1><p>gulp server</p>
+<h1 id="run-test"><a href="#run-test" class="headerlink" title="run test"></a>run test</h1><p>gulp test</p>
+<h1 id="for-production-mode"><a href="#for-production-mode" class="headerlink" title="for production mode"></a>for production mode</h1><p>gulp build<br>gulp server 流程<br>把 less, sass, 之类的文件编译成 CSS，常用插件：<br>gulp-less<br>gulp-sass<br>创建 Web Server (with Live Reload)，常用：<br>gulp-connect，用来创建 Web Server，其实还有其他选择的，但多数都是利用 connect 来创建 Web Server 的。<br>node-proxy-middle，用来代理请求，可以把 /api/xxx 发送到指定的地址。(常用于 SPA 开发)<br>connect-modrewrite，匹配资源，如果不匹配就可以重定向到指定地址。(常用于 SPA 开发)<br>connect-history-api-fallback，作用同上，也用于匹配资源，但用起来简单很多。(常用于 SPA 开发)<br>监听文件变化，常用插件：<br>gulp-watch<br>示例代码<br>    gulp.task(‘clean:css’, function () {<br>        del.sync(‘app/styles/*.css’);<br>    });</p>
+<pre><code>gulp.task(&apos;less&apos;, [&apos;clean:css&apos;], function () {
+    var stream = gulp
+            .src(&apos;app/styles/main.less&apos;)
             .pipe(less())
-            .pipe(gulp.dest(<span class="string">'app/styles/'</span>));
-    <span class="keyword">return</span> stream;
+            .pipe(gulp.dest(&apos;app/styles/&apos;));
+    return stream;
 });
 
-gulp.task(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+gulp.task(&apos;connect&apos;, function () {
     connect.server({
-        root: <span class="string">'./app'</span>,
-        port: <span class="number">9000</span>,
-        livereload: <span class="literal">true</span>,
-        middleware: <span class="function"><span class="keyword">function</span> (<span class="params">connect, o</span>) </span>{
-            <span class="keyword">return</span> [
-                (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-                    <span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);
-                    <span class="keyword">var</span> proxy = <span class="built_in">require</span>(<span class="string">'proxy-middleware'</span>);
-                    <span class="keyword">var</span> options = url.parse(<span class="string">'http://localhost:3000/api'</span>);
-                    options.route = <span class="string">'/api'</span>;
-                    <span class="keyword">return</span> proxy(options);
+        root: &apos;./app&apos;,
+        port: 9000,
+        livereload: true,
+        middleware: function (connect, o) {
+            return [
+                (function () {
+                    var url = require(&apos;url&apos;);
+                    var proxy = require(&apos;proxy-middleware&apos;);
+                    var options = url.parse(&apos;http://localhost:3000/api&apos;);
+                    options.route = &apos;/api&apos;;
+                    return proxy(options);
                 })(),
                 modRewrite([
-                    <span class="string">'!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html'</span>
+                    &apos;!\\.html|\\.js|\\.css|\\.swf|\\.jp(e?)g|\\.png|\\.gif|\\.eot|\\.woff|\\.ttf|\\.svg$ /index.html&apos;
                 ])
             ];
         }
     });
 });
 
-gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+gulp.task(&apos;watch&apos;, function () {
     gulp
-        .src(<span class="string">'app/styles/**/*.less'</span>, {read: <span class="literal">false</span>})
-        .pipe(watch(<span class="string">'app/styles/**/*.less'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-            <span class="keyword">return</span> gulp
-                .src(<span class="string">'app/styles/main.less'</span>)
+        .src(&apos;app/styles/**/*.less&apos;, {read: false})
+        .pipe(watch(&apos;app/styles/**/*.less&apos;, function () {
+            return gulp
+                .src(&apos;app/styles/main.less&apos;)
                 .pipe(less())
-                .pipe(gulp.dest(<span class="string">'app/styles/'</span>))
+                .pipe(gulp.dest(&apos;app/styles/&apos;))
                 .pipe(connect.reload());
         }));
 
 gulp
-    .src([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>])
-    .pipe(watch([<span class="string">'app/scripts/**/*.js'</span>, <span class="string">'app/**/*.html'</span>]))
+    .src([&apos;app/scripts/**/*.js&apos;, &apos;app/**/*.html&apos;])
+    .pipe(watch([&apos;app/scripts/**/*.js&apos;, &apos;app/**/*.html&apos;]))
     .pipe(plumber())
     .pipe(connect.reload());
 });
 
-gulp.task(<span class="string">'server'</span>, [<span class="string">'less'</span>, <span class="string">'connect'</span>, <span class="string">'watch'</span>]);
+gulp.task(&apos;server&apos;, [&apos;less&apos;, &apos;connect&apos;, &apos;watch&apos;]);
 gulp build 流程
 清理 dist/ 文件夹
 del，根据 glob 来删除文件/目录
@@ -408,32 +492,32 @@ gulp-rev，给静态文件加上版本号，如 app.js -&gt; app-d41d8cd98f.js
 复制其他文件到 dist/
 gulp.src(...).pipe(gulp.dest(...))
 实例代码
-gulp.task(<span class="string">'clean:build'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-    del.sync(<span class="string">'dist/'</span>, {force: <span class="literal">true</span>});
+gulp.task(&apos;clean:build&apos;, function () {
+    del.sync(&apos;dist/&apos;, {force: true});
 });
 
-gulp.task(<span class="string">'minify'</span>, [<span class="string">'clean:build'</span>, <span class="string">'less'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+gulp.task(&apos;minify&apos;, [&apos;clean:build&apos;, &apos;less&apos;], function () {
     gulp
-        .src(<span class="string">'app/views/**/*.html'</span>)
-        .pipe(htmlmin({collapseWhitespace: <span class="literal">true</span>}))
-        .pipe(gulp.dest(<span class="string">'dist/views'</span>));
+        .src(&apos;app/views/**/*.html&apos;)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest(&apos;dist/views&apos;));
 
     gulp
-        .src(<span class="string">'app/index.html'</span>)
+        .src(&apos;app/index.html&apos;)
         .pipe(usemin({
             js: [uglify(), rev()],
-            css: [minifyCss(), <span class="string">'concat'</span>, rev()]
+            css: [minifyCss(), &apos;concat&apos;, rev()]
         }))
-        .pipe(gulp.dest(<span class="string">'dist/'</span>));
+        .pipe(gulp.dest(&apos;dist/&apos;));
 });
 
-gulp.task(<span class="string">'copyfonts'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+gulp.task(&apos;copyfonts&apos;, function () {
     gulp
-        .src(<span class="string">'app/styles/fonts/*'</span>)
-        .pipe(gulp.dest(<span class="string">'dist/fonts/'</span>));
+        .src(&apos;app/styles/fonts/*&apos;)
+        .pipe(gulp.dest(&apos;dist/fonts/&apos;));
 });
 
-gulp.task(<span class="string">'build'</span>, [<span class="string">'clean:build'</span>, <span class="string">'minify'</span>, <span class="string">'copyfonts'</span>]);
+gulp.task(&apos;build&apos;, [&apos;clean:build&apos;, &apos;minify&apos;, &apos;copyfonts&apos;]);
 </code></pre><p>转载自 scarlex 的文章 利用gulp处理前端工作流程 </p>
 
     
@@ -658,21 +742,21 @@ css：<pre><code>
     
       <p>这两个方法都是每个函数都自带的方法，用途都是在特定的时候调用函数，同时修改this的指向，<br>避免传入参数的不正确。同时还能够对一个原本不含有某个方法的函数，调用这个方法。<br>例子：<br>    function Animal(){<br>    this.name = “Animal”;<br>    this.showName = function(){<br>        alert(this.name);<br>    }<br>    }    </p>
 <pre><code>function Cat(){    
-    this.name = <span class="string">"Cat"</span>;    
+    this.name = &quot;Cat&quot;;    
 }    
 
-var <span class="keyword">animal</span> = new <span class="keyword">Animal</span>();    
+var animal = new Animal();    
 var cat = new Cat();    
 
-//输入结果为<span class="string">"Cat"</span>    
-<span class="keyword">animal</span>.showName.call(cat,<span class="string">","</span>);    
-//<span class="keyword">animal</span>.showName.apply(cat,<span class="comment">[]</span>);  
+//输入结果为&quot;Cat&quot;    
+animal.showName.call(cat,&quot;,&quot;);    
+//animal.showName.apply(cat,[]);  
 </code></pre><p>在这里，通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。<br>而且还能实现继承。<br>例子：<br>      function Animal(name){<br>        this.name = name;<br>        this.showName = function(){<br>            alert(this.name);<br>        }<br>    }      </p>
 <pre><code>function Cat(name){    
-    <span class="keyword">Animal</span>.call(this, name);    
+    Animal.call(this, name);    
 }      
 
-var cat = new Cat(<span class="string">"Black Cat"</span>);     
+var cat = new Cat(&quot;Black Cat&quot;);     
 cat.showName();
 </code></pre><p> Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么 Cat中不就有Animal的所有属性和方法了吗，Cat对象就能够直接调用Animal的方法以及属性了.<br>区别：apply()接收两个参数，一个是函数运行的作用域(this)，另一个是参数数组。<br>call()方法第一个参数与apply()方法相同，但传递给函数的参数必须列举出来。</p>
 
@@ -767,39 +851,6 @@ cat.showName();
 <hr>
 <p>##碰撞检测<br>外界矩形判别法，即两个凸多边形的话从每条边上作发现为投影轴，检测每个多边形在投影轴上的投影是否有分离，如有分离则未碰撞。<br>外界圆判别法，直接计算圆心距。<br>最小平移法：直接求定点到边的最小距离。</p>
 
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/09/20/浏览器类型检测方法/">
-  <time datetime="2015-09-20T12:43:18.000Z">
-    2015-09-20
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/09/20/浏览器类型检测方法/">浏览器类型检测方法</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      
     
   </div>
   <footer class="end-sep">
