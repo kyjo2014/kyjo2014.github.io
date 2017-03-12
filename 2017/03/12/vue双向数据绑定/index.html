@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>vue双向数据绑定 | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="#Vue双向数据绑定 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的
+
+监视数据变化实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的">
+  
+  <meta name="description" content="#Vue双向数据绑定 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的
+
+监视数据变化实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue双向数据绑定">
+<meta property="og:url" content="http://yoursite.com/2017/03/12/vue双向数据绑定/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="#Vue双向数据绑定 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的
+
+监视数据变化实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的">
+<meta property="og:updated_time" content="2017-03-12T16:00:57.271Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue双向数据绑定">
+<meta name="twitter:description" content="#Vue双向数据绑定 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的
+
+监视数据变化实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/testing">TestArea</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/03/12/vue双向数据绑定/">
+  <time datetime="2017-03-12T15:47:55.000Z">
+    2017-03-12
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">vue双向数据绑定</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p> #Vue双向数据绑定<br> 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的</p>
+<ol>
+<li>监视数据变化<br>实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的时候，就会自动触发对应的setter或者getter函数</li>
+</ol>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/vue/">vue</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
