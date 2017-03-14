@@ -68,6 +68,58 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/11/22/js中的call和apply的作用/">
+  <time datetime="2015-11-22T11:39:57.000Z">
+    2015-11-22
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/11/22/js中的call和apply的作用/">js中的call和apply的作用 </a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <p>这两个方法都是每个函数都自带的方法，用途都是在特定的时候调用函数，同时修改this的指向，<br>避免传入参数的不正确。同时还能够对一个原本不含有某个方法的函数，调用这个方法。<br>例子：<br>    function Animal(){<br>    this.name = “Animal”;<br>    this.showName = function(){<br>        alert(this.name);<br>    }<br>    }    </p>
+<pre><code>function Cat(){    
+    this.name = &quot;Cat&quot;;    
+}    
+
+var animal = new Animal();    
+var cat = new Cat();    
+
+//输入结果为&quot;Cat&quot;    
+animal.showName.call(cat,&quot;,&quot;);    
+//animal.showName.apply(cat,[]);  
+</code></pre><p>在这里，通过call或apply方法，将原本属于Animal对象的showName()方法交给对象cat来使用了。<br>而且还能实现继承。<br>例子：<br>      function Animal(name){<br>        this.name = name;<br>        this.showName = function(){<br>            alert(this.name);<br>        }<br>    }      </p>
+<pre><code>function Cat(name){    
+    Animal.call(this, name);    
+}      
+
+var cat = new Cat(&quot;Black Cat&quot;);     
+cat.showName();
+</code></pre><p> Animal.call(this) 的意思就是使用 Animal对象代替this对象，那么 Cat中不就有Animal的所有属性和方法了吗，Cat对象就能够直接调用Animal的方法以及属性了.<br>区别：apply()接收两个参数，一个是函数运行的作用域(this)，另一个是参数数组。<br>call()方法第一个参数与apply()方法相同，但传递给函数的参数必须列举出来。</p>
+
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/10/22/css-hack效果/">
   <time datetime="2015-10-22T14:51:59.000Z">
     2015-10-22
@@ -1264,56 +1316,6 @@ var canvas = document.getElementById(&apos;canvas&apos;);
   <div class="entry">
     
       <p><a href="http://www.soulteary.com/2014/05/09/how-to-install-nodejs-on-mobile.html" target="_blank" rel="external">http://www.soulteary.com/2014/05/09/how-to-install-nodejs-on-mobile.html</a><br>又是转的文章。不过这样子就能够在手机上往博客推文章了。</p>
-
-    
-  </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
-</article>
-
-
-  
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/20/github常用命令行/">
-  <time datetime="2015-08-20T14:31:44.000Z">
-    2015-08-20
-  </time>
-</a>
-    
-    
-  
-    <h1 class="title"><a href="/2015/08/20/github常用命令行/">github常用命令行</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>git remote add upstream <a href="https://github.com/winterIce/testTitle.git(别人的repository" target="_blank" rel="external">https://github.com/winterIce/testTitle.git(别人的repository</a>)    // 新建分支用于存放别人的repository</p>
-<p>git clone <a href="https://github.com/winterIce/testTitle.git" target="_blank" rel="external">https://github.com/winterIce/testTitle.git</a>  克隆到本地</p>
-<p>git fetch branch2//更新信息</p>
-<p>git merge branch2/master    //merge本地信息</p>
-<p>git add . //添加新文件或者更改新文件</p>
-<p>git remove  ** //删除文件</p>
-<p>git commit -m ‘by who do what’  //提交文件到本地</p>
-<p>git push  push到服务器上</p>
-<p>git pull origin master 从服务器上拉取信息</p>
-<p>git remote  查看repository上的所有分支</p>
-<p>git branch -a  查看所有分支</p>
-<p>git branch -r 查看远程分支</p>
-<p>git branch -d <em>*</em> //删除分支</p>
-<p>git branch <em>*</em> //新建分支</p>
-<p>git checkout <em>*</em>//切换分支</p>
-<p>git status //查看状态</p>
-<p>git log //查看提交修改记录</p>
 
     
   </div>
