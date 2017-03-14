@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="AMD模块加载理解看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 
 先介绍浏览器AMD模块加载的规范和定义123456789主页面    &amp;lt;script src=&quot;./mass.js&quot;&amp;gt;&amp;lt;/script&amp;gt;">
-<meta property="og:updated_time" content="2017-03-14T15:57:15.589Z">
+<meta property="og:updated_time" content="2017-03-14T16:32:04.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AMD模块加载理解">
 <meta name="twitter:description" content="AMD模块加载理解看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 
@@ -101,7 +101,17 @@
 <li>调用<em>loadjscss</em>函数对依赖的路径，文件类型进行补全。</li>
 <li>在<em>loadjscss</em>函数的末尾，会为css和js文件分别调用具体加载函数<em>loadjs</em>和<em>loadcss</em></li>
 <li>注意：有时往loadjs函数会比loadcss函数多传入一个callback函数，因为js模块还可能依赖于其他模块。需要注意回调函数中会有一个<em>checkDeps</em>函数，这个稍后解释。</li>
-<li>接下来看<em>loadjs</em>函数，这个函数主要工作是，生成\<script\>标签，对模块进行加载</script\></li>
+<li>接下来看<em>loadjs</em>函数，这个函数主要工作是，生成\<script\>标签，下载模块文件，为标签注册loaded事件。而当loaded事件触发，就会先从保存的模块的回调函数中获取自己的（如何保证？），然后调用<em>loadjs</em>函数的回调函数，让模块的状态变为已完成而且，触发checkDeps（）。</script\></li>
+<li>接下来主页面的流程暂时结束。看一下模块的定义。<strong>define</strong>函数是在框架加载完成的时候就已经在全局下定义的。define函数的工作有，分析模块有没有依赖，如果有，就需要递归调用require函数进行模块加载（这时候传递的回调函数是外面模块的回调函数，保证当其依赖的模块加载完成后会触发回调函数）。如果没有，直接把回调函数压入factorys数组中保存。当然还会有检查循环引用报错的功能。</li>
+<li>回到<em>checkdeps</em>函数其功能有，循环检测module数组查看各个模块完成状态。当所有模块完成后，调用<em>fireFactory</em>函数，按顺序执行模块的factory（callback）函数，把各个模块暴露的接口注入到全局环境中。到这里模块加载完成。</li>
+</ol>
+<hr>
+<p>重点：</p>
+<ol>
+<li>define函数是在框架中定义而不是模块中定义</li>
+<li>define函数只是告知require函数去加载其他模块，而模块的具体代码是放在factory函数中，而直到firefactory函数执行的时候，factory才会执行。所以模块代码的执行与异步行为无关，不会出现由于网络环境问题，出现依赖模块迟执行从而导致缺少依赖的问题出现。</li>
+<li>由于factory的插入跟异步加载无关，所以用先进后出的栈来保存模块一定能保证，先加载的模块会在下层，不会出现顺序错乱。</li>
+<li>由于每个模块加载一旦加载完成就会触发checkDeps，所以实际上不需要像数据劫持那样一直监视Deps的加载情况（因为只有两种状态，全部加载完成or没有加载完成）。</li>
 </ol>
 
     
