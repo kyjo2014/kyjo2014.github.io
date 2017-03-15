@@ -10,18 +10,74 @@
     <meta name="author" content="kyjo2014">
   
   
-    <meta name="description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》">
+    <meta name="description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》。下面列出常见的web攻击
+
+跨站脚本攻击（xss）
+dns劫持（dns缓存，dns转发）
+跨站点请求伪造（CSRF）
+点击劫持（clickJacking）
+CRLF注入攻击（篡改头部）
+文件上传漏洞
+SSRF漏洞
+DDos攻击
+SQL注入攻击
+
+
+##XSS
+以下内容节">
   
-  <meta name="description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》">
+  <meta name="description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》。下面列出常见的web攻击
+
+跨站脚本攻击（xss）
+dns劫持（dns缓存，dns转发）
+跨站点请求伪造（CSRF）
+点击劫持（clickJacking）
+CRLF注入攻击（篡改头部）
+文件上传漏洞
+SSRF漏洞
+DDos攻击
+SQL注入攻击
+
+
+##XSS
+以下内容节">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web安全漏洞">
 <meta property="og:url" content="http://yoursite.com/2017/03/15/web安全漏洞/index.html">
 <meta property="og:site_name" content="LTH's note book">
-<meta property="og:description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》">
-<meta property="og:updated_time" content="2017-03-15T14:56:17.218Z">
+<meta property="og:description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》。下面列出常见的web攻击
+
+跨站脚本攻击（xss）
+dns劫持（dns缓存，dns转发）
+跨站点请求伪造（CSRF）
+点击劫持（clickJacking）
+CRLF注入攻击（篡改头部）
+文件上传漏洞
+SSRF漏洞
+DDos攻击
+SQL注入攻击
+
+
+##XSS
+以下内容节">
+<meta property="og:updated_time" content="2017-03-15T15:49:57.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全漏洞">
-<meta name="twitter:description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》">
+<meta name="twitter:description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》。下面列出常见的web攻击
+
+跨站脚本攻击（xss）
+dns劫持（dns缓存，dns转发）
+跨站点请求伪造（CSRF）
+点击劫持（clickJacking）
+CRLF注入攻击（篡改头部）
+文件上传漏洞
+SSRF漏洞
+DDos攻击
+SQL注入攻击
+
+
+##XSS
+以下内容节">
   
     <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
@@ -80,7 +136,26 @@
   
   <div class="entry">
     
-      <h1 id="web安全漏洞"><a href="#web安全漏洞" class="headerlink" title="web安全漏洞"></a>web安全漏洞</h1><p>今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》</p>
+      <h1 id="web安全漏洞"><a href="#web安全漏洞" class="headerlink" title="web安全漏洞"></a>web安全漏洞</h1><p>今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《<a href="https://book.douban.com/subject/10546925/" target="_blank" rel="external">白帽子讲web安全</a>》和《<a href="https://book.douban.com/subject/25733421/" target="_blank" rel="external">web之困</a>》。<br><br>下面列出常见的web攻击</p>
+<ol>
+<li>跨站脚本攻击（xss）</li>
+<li>dns劫持（dns缓存，dns转发）</li>
+<li>跨站点请求伪造（CSRF）</li>
+<li>点击劫持（clickJacking）</li>
+<li>CRLF注入攻击（篡改头部）</li>
+<li>文件上传漏洞</li>
+<li>SSRF漏洞</li>
+<li>DDos攻击</li>
+<li>SQL注入攻击</li>
+</ol>
+<hr>
+<p>##XSS</p>
+<p><em>以下内容节选自《白帽子讲web安全》</em></p>
+<blockquote>
+<p>跨站脚本攻击，全称是Cross Site Script，本来缩写是css，但是为了和样式表有所区别，所以在安全领域叫做“xss”。XSS攻击，通常指黑客通过”HTML注入”篡改了网页，插入了恶意的脚本，蓉儿在用户浏览网页时，控制用户浏览器的一种攻击。<br><br>XSS有三种类型<br>第一种类型：</p>
+<h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>反射型XSS只是简单地把用户输入的数据“反射“到浏览器，也就是说，黑客往往需要有使用户”点击”一个恶意链接，才能攻击成功。反射型XSS也叫做”非持久型XSS”</p>
+<h2 id="这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location-hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。"><a href="#这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location-hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。" class="headerlink" title="这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location.hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。"></a>这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location.hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。</h2><p>今天先写到这</p>
+</blockquote>
 
     
   </div>
