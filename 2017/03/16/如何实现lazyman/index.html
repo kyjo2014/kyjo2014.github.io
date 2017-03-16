@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>如何实现lazyman | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="如何实现一个lazyman这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。题目的要求是这样的：
+
+实现一个LazyMan，可以按照以下方式调用:LazyMan(“Hank”)输出:Hi! This is Hank!LazyMan(“Hank”).sleep(10).eat(“dinner”)输出Hi! This is Hank!//等待10秒..Wake up af">
+  
+  <meta name="description" content="如何实现一个lazyman这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。题目的要求是这样的：
+
+实现一个LazyMan，可以按照以下方式调用:LazyMan(“Hank”)输出:Hi! This is Hank!LazyMan(“Hank”).sleep(10).eat(“dinner”)输出Hi! This is Hank!//等待10秒..Wake up af">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现lazyman">
+<meta property="og:url" content="http://yoursite.com/2017/03/16/如何实现lazyman/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="如何实现一个lazyman这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。题目的要求是这样的：
+
+实现一个LazyMan，可以按照以下方式调用:LazyMan(“Hank”)输出:Hi! This is Hank!LazyMan(“Hank”).sleep(10).eat(“dinner”)输出Hi! This is Hank!//等待10秒..Wake up af">
+<meta property="og:updated_time" content="2017-03-16T05:42:00.316Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何实现lazyman">
+<meta name="twitter:description" content="如何实现一个lazyman这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。题目的要求是这样的：
+
+实现一个LazyMan，可以按照以下方式调用:LazyMan(“Hank”)输出:Hi! This is Hank!LazyMan(“Hank”).sleep(10).eat(“dinner”)输出Hi! This is Hank!//等待10秒..Wake up af">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/testing">TestArea</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/03/16/如何实现lazyman/">
+  <time datetime="2017-03-16T04:45:58.000Z">
+    2017-03-16
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">如何实现lazyman</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="如何实现一个lazyman"><a href="#如何实现一个lazyman" class="headerlink" title="如何实现一个lazyman"></a>如何实现一个lazyman</h1><p>这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。<br>题目的要求是这样的：</p>
+<blockquote>
+<p>实现一个LazyMan，可以按照以下方式调用:<br>LazyMan(“Hank”)输出:<br>Hi! This is Hank!<br>LazyMan(“Hank”).sleep(10).eat(“dinner”)<br>输出<br>Hi! This is Hank!<br>//等待10秒..<br>Wake up after 10<br>Eat dinner~<br>LazyMan(“Hank”).eat(“dinner”).eat(“supper”)<br>输出<br>Hi This is Hank!<br>Eat dinner~<br>Eat supper~<br>LazyMan(“Hank”).sleepFirst(5).eat(“supper”)<br>输出<br>//等待5秒<br>Wake up after 5<br>Hi This is Hank!<br>Eat supper<br>以此类推。</p>
+</blockquote>
+<p>完成这个题目有以下几个要点:</p>
+<p>1.解决链式调用  </p>
+<p>在jquery对象中会通过<code>return this</code>的方式，把自身不断返回出去，从而让下一次调用能够成功。根据这个原理我就可以先写下这样的代码:</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">lzman</span><span class="params">(info)</span> </span>&#123;</div><div class="line">   console.log(`<span class="keyword">this</span> <span class="keyword">is</span> $&#123;info&#125;`)</div><div class="line">   <span class="keyword">return</span> <span class="keyword">this</span><span class="comment">//注意：用new的方式调用函数会默认返回this，这句可以省略</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> lzman(<span class="string">'hank'</span>)</div><div class="line"></div><div class="line">执行情况：</div><div class="line">   <span class="keyword">this</span> <span class="keyword">is</span> hank</div></pre></td></tr></table></figure>
+<p>这样题目的第一步就完成了。但这时候还没进行链式调用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">lzman.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">meal</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`eat <span class="subst">$&#123;meal&#125;</span>`</span> )</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">lzman</span>(<span class="params">info</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`this is <span class="subst">$&#123;info&#125;</span>`</span>)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span><span class="comment">//注意：用new的方式调用函数会默认返回this，这句可以省略</span></div><div class="line"> &#125;</div><div class="line"> <span class="keyword">var</span> a = (<span class="keyword">new</span> lzman(<span class="string">'hank'</span>)).eat(<span class="string">'supper'</span>).eat(<span class="string">'dinner'</span>)</div><div class="line"> 执行情况:</div><div class="line">    <span class="keyword">this</span> is hank</div><div class="line">    eat supper</div><div class="line">    eat dinner</div></pre></td></tr></table></figure></p>
+<p> 现在可以看到链式调用执行成功，hank可以按照调用顺序先吃午饭再吃晚饭了。<br> 但这个时候遇到了个问题，题目中说hank可以进行sleep操作，函数的执行过程需要进行等待。</p>
+<ol>
+<li>行为流程要进行延时操作<br>一想到延时立马就想到了setTimeout函数，然而这个函数与c语言的sleep函数不一样。这个函数并不会对进程进行堵塞。而是把延时函数放在任务队列中，<br>一旦执行完函数依然会立刻进行返回，从而导致接下来的函数继续立刻执行。所以要求函数的实际行为不能够与函数的执行同步。这样子应该怎么做呢？很容易，既然setTimeout是把一个函数放在任务队列中，让延时执行函数与外部函数的执行时机不一致。那么我也去实现一个任务队列就好啦。这样就可以写成这样的函数。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//这里eat也要改写下</span></div><div class="line">  lzman.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">var</span> fn =(<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Eat "</span> + name + <span class="string">"~"</span>);</div><div class="line">                self.next()</div><div class="line">            &#125;</div><div class="line">        &#125;)(name);</div><div class="line">        <span class="keyword">this</span>.tasks.push(fn);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>; <span class="comment">// 实现链式调用</span></div><div class="line"></div><div class="line">&#125;</div><div class="line">lzman.prototype.next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">    <span class="keyword">var</span> fn = <span class="keyword">this</span>.tasks.shift();</div><div class="line">    fn &amp;&amp; fn();</div><div class="line">&#125;</div><div class="line">lzman.prototype.sleep = <span class="function"><span class="keyword">function</span> (<span class="params">time</span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">time</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Wake up after "</span> + time + <span class="string">"s!"</span>);</div><div class="line">                self.next();</div><div class="line">            &#125;, time * <span class="number">1000</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;)(time);<span class="comment">//由于setTimeout执行内部函数的时候作用域环境已经发生改变所以需要使用self和闭包来保存变量，否则下次调用sleep的时候上一次的time会被覆盖，同时由于函数完成时有可能上一次sleep操作未完成，所以tasks队列保存的是一个函数，不立刻进行setTImeout的调用</span></div><div class="line">    <span class="keyword">this</span>.tasks.push(fn);</div><div class="line">   <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//为了统一行为，这里也要把主要行为分拆</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">lzman</span>(<span class="params">info</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.tasks = [];</div><div class="line">     <span class="keyword">this</span>.tasks = [];   </div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">    <span class="keyword">var</span> fn =(<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> name = n;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"Hi! This is "</span> + name + <span class="string">"!"</span>);</div><div class="line">            self.next();</div><div class="line">        &#125;</div><div class="line">    &#125;)(name);</div><div class="line">    <span class="keyword">this</span>.tasks.push(fn);</div><div class="line">    self.next();<span class="comment">//注意这里</span></div><div class="line">   </div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span><span class="comment">//注意：用new的方式调用函数会默认返回this，这句可以省略</span></div><div class="line"> &#125;</div><div class="line"> <span class="keyword">var</span> a = (<span class="keyword">new</span> lzman(<span class="string">'hank'</span>)).sleep(<span class="number">10</span>).eat(<span class="string">'supper'</span>).eat(<span class="string">'dinner'</span>)</div><div class="line"></div><div class="line"> 执行结果:</div><div class="line">    Hi! This is hank!</div><div class="line">    Wake up after <span class="number">10</span>s!</div><div class="line">    Eat supper~</div><div class="line">    Eat dinner~</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>
