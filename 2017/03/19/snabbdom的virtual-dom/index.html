@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  
+  <title>snabbdom的virtual dom | LTH&#39;s note book</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  
+    <meta name="author" content="kyjo2014">
+  
+  
+    <meta name="description" content="学习virtualdom
+什么是vdomVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual">
+  
+  <meta name="description" content="学习virtualdom
+什么是vdomVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual">
+<meta property="og:type" content="article">
+<meta property="og:title" content="snabbdom的virtual dom">
+<meta property="og:url" content="http://yoursite.com/2017/03/19/snabbdom的virtual-dom/index.html">
+<meta property="og:site_name" content="LTH's note book">
+<meta property="og:description" content="学习virtualdom
+什么是vdomVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual">
+<meta property="og:updated_time" content="2017-03-19T15:52:52.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="snabbdom的virtual dom">
+<meta name="twitter:description" content="学习virtualdom
+什么是vdomVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual">
+  
+    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+  
+  
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+</head>
+
+<body>
+  <div class="wrapper">
+    <header id="header">
+  <div class="title">
+    <h1><a href="/">LTH&#39;s note book</a></h1>
+    <p><a href="/">逗逼+未来の程序员</a></p>
+  </div>
+  <nav class="nav">
+    <ul>
+      
+        <li><a href="/">Home</a></li>
+      
+        <li><a href="/archives">Archives</a></li>
+      
+        <li><a href="/Reading">Reading</a></li>
+      
+        <li><a href="/about">About</a></li>
+      
+        <li><a href="/testing">TestArea</a></li>
+      
+      
+        <li><a href="/atom.xml">RSS</a></li>
+      
+    </ul>
+    <div class="clearfix"></div>
+  </nav>
+  <div class="clearfix"></div>
+</header>
+    <div class="content"><article class="post">
+  <header>
+    
+      <div class="icon"></div>
+      <a href="/2017/03/19/snabbdom的virtual-dom/">
+  <time datetime="2017-03-19T14:49:47.000Z">
+    2017-03-19
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title">snabbdom的virtual dom</h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
+<li><p>什么是vdom<br>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
+</li>
+<li><p>为什么要使用vdom<br>为什么相比于直接操控浏览器的Dom树，操控vdom会更快呢？毕竟最后vdom树也需要对真实的dom树进行操作。这里就要归功于vdom高效的diff和patch算法。如果直接在实际dom树上进行操作，那么每一次进行元素的操作都相当于对整棵dom树进行一次DFS（先序遍历），非常耗费时间</p>
+</li>
+</ol>
+
+    
+  </div>
+  <footer>
+    
+      
+      
+  <div class="tags">
+    <a class="tags-link" href="/tags/virtualdom-vue源码/">virtualdom | vue源码</a>
+  </div>
+
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+</div>
+  </div>
+  <footer id="footer"><div class="copyright">
+  
+  &copy; 2017 <a href="/">kyjo2014</a>
+  
+</div>
+<div class="theme-copyright">
+  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
+   | 
+  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="/js/scale.fix.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    $('.fancybox').fancybox();
+  })(jQuery);
+</script>
+
+</body>
+</html>

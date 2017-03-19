@@ -68,6 +68,430 @@
   <header>
     
       <div class="icon"></div>
+      <a href="/2015/08/31/多边形碰撞实例（添加圆形）/">
+  <time datetime="2015-08-31T12:39:16.000Z">
+    2015-08-31
+  </time>
+</a>
+    
+    
+  
+    <h1 class="title"><a href="/2015/08/31/多边形碰撞实例（添加圆形）/">多边形碰撞实例（添加圆形）</a></h1>
+  
+
+  </header>
+  
+  <div class="entry">
+    
+      <pre><code>    var Vector = function (x,y){
+    this.x = x;
+    this.y = y;
+};
+Vector.prototype = {
+getMagnitude:function (){
+    return Math.sqrt(Math.pow(this.x,2)+Math.pow(this.y,2));
+},
+add: function (vector){
+    var v = new Vector();
+    v.x = this.x+vector.x;
+    v.y = this.y+vector.y;
+    return v;
+},
+substract: function (vector){
+    var v= new Vector();
+    v.x = this.x - vector.x;
+    v.y = this.y - vector.y;
+    return v;
+
+},
+dotProduct: function (vector){
+    return this.x*vector.x+ this.y*vector.y;
+},
+edge: function(vector) {
+    return this.substract(vector);
+},
+prependicular:function (){
+    var v = new Vector();
+    v.x = this.y;
+    v.y = 0 - this.x;
+    return v;
+},
+normalize: function (){
+    var v = new Vector(0,0),
+    m = this.getMagnitude();
+    if (m!=0){
+        v.x = this.x/m;
+        v.y = this.y/m;
+    }
+    return v;
+},
+normal:function (){
+    var p = this.prependicular();
+    return p.normalize();
+}
+};
+
+
+
+
+
+
+var Projection = function (min,max){
+    this.min = min;
+    this.max = max;
+
+};
+Projection.prototype = {
+    overlaps:function (projection){
+        return this.max&gt;projection.min&amp;&amp;projection.max&gt;this.min;
+    }
+};
+
+
+
+
+var Shape = function (){
+    this.x = undefined;
+    this.y = undefined;
+    this.strokeStyle = &apos;rgba(255,253,208,0.9)&apos;;
+    this.fillStyle = &apos;rgba(147,197,114,0.8)&apos;;
+};
+
+Shape.prototype = {
+    collidesWith: function (shape){
+
+        var axes = this.getAxes().concat(shape.getAxes());
+        return !this.separationOnAxes(axes,shape);
+    },
+    separationOnAxes:function (axes,shape){
+        for (var i=0;i&lt;axes.length;++i) {
+            axis = axes[i];
+            projection1 = shape.project(axis);
+            projection2 = this.project(axis);
+            if (! projection1.overlaps(projection2)) {
+                return true;
+            }
+        }
+        return false;
+    },
+    project:function (axis) {
+        throw &apos;project(axis) not implemented&apos;;
+    },
+    getAxes:function (){
+        throw &apos;getAxes() not implemented&apos;;
+    },
+    move :function (dx,dy){
+        throw &apos;move(dx,dy)not implemented&apos;;
+    },
+    createPath: function (context) {
+        throw &apos;createPath(context) not implemented&apos;;
+    },
+    fill : function (context){
+        context.save();
+        context.fillStyle = this.fillStyle;
+        this.createPath(context);
+        context.fill();
+        context.restore();
+    },
+    stroke: function (context){
+        context.save();
+        context.strokeStyle = this.strokeStyle;
+        this.createPath(context);
+        context.stroke();
+        context.restore();
+    },
+    isPointInPath: function (context,x,y) {
+        this.createPath(context);
+        return context.isPointInPath(x,y);
+    },
+
+
+};
+
+
+
+function detectCollisions(){
+    var textY = 30,
+    numShapes = shapes.length,
+    shape,i;
+    if (shapeBeingDragged) {
+        for (i =0;i&lt;numShapes;++i) {
+            shape = shapes[i];
+            if (shape!==shapeBeingDragged) {
+                if (shapeBeingDragged.collidesWith(shape)) {
+                    context.fillStyle = shape.fillStyle;
+                    context.fillText(&apos;collision&apos;,20,textY);
+                    textY +=40;
+                }
+            }
+        }
+    }
+}
+var Point = function (x,y) {
+    this.x = x;
+    this.y = y;
+
+};
+var Polygon = function (){
+    this.points = [];
+    this.strokeStyle = &apos;blue&apos;;
+    this.fillStyle = &apos;white&apos;;
+};
+Polygon.prototype = new Shape();
+Polygon.prototype.getAxes = function (){
+    var v1 = new Vector(),
+        v2 = new Vector(),
+        axes = [];
+    for (var i=0; i&lt;this.points.length-1;i++) {
+        v1.x = this.points[i].x;
+        v1.y = this.points[i].y;
+        v2.x = this.points[i+1].x;
+        v2.y = this.points[i+1].y;
+        axes.push(v1.edge(v2).normal());
+    }
+    v1.x = this.points[this.points.length-1].x;
+    v1.y = this.points[this.points.length-1].y;
+
+    v2.x = this.points[0].x;
+    v2.y = this.points[0].y;
+    axes.push(v1.edge(v2).normal());
+    return axes;
+};
+Polygon.prototype.project = function (axis){
+    var scalars = [],
+    v = new Vector();
+    this.points.forEach(function (point){
+        v.x = point.x;
+        v.y = point.y;
+        scalars.push(v.dotProduct(axis));
+    });
+    return new Projection(Math.min.apply(Math,scalars),Math.max.apply(Math,scalars));
+};
+Polygon.prototype.addPoint = function (x,y){
+    this.points.push(new Point(x,y));
+};
+Polygon.prototype.createPath = function (context) {
+if (this.points.length == 0) {
+    return ;
+
+}
+context.beginPath();
+context.moveTo(this.points[0].x,this.points[0].y);
+for (var i=0;i&lt;this.points.length;++i) {
+    context.lineTo(this.points[i].x,this.points[i].y);
+}
+context.closePath();
+};
+Polygon.prototype.move = function (dx,dy){
+    for (var i=0 ,point;i&lt;this.points.length;++i) {
+        point = this.points[i];
+        point.x += dx;
+        point.y += dy;
+    }
+};
+
+
+
+
+
+//圆形参数
+var Circle = function (x,y,radius) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.stroketype = &apos;rgba(255,253,208,0.9)&apos;;
+    this.fillStyle = &apos;rgba(147,197,114,0.8)&apos;;
+}
+Circle.prototype = new Shape();
+Circle.prototype.collidesWith = function (shape) {
+    var point ,length,min =10000,v1,v2,edge,perpendicular,normal,
+    axes = shape.getAxes(),distance;
+    if(axes === undefined) {
+        distance = Math.sqrt(Math.pow(shape.x-this.x,2)+Math.pow(shape.y-this.y,2));
+        return distance&lt;Math.abs(this.radius +shape.radius);
+    }
+    else {
+        return polygonCollidesWithCircle(shape,this);
+    }
+};
+Circle.prototype.getAxes = function (){
+    return undefined;//圆形没有固定的投影轴
+};
+Circle.prototype.project = function (axis) {
+    var scalars = [],
+    point = new Point(this.x,this.y);
+    dotProduct = new Vector(point).dotProduct(axis);
+    scalars.push(dotProduct);
+    scalars.push(dotProduct + this.radius);
+    scalars.push(dotProduct - this.radius);
+    return new Projection(Math.min.apply(Math,scalars),
+    Math.max.apply(Math,scalars));
+};
+Circle .prototype.move = function (dx,dy) {
+    this.x +=dx;
+    this.y +=dy;
+
+};
+Circle.prototype.createPath = function (context) {
+    context.beginPath();
+    context.arc(this.x,this.y,this.radius,0,Math.PI*2,false);
+};
+function getPolygonPointClosestToCircle (polygon,circle) {
+    var min = 10000,
+    length,
+    testPoint,
+    closestPoint;
+    for(var i=0; i&lt;polygon.points.length;++i) {
+        testPoint = polygon.points[i];
+
+        length = Math.sqrt(Math.pow(testPoint.x - circle.x,2),Math.pow(testPoint.y-circle.y,2));
+        if (length &lt;min) {
+            min = length;
+            closestPoint = testPoint;
+        }
+    }
+
+    return closestPoint;
+};
+function polygonCollidesWithCircle (polygon,circle) {
+    var min = 100000,v1,v2,
+    edge,perpendicular,normal,
+    axes = polygon.getAxes();
+    closestPoint = getPolygonPointClosestToCircle(polygon,circle);
+    //console.log(typeof closestPoint);
+    v1 = new Vector(new Point(circle.x,circle.y));
+    v2 = new Vector(new Point(closestPoint.x,closestPoint.y));
+    axes.push(v1.substract(v2).normalize());
+    return !polygon.separationOnAxes(axes,circle);
+};
+
+
+Polygon.prototype.collidesWith = function (shape){
+    var axes = shape.getAxes();
+    if (axes === undefined) {
+        return polygonCollidesWithCircle(this,shape);
+    }
+    else {
+        axes.concat(this.getAxes());
+        return !this.separationOnAxes(axes,shape);
+    }
+};
+
+
+
+
+
+var canvas = document.getElementById(&apos;canvas&apos;);
+context = canvas.getContext(&apos;2d&apos;);
+shapes = [];
+polygonPoints = [
+[new Point(250,150),new Point(250,250),new Point(350,250)],
+[new Point(100,100),new Point(100,150),new Point(150,150),new Point(150,100)],
+[new Point(400,100),new Point(380,150),new Point(500,150),new Point(520,100)],[new Point(300,150),new Point(280,150),new Point(400,150),new Point(420,100)]
+],
+polygonStrokeStyles = [&apos;blue&apos;,&apos;yellow&apos;,&apos;red&apos;],
+polygonFillStyle = [&apos;rgba(255,255,0,0.7)&apos;,&apos;rgba(100,140230,0.6)&apos;,&apos;rgba(255,255,255,0.8)&apos;],
+mousedown = { x:0,y:0},
+lastdrag = {x:0,y:0},
+shapeBeingDragged = undefined;
+circle1 = new Circle(150,75,20);
+circlr2 = new Circle(350,25,30);
+shapes.push(circle1);
+shapes.push(circlr2);
+
+function windowToCanvas(x,y){
+    var bbox = canvas.getBoundingClientRect();
+    return {
+        x: x-bbox.left*(canvas.width/bbox.width),
+        y: y-bbox.top *(canvas.height/bbox.height)
+    };
+}
+function drawShapes (){
+    shapes.forEach(function(shape){
+        shape.stroke(context);shape.fill(context);
+    });
+}
+function detectCollisions(){
+var textY = 30,
+numShapes = shapes.length,
+shape,i;
+if (shapeBeingDragged) {
+    for (i =0;i&lt;numShapes;++i) {
+        shape = shapes[i];
+        if (shape!==shapeBeingDragged) {
+            if (shapeBeingDragged.collidesWith(shape)) {
+                context.fillStyle = shape.fillStyle;
+                context.fillText(&apos;collision&apos;,20,textY);
+                textY +=40;
+            }
+        }
+    }
+}
+</code></pre><p>}<br>    canvas.onmousedown = function (e){<br>        var location = windowToCanvas(e.clientX,e.clientY);<br>        shapes.forEach( function(shape){<br>            if(shape.isPointInPath(context,location.x,location.y)){<br>                shapeBeingDragged = shape;<br>                mousedown.x = location.x;<br>                mousedown.y = location.y;<br>                lastdrag.x = location.x;<br>                lastdrag.y = location.y;</p>
+<pre><code>        }
+    });
+};
+canvas.onmousemove = function (e) {
+    var location,
+    dragVector;
+    if(shapeBeingDragged !== undefined) {
+        location = windowToCanvas(e.clientX,e.clientY);
+        dragVector = {
+            x:location.x - lastdrag.x,
+            y: location.y - lastdrag.y
+
+        };
+        shapeBeingDragged.move(dragVector.x,dragVector.y);
+        lastdrag.x = location.x;
+        lastdrag.y = location.y;
+        context.clearRect(0,0,canvas.width,canvas.height);
+        drawShapes();
+        detectCollisions();
+    }
+};
+canvas.onmouseup = function (e) {
+    shapeBeingDragged = undefined;
+}
+for (var i=0;i&lt;polygonPoints.length;++i) {
+    var polygon = new Polygon();
+    points = polygonPoints[i];
+    polygon.strokeStyle = polygonStrokeStyles[i];
+    points.forEach(function (point){
+        polygon.addPoint(point.x,point.y);
+    });
+    shapes.push(polygon);
+
+
+}
+context.shadowColor = &apos;rgba(100,140,255,0.5)&apos;;
+context.shadowBlur = 4;
+context.shadowOffsetX = 2;
+context.shadowOffsetY = 2;
+context.font = &apos;38px Arial&apos;;
+drawShapes();
+context.save();
+context.fillStyle = &apos;cornflowerblue&apos;;
+context.font = &apos;24px Arial&apos;;
+context.fillText(&apos;Drag shapes over each other&apos;,10,25);
+context.restore();
+</code></pre>
+    
+  </div>
+  <footer class="end-sep">
+    
+      
+      
+    
+    <div class="clearfix"></div>
+  </footer>
+</article>
+
+
+  
+    <article class="post">
+  <header>
+    
+      <div class="icon"></div>
       <a href="/2015/08/28/碰撞检测案列/">
   <time datetime="2015-08-28T14:26:46.000Z">
     2015-08-28
