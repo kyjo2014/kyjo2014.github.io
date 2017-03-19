@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="学习virtualdom
 什么是vdomVirtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual">
-<meta property="og:updated_time" content="2017-03-19T15:52:52.137Z">
+<meta property="og:updated_time" content="2017-03-19T16:03:37.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="snabbdom的virtual dom">
 <meta name="twitter:description" content="学习virtualdom
@@ -87,9 +87,10 @@
       <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
 <li><p>什么是vdom<br>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
 </li>
-<li><p>为什么要使用vdom<br>为什么相比于直接操控浏览器的Dom树，操控vdom会更快呢？毕竟最后vdom树也需要对真实的dom树进行操作。这里就要归功于vdom高效的diff和patch算法。如果直接在实际dom树上进行操作，那么每一次进行元素的操作都相当于对整棵dom树进行一次DFS（先序遍历），非常耗费时间</p>
+<li><p>为什么要使用vdom<br>为什么相比于直接操控浏览器的Dom树，操控vdom会更快呢？毕竟最后vdom树也需要对真实的dom树进行操作。这里就要归功于vdom高效的diff和patch算法。如果直接在实际dom树上进行操作，那么每一次进行元素的操作都相当于对整棵dom树进行一次DFS（先序遍历），非常耗费时间（可以使用NodeIterator和TreeWalker自己实现getElementById）。而且如果一次更新大量的dom元素（不使用fragment）会使得浏览器进行大量的重绘操作。使用vdom的话就可以使得把对原先节点的增删查改操作都放在内存中进行，并且由于vdom的操作并不会马上就产生真实的效果，触发浏览器的重绘，这样就使得框架可以先计算出几乎最小的diff，然后再等到事件循环的结尾才对真实dom树进行批量的更新。因此，vdom的性能比原生dom快很多。</p>
 </li>
 </ol>
+<p>3.如何实现vdom<br>vue2.0相比vue1.x版本增加了对vdom特性的支持。</p>
 
     
   </div>
