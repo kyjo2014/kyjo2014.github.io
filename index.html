@@ -84,12 +84,20 @@
   <div class="entry">
     
       <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
-<li><p>什么是vdom<br>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
-</li>
-<li><p>为什么要使用vdom<br>为什么相比于直接操控浏览器的Dom树，操控vdom会更快呢？毕竟最后vdom树也需要对真实的dom树进行操作。这里就要归功于vdom高效的diff和patch算法。如果直接在实际dom树上进行操作，那么每一次进行元素的操作都相当于对整棵dom树进行一次DFS（先序遍历），非常耗费时间（可以使用NodeIterator和TreeWalker自己实现getElementById）。而且如果一次更新大量的dom元素（不使用fragment）会使得浏览器进行大量的重绘操作。使用vdom的话就可以使得把对原先节点的增删查改操作都放在内存中进行，并且由于vdom的操作并不会马上就产生真实的效果，触发浏览器的重绘，这样就使得框架可以先计算出几乎最小的diff，然后再等到事件循环的结尾才对真实dom树进行批量的更新。因此，vdom的性能比原生dom快很多。</p>
-</li>
+<li>什么是vdom</li>
 </ol>
-<p>3.如何实现vdom<br>vue2.0相比vue1.x版本增加了对vdom特性的支持。</p>
+<p>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
+<ol>
+<li>为什么要使用vdom</li>
+</ol>
+<p>为什么相比于直接操控浏览器的Dom树，操控vdom会更快呢？毕竟最后vdom树也需要对真实的dom树进行操作。这里就要归功于vdom高效的diff和patch算法。如果直接在实际dom树上进行操作，那么每一次进行元素的操作都相当于对整棵dom树进行一次DFS（先序遍历），非常耗费时间（可以使用NodeIterator和TreeWalker自己实现getElementById）。而且如果一次更新大量的dom元素（不使用fragment）会使得浏览器进行大量的重绘操作。使用vdom的话就可以使得把对原先节点的增删查改操作都放在内存中进行，并且由于vdom的操作并不会马上就产生真实的效果，触发浏览器的重绘，这样就使得框架可以先计算出几乎最小的diff，然后再等到事件循环的结尾才对真实dom树进行批量的更新。因此，vdom的性能比原生dom快很多。</p>
+<ol>
+<li>如何实现vdom<br>vue2.0相比vue1.x版本增加了对vdom特性的支持。而vue2.0的vdom特性是源自于对snabbdom的魔改，接下来就看看snabbdom是怎么实现virtualdom的。</li>
+</ol>
+<blockquote>
+<p><em>转载自<a href="http://www.jianshu.com/p/b461657e49c0" target="_blank" rel="external">袁韩的博客</a></em><br>virtual dom优化开发的方式是：通过vnode,来实现无状态组件,结合单向数据流(undirectional data flow),进行UI更新,整体代码结构是：<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var newVnode = render(vnode, <span class="keyword">state</span>)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div><div class="line"><span class="keyword">state</span>.dispatch('change')</div><div class="line">var newVnode = render(vnode, <span class="keyword">state</span>)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>我看的是<a href="https://github.com/snabbdom/snabbdom/tree/43908d81c804f91dba44e7007f3aff2bcd52efb2" target="_blank" rel="external">snabbdom</a>这个版本的代码。代码仓库中,<br>| 名字        | 种类           | 介绍  |<br>| ————- |:————-:| —–:|<br>| module     | 目录 | 存放对不同指令的解释模块 |<br>|  vnode     | 文件      |   vnode的构造函数 |<br>| h | 文件      |    负责把用户输入转化为vnode节点 |<br>|is|文件|用于提供工具函数，验证值的类型|<br>|htmldomapi|文件|对domapi用函数进行包装，方便更好使用|<br>|snabbdom|文件| 框架主体包含diff，patch，初始化函数|</p>
 
     
   </div>
