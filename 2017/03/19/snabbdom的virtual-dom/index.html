@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#学习virtualdom"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习virtualdom</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#学习virtualdom-一"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习virtualdom 一</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -380,7 +380,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
+        <h1 id="学习virtualdom-一"><a href="#学习virtualdom-一" class="headerlink" title="学习virtualdom 一"></a>学习virtualdom 一</h1><ol>
 <li>什么是vdom</li>
 </ol>
 <p>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
@@ -395,6 +395,7 @@
 <p><em>转载自<a href="http://www.jianshu.com/p/b461657e49c0" target="_blank" rel="external">袁韩的博客</a></em><br>virtual dom优化开发的方式是：通过vnode,来实现无状态组件,结合单向数据流(undirectional data flow),进行UI更新,整体代码结构是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var newVnode = render(vnode, state)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div><div class="line">state.dispatch(&apos;change&apos;)</div><div class="line">var newVnode = render(vnode, state)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div></pre></td></tr></table></figure></p>
 </blockquote>
 <p>我看的是<a href="https://github.com/snabbdom/snabbdom/tree/43908d81c804f91dba44e7007f3aff2bcd52efb2" target="_blank" rel="external">snabbdom</a>这个版本的代码。代码仓库中,<br>| 名字        | 种类           | 介绍  |<br>| ————- |:————-:| —–:|<br>| module     | 目录 | 存放对不同指令的解释模块 |<br>|  vnode     | 文件      |   vnode的构造函数 |<br>| h | 文件      |    负责把用户输入转化为vnode节点 |<br>|is|文件|用于提供工具函数，验证值的类型|<br>|htmldomapi|文件|对domapi用函数进行包装，方便更好使用|<br>|snabbdom|文件| 框架主体包含diff，patch，初始化函数|</p>
+<p>这里先看一下snabbdom对vnode的定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module.exports = function(sel, data, children, text, elm) &#123;</div><div class="line">  /*sel: vnode对应的选择器属性如标签名，id，class等，形式如‘div.btn.rm-btn’</div><div class="line">   *data： vnode所绑定的数据，可以有以下类型：attribute、props、eventlistner、class、dataset、hook</div><div class="line">   *children： 子元素数组</div><div class="line">   *text：vnode节点内部的文本内容</div><div class="line">   *elm： 用来保存对实际dom节点的引用</div><div class="line">   *key： 用来区分不同vnode节点的唯一值</div><div class="line">   */</div><div class="line">  var key = data === undefined ? undefined : data.key;</div><div class="line">  return &#123;sel: sel, data: data, children: children,</div><div class="line">          text: text, elm: elm, key: key&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
     
 
