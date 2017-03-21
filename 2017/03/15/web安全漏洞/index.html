@@ -411,9 +411,18 @@
 </blockquote>
 <p>第三种类型：</p>
 <h3 id="DOM-Based-XSS"><a href="#DOM-Based-XSS" class="headerlink" title="DOM Based XSS"></a>DOM Based XSS</h3><blockquote>
-<p>从效果上来说也是反射型XSS。单独划分出来，是因为其形成原因比较特别，发现他的安全专家专门提出了这种类型的XSS。出于历史原因，也就把它单独作为一个分类了。<em>通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</em></p>
+<p>从效果上来说也是反射型XSS。单独划分出来，是因为其形成原因比较特别，发现他的安全专家专门提出了这种类型的XSS。出于历史原因，也就把它单独作为一个分类了。<em>通过修改页面的DOM节点形成的XSS，称之为DOM Based XSS。</em><br><strong><em>domxss取决于输出位置，并不取决于输出环境，因此domxss既有可能是反射型的，也有可能是存储型的</em></strong></p>
 </blockquote>
 <p>意思上就是通过传入一个DOM节点的代码，使得受攻击页面中被插入了攻击的脚本或者dom节点。相比于反射型XSS通过传入数据的方式进行影响页面，DOM base型限制了传入数据的类型。</p>
+<p><em>例子</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">error_reporting(0);</div><div class="line">$name = $_GET[&quot;name&quot;];</div><div class="line">?&gt;</div><div class="line">&lt;input id=&quot;text&quot; type=&quot;text&quot; value=&quot;&lt;?php echo $name;?&gt;&quot; /&gt;</div><div class="line">&lt;div id=&quot;print&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">var text = document.getElementById(&quot;text&quot;); </div><div class="line">var print = document.getElementById(&quot;print&quot;);</div><div class="line">print.innerHTML = text.value; // 获取 text的值，并且输出在print内。这里是导致xss的主要原因。</div><div class="line">&lt;/script&gt;</div><div class="line"></div><div class="line">作者：梧桐雨</div><div class="line">链接：https://www.zhihu.com/question/26628342/answer/33504799</div><div class="line">来源：知乎</div><div class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</div></pre></td></tr></table></figure></p>
+<ol>
+<li>dns劫持（路由劫持）</li>
+</ol>
+<p>dns劫持：用户输入了正确的域名但是dns服务器返回了其他网站的ip地址。</p>
+<p>解决方式：使用https进行全站加密。HTTPS是建立在SSL层上的HTTP协议，当建立连接的时候，客户端会打开一条到服务器端口443的链接然后交换一些SSL安全参数。例如安全密钥，加密参数等。</p>
+<blockquote>
+<p>HTTPS提供了端到端的安全加密不仅提供数据机密性（加密），还提供数据完整性（不篡改数据）保护、防重放（把捕获的报文再发一次无效），这样坏小子就很难下手，没有session key 很难去偷窥并篡改用户的数据，更无法依赖HTTPS这个载体植入木马。一定有同学会有疑问，为何明文传输的HTTP可以被劫持，篡改网页内容，而加密传输的HTTPS却不可以？那是因为HTTP被劫持篡改页面，重新计算TCP checksum，用户电脑是无法判别是否被篡改，只好被动接收。而加密传输之后，有了HMAC保护，任何篡改页面的尝试，由于没有session key，无法计算出和篡改网页一致的HMAC，所以数据接收端的SSL/TLS会轻易地识别出网页已被篡改，然后丢弃，既然无法劫持，也就没有篡改的冲动了，所以HTTPS可以很好地对付网页劫持。<br>作者：车小胖<br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
 
     
 
