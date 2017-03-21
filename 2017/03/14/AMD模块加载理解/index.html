@@ -1,103 +1,394 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>AMD模块加载理解 | LTH&#39;s note book</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="AMD模块加载理解看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 
-先介绍浏览器AMD模块加载的规范和定义123456789主页面    &amp;lt;script src=&quot;./mass.js&quot;&amp;gt;&amp;lt;/script&amp;gt;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="AMD模块加载理解">
-<meta property="og:url" content="http://kyjo2014.github.com/2017/03/14/AMD模块加载理解/index.html">
-<meta property="og:site_name" content="LTH's note book">
-<meta property="og:description" content="AMD模块加载理解看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 
-先介绍浏览器AMD模块加载的规范和定义123456789主页面    &amp;lt;script src=&quot;./mass.js&quot;&amp;gt;&amp;lt;/script&amp;gt;">
-<meta property="og:updated_time" content="2017-03-14T16:32:04.769Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AMD模块加载理解">
-<meta name="twitter:description" content="AMD模块加载理解看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 
-先介绍浏览器AMD模块加载的规范和定义123456789主页面    &amp;lt;script src=&quot;./mass.js&quot;&amp;gt;&amp;lt;/script&amp;gt;">
-  
-    <link rel="alternative" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/style.css">
-  
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
 
+    <!-- Title -->
+    
+    <title>
+        
+            AMD模块加载理解 | 
+        
+        LTH&#39;s note book
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="kyjo2014">
+    <meta name="description" content="html|css|javascript|LTH&#39;s blog">
+    <meta name="keywords" content="123,AMD | 模块">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="LTH&#39;s note book">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://kyjo2014.github.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="AMD模块加载理解 | LTH&#39;s note book">
+    <meta property="og:description" content="html|css|javascript|LTH&#39;s blog">
+    <meta property="og:article:tag" content="AMD | 模块"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
 </head>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LTH&#39;s note book</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">逗逼+未来の程序员</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kyjo2014.github.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-AMD模块加载理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/14/AMD模块加载理解/" class="article-date">
-  <time datetime="2017-03-14T15:08:53.000Z" itemprop="datePublished">2017-03-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      AMD模块加载理解
-    </h1>
-  
 
-      </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#AMD模块加载理解"><span class="post-toc-number">1.</span> <span class="post-toc-text">AMD模块加载理解</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                AMD模块加载理解
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>kyjo2014</strong>
+        <span>3月 14, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/AMD-模块/">AMD | 模块</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=AMD模块加载理解&url=http://kyjo2014.github.com//2017/03/14/AMD模块加载理解/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=AMD模块加载理解&url=http://kyjo2014.github.com//2017/03/14/AMD模块加载理解/index.html&via=kyjo2014" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2017/03/14/AMD模块加载理解/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2017/03/14/AMD模块加载理解/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
         <h1 id="AMD模块加载理解"><a href="#AMD模块加载理解" class="headerlink" title="AMD模块加载理解"></a>AMD模块加载理解</h1><p>看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 </p>
-<p>先介绍浏览器AMD模块加载的规范和定义<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">主页面</div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./mass.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="comment">//require（依赖模块，回调函数，目录路径）</span></div><div class="line">        <span class="built_in">require</span>([<span class="string">'aaa'</span>,<span class="string">'bbb'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;&#125;,parentPath)</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">模块 aaa.js</div><div class="line">    //定义模块 define（模块名字，依赖模块，回调函数）</div><div class="line">    define(id?, dependencies?, factory);</div></pre></td></tr></table></figure></p>
+<p>先介绍浏览器AMD模块加载的规范和定义<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">主页面</div><div class="line">    &lt;script src=&quot;./mass.js&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;script&gt;</div><div class="line">        //require（依赖模块，回调函数，目录路径）</div><div class="line">        require([&apos;aaa&apos;,&apos;bbb&apos;],function(a,b)&#123;&#125;,parentPath)</div><div class="line">    &lt;/script&gt;</div><div class="line">模块 aaa.js</div><div class="line">    //定义模块 define（模块名字，依赖模块，回调函数）</div><div class="line">    define(id?, dependencies?, factory);</div></pre></td></tr></table></figure></p>
 <p>可以看到使用者只需要在需要使用模块化加载的地方调用require即可加载经过define定义的模块。</p>
 <p>这时候有两个问题困惑着我：  </p>
 <ol>
 <li>在模块文件中，没有存在define函数的定义。</li>
 <li>当模块加载好后，require函数是如何得知的。</li>
 </ol>
-<p>接下来看下mass.js是怎么实现模块化加载<br><br><em>注意：下面的代码由mass.js源代码剥离其他功能而成。全部源代码请浏览<a href="https://github.com/RubyLouvre/mass-Framework/blob/master/mass.js" target="_blank" rel="external">mass.js</a></em><br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params">global, DOC</span>) </span>&#123;</div><div class="line">    <span class="built_in">var</span> $$ = global.$; <span class="comment">//保存已有同名变量</span></div><div class="line">    <span class="built_in">var</span> rmakeid = <span class="regexp">/(#.+|\W)/g</span>; <span class="comment">//用于处理掉href中的hash与所有特殊符号，生成长命名空间</span></div><div class="line">    <span class="built_in">var</span> NsKey = DOC.URL.replace(rmakeid, <span class="string">""</span>); <span class="comment">//长命名空间（字符串）</span></div><div class="line">    <span class="built_in">var</span> NsVal = global[NsKey]; <span class="comment">//长命名空间（mass对象）</span></div><div class="line">    <span class="built_in">var</span> W3C = DOC.dispatchEvent; <span class="comment">//IE9开始支持W3C的事件模型与getComputedStyle取样式值</span></div><div class="line">    <span class="built_in">var</span> html = DOC.documentElement; <span class="comment">//HTML元素</span></div><div class="line">    <span class="built_in">var</span> head = DOC.head || DOC.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>]; <span class="comment">//HEAD元素</span></div><div class="line">    <span class="built_in">var</span> loadings = []; <span class="comment">//正在加载中的模块列表</span></div><div class="line">    <span class="built_in">var</span> factorys = []; <span class="comment">//储存需要绑定ID与factory对应关系的模块（标准浏览器下，先parse的script节点会先onload）</span></div><div class="line">    <span class="built_in">var</span> mass = <span class="number">1</span>; <span class="comment">//当前框架的版本号</span></div><div class="line">    <span class="built_in">var</span> postfix = <span class="string">""</span>; <span class="comment">//用于强制别名</span></div><div class="line">    <span class="built_in">var</span> all = <span class="string">"mass,lang,class,flow,data,support,query,node,attr,css,event,ajax,fx"</span>;</div><div class="line">    <span class="built_in">var</span> moduleClass = <span class="string">"mass"</span> + (<span class="keyword">new</span> <span class="built_in">Date</span> - <span class="number">0</span>);</div><div class="line">    <span class="built_in">var</span> hasOwn = <span class="built_in">Object</span>.prototype.hasOwnProperty;</div><div class="line">   </div><div class="line">    <span class="comment">//============================加载系统===========================</span></div><div class="line">    <span class="built_in">var</span> modules = $.modules = &#123;</div><div class="line">        <span class="attribute">ready</span>: &#123;</div><div class="line">            <span class="attribute">exports</span>: $</div><div class="line">        &#125;,</div><div class="line">        <span class="attribute">mass</span>: &#123;</div><div class="line">            <span class="attribute">state</span>: <span class="number">2</span>,</div><div class="line">            <span class="attribute">exports</span>: $</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getCurrentScript</span>(<span class="params">base</span>) </span>&#123;</div><div class="line">        <span class="comment">// 参考 https://github.com/samyk/jiagra/blob/master/jiagra.js</span></div><div class="line">        <span class="built_in">var</span> stack;</div><div class="line">        <span class="title">try</span> &#123;</div><div class="line">            a.b.c(); <span class="comment">//强制报错,以便捕获e.stack</span></div><div class="line">        &#125; <span class="keyword">catch</span> (e) &#123; <span class="comment">//safari的错误对象只有line,sourceId,sourceURL</span></div><div class="line">            stack = e.stack;</div><div class="line">            <span class="keyword">if</span> (!stack &amp;&amp; <span class="built_in">window</span>.opera) &#123;</div><div class="line">                <span class="comment">//opera 9没有e.stack,但有e.Backtrace,但不能直接取得,需要对e对象转字符串进行抽取</span></div><div class="line">                stack = (<span class="built_in">String</span>(e).match(<span class="regexp">/of linked script \S+/g</span>) || []).join(<span class="string">" "</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (stack) &#123;</div><div class="line">            <span class="comment">/**e.stack最后一行在所有支持的浏览器大致如下:</span></div><div class="line">             *chrome23:</div><div class="line">             * at http://113.93.50.63/data.js:4:1</div><div class="line">             *firefox17:</div><div class="line">             *@http://113.93.50.63/query.js:4</div><div class="line">             *opera12:http://www.oldapps.com/opera.php?system=Windows_XP</div><div class="line">             *@http://113.93.50.63/data.js:4</div><div class="line">             *IE10:</div><div class="line">             *  at Global code (http://113.93.50.63/data.js:4:1)</div><div class="line">             *  //firefox4+ 可以用document.currentScript</div><div class="line">             */</div><div class="line">            stack = stack.split(<span class="regexp">/[@ ]/g</span>).pop(); <span class="comment">//取得最后一行,最后一个空格或@之后的部分</span></div><div class="line">            stack = stack[<span class="number">0</span>] === <span class="string">"("</span> ? stack.slice(<span class="number">1</span>, <span class="number">-1</span>) : stack.replace(<span class="regexp">/\s/</span>, <span class="string">""</span>); <span class="comment">//去掉换行符</span></div><div class="line">            <span class="keyword">return</span> stack.replace(<span class="regexp">/(:\d+)?:\d+$/i</span>, <span class="string">""</span>); <span class="comment">//去掉行号与或许存在的出错字符起始位置</span></div><div class="line">        &#125;</div><div class="line">        <span class="built_in">var</span> nodes = (base ? <span class="attribute">document</span> : head).getElementsByTagName(<span class="string">"script"</span>); <span class="comment">//只在head标签中寻找</span></div><div class="line">        <span class="keyword">for</span> (<span class="built_in">var</span> i = nodes.length, node; node = nodes[--i]; ) &#123;</div><div class="line">            <span class="keyword">if</span> ((base || node.className === moduleClass) &amp;&amp; node.readyState === <span class="string">"interactive"</span>) &#123;</div><div class="line">                <span class="keyword">return</span> node.className = node.src;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkCycle</span>(<span class="params">deps, nick</span>) </span>&#123;</div><div class="line">        <span class="comment">//检测是否存在循环依赖</span></div><div class="line">        <span class="keyword">for</span> (<span class="built_in">var</span> id <span class="keyword">in</span> deps) &#123;</div><div class="line">            <span class="keyword">if</span> (deps[id] === <span class="string">"司徒正美"</span> &amp;&amp; modules[id].state !== <span class="number">2</span> &amp;&amp; (id === nick || checkCycle(modules[id].deps, nick))) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkDeps</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//检测此JS模块的依赖是否都已安装完毕,是则安装自身</span></div><div class="line">        <span class="attribute">loop</span>: <span class="keyword">for</span> (<span class="built_in">var</span> i = loadings.length, id; id = loadings[--i]; ) &#123;</div><div class="line">            <span class="built_in">var</span> obj = modules[id],</div><div class="line">                    deps = obj.deps;</div><div class="line">            <span class="keyword">for</span> (<span class="built_in">var</span> key <span class="keyword">in</span> deps) &#123;</div><div class="line">                <span class="keyword">if</span> (hasOwn.call(deps, key) &amp;&amp; modules[key].state !== <span class="number">2</span>) &#123;</div><div class="line">                    <span class="keyword">continue</span> loop;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//如果deps是空对象或者其依赖的模块的状态都是2</span></div><div class="line">            <span class="keyword">if</span> (obj.state !== <span class="number">2</span>) &#123;</div><div class="line">                loadings.splice(i, <span class="number">1</span>); <span class="comment">//必须先移除再安装，防止在IE下DOM树建完后手动刷新页面，会多次执行它</span></div><div class="line">                fireFactory(obj.id, obj.args, obj.factory);</div><div class="line">                checkDeps();<span class="comment">//如果成功,则再执行一次,以防有些模块就差本模块没有安装好</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">checkFail</span>(<span class="params">node, onError, fuckIE</span>) </span>&#123;</div><div class="line">        <span class="built_in">var</span> id = node.src;<span class="comment">//检测是否死链</span></div><div class="line">        node.onload = node.onreadystatechange = node.onerror = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">if</span> (onError || (fuckIE &amp;&amp; !modules[id].state)) &#123;</div><div class="line">            setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                head.removeChild(node);</div><div class="line">            &#125;);</div><div class="line">            $.log(<span class="string">"加载 "</span> + id + <span class="string">" 失败"</span> + onError + <span class="string">" "</span> + (!modules[id].state), <span class="number">7</span>);</div><div class="line">        &#125; <span class="title">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">var</span> rdeuce = <span class="regexp">/\/\w+\/\.\./</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadJSCSS</span>(<span class="params">url, parent, ret, shim</span>) </span>&#123;</div><div class="line">        <span class="comment">//1. 特别处理mass|ready标识符</span></div><div class="line">        <span class="keyword">if</span> (<span class="regexp">/^(mass|ready)$/</span>.test(<span class="built_in">url</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="built_in">url</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//2. 转化为完整路径</span></div><div class="line">        <span class="keyword">if</span> ($.config.alias[<span class="built_in">url</span>]) &#123;<span class="comment">//别名机制</span></div><div class="line">            ret = $.config.alias[<span class="built_in">url</span>];</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">typeof</span> ret === <span class="string">"object"</span>) &#123;</div><div class="line">                shim = ret;</div><div class="line">                ret = ret.src;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="title">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="regexp">/^(\w+)(\d)?:.*/</span>.test(<span class="built_in">url</span>)) &#123; <span class="comment">//如果本来就是完整路径</span></div><div class="line">                ret = <span class="built_in">url</span>;</div><div class="line">            &#125; <span class="title">else</span> &#123;</div><div class="line">                <span class="built_in">parent</span> = <span class="built_in">parent</span>.substr(<span class="number">0</span>, <span class="built_in">parent</span>.lastIndexOf(<span class="string">'/'</span>));</div><div class="line">                <span class="built_in">var</span> tmp = <span class="built_in">url</span>.charAt(<span class="number">0</span>);</div><div class="line">                <span class="keyword">if</span> (tmp !== <span class="string">"."</span> &amp;&amp; tmp !== <span class="string">"/"</span>) &#123; <span class="comment">//相对于根路径</span></div><div class="line">                    ret = basepath + <span class="built_in">url</span>;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">url</span>.slice(<span class="number">0</span>, <span class="number">2</span>) === <span class="string">"./"</span>) &#123; <span class="comment">//相对于兄弟路径</span></div><div class="line">                    ret = <span class="built_in">parent</span> + <span class="built_in">url</span>.slice(<span class="number">1</span>);</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">url</span>.slice(<span class="number">0</span>, <span class="number">2</span>) === <span class="string">".."</span>) &#123; <span class="comment">//相对于父路径</span></div><div class="line">                    ret = <span class="built_in">parent</span> + <span class="string">"/"</span> + <span class="built_in">url</span></div><div class="line">                    <span class="keyword">while</span> (rdeuce.test(ret)) &#123;</div><div class="line">                        ret = ret.replace(rdeuce, <span class="string">""</span>)</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (tmp === <span class="string">"/"</span>) &#123;</div><div class="line">                    ret = <span class="built_in">parent</span> + <span class="built_in">url</span>;<span class="comment">//相对于兄弟路径</span></div><div class="line">                &#125; <span class="title">else</span> &#123;</div><div class="line">                    $.error(<span class="string">"不符合模块标识规则: "</span> + <span class="built_in">url</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">var</span> src = ret.replace(<span class="regexp">/[?#].*/</span>, <span class="string">""</span>),</div><div class="line">                ext;</div><div class="line">        <span class="keyword">if</span> (<span class="regexp">/\.(css|js)$/</span>.test(src)) &#123; <span class="comment">// 处理"http://113.93.55.202/mass.draggable"的情况</span></div><div class="line">            ext = <span class="built_in">RegExp</span>.$<span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!ext) &#123; <span class="comment">//如果没有后缀名,加上后缀名</span></div><div class="line">            src += <span class="string">".js"</span>;</div><div class="line">            ext = <span class="string">"js"</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//3. 开始加载JS或CSS</span></div><div class="line">        <span class="keyword">if</span> (ext === <span class="string">"js"</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (!modules[src]) &#123; <span class="comment">//如果之前没有加载过</span></div><div class="line">                modules[src] = &#123;</div><div class="line">                    <span class="attribute">id:</span><span class="string"> src</span>,</div><div class="line">                    <span class="attribute">parent</span>: <span class="built_in">parent</span>,</div><div class="line">                    <span class="attribute">exports</span>: &#123;&#125;</div><div class="line">                &#125;;</div><div class="line">                <span class="keyword">if</span> (shim) &#123;<span class="comment">//shim机制</span></div><div class="line">                    <span class="built_in">require</span>(shim.deps || <span class="string">""</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                        loadJS(src, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">                            modules[src].state = <span class="number">2</span>;</div><div class="line">                            modules[src].exports = <span class="keyword">typeof</span> shim.exports === <span class="string">"function"</span> ?</div><div class="line">                                    shim.exports() : <span class="built_in">window</span>[shim.exports];</div><div class="line">                            checkDeps();</div><div class="line">                        &#125;);</div><div class="line">                    &#125;);</div><div class="line">                &#125; <span class="title">else</span> &#123;</div><div class="line">                    loadJS(src);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> src;</div><div class="line">        &#125; <span class="title">else</span> &#123;</div><div class="line">            loadCSS(src);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadJS</span>(<span class="params">url, callback</span>) </span>&#123;</div><div class="line">        <span class="comment">//通过script节点加载目标模块</span></div><div class="line">        <span class="built_in">var</span> node = DOC.createElement(<span class="string">"script"</span>);</div><div class="line">        node.className = moduleClass; <span class="comment">//让getCurrentScript只处理类名为moduleClass的script节点</span></div><div class="line">        node[W3C ? <span class="string">"onload"</span> : <span class="string">"onreadystatechange"</span>] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (W3C || <span class="regexp">/loaded|complete/i</span>.test(node.readyState)) &#123;</div><div class="line">                <span class="comment">//mass Framework会在_checkFail把它上面的回调清掉，尽可能释放回存，尽管DOM0事件写法在IE6下GC无望</span></div><div class="line">                <span class="built_in">var</span> factory = factorys.pop();</div><div class="line">                factory &amp;&amp; factory.delay(node.src);</div><div class="line">                <span class="keyword">if</span> (callback) &#123;</div><div class="line">                    callback();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (checkFail(node, <span class="literal">false</span>, !W3C)) &#123;</div><div class="line">                    $.log(<span class="string">"已成功加载 "</span> + node.src, <span class="number">7</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        node.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            checkFail(node, <span class="literal">true</span>);</div><div class="line">        &#125;;</div><div class="line">        node.src = <span class="built_in">url</span>; <span class="comment">//插入到head的第一个节点前，防止IE6下head标签没闭合前使用appendChild抛错</span></div><div class="line">        head.insertBefore(node, head.firstChild); <span class="comment">//chrome下第二个参数不能为null</span></div><div class="line">        $.log(<span class="string">"正准备加载 "</span> + node.src, <span class="number">7</span>); <span class="comment">//更重要的是IE6下可以收窄getCurrentScript的寻找范围</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadCSS</span>(<span class="params">url</span>) </span>&#123;</div><div class="line">        <span class="comment">//通过link节点加载模块需要的CSS文件</span></div><div class="line">        <span class="built_in">var</span> id = <span class="built_in">url</span>.replace(rmakeid, <span class="string">""</span>);</div><div class="line">        <span class="keyword">if</span> (!DOC.getElementById(id)) &#123;</div><div class="line">            <span class="built_in">var</span> node = DOC.createElement(<span class="string">"link"</span>);</div><div class="line">            node.rel = <span class="string">"stylesheet"</span>;</div><div class="line">            node.href = <span class="built_in">url</span>;</div><div class="line">            node.id = id;</div><div class="line">            head.insertBefore(node, head.firstChild);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 请求模块</div><div class="line">     * @param &#123;String|Array&#125; list 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @param &#123;String&#125; parent ? 父路径，没有使用种子模块的根路径或配置项</div><div class="line">     * @api public</div><div class="line">     */</div><div class="line">    <span class="built_in">window</span>.require = $.require = <span class="function"><span class="keyword">function</span>(<span class="params">list, factory, parent</span>) </span>&#123;</div><div class="line">        <span class="comment">// 用于检测它的依赖是否都为2</span></div><div class="line">        <span class="built_in">var</span> deps = &#123;&#125;,</div><div class="line">                <span class="comment">// 用于保存依赖模块的返回值</span></div><div class="line">                args = [],</div><div class="line">                <span class="comment">// 需要安装的模块数</span></div><div class="line">                dn = <span class="number">0</span>,</div><div class="line">                <span class="comment">// 已安装完的模块数</span></div><div class="line">                cn = <span class="number">0</span>,</div><div class="line">                id = <span class="built_in">parent</span> || <span class="string">"callback"</span> + setTimeout(<span class="string">"1"</span>);</div><div class="line">        <span class="built_in">parent</span> = <span class="built_in">parent</span> || basepath;</div><div class="line">        <span class="built_in">String</span>(<span class="built_in">list</span>).replace($.rword, <span class="function"><span class="keyword">function</span>(<span class="params">el</span>) </span>&#123;</div><div class="line">            <span class="built_in">var</span> <span class="built_in">url</span> = loadJSCSS(el, <span class="built_in">parent</span>)</div><div class="line">            <span class="keyword">if</span> (<span class="built_in">url</span>) &#123;</div><div class="line">                dn++;</div><div class="line">                <span class="keyword">if</span> (modules[<span class="built_in">url</span>] &amp;&amp; modules[<span class="built_in">url</span>].state === <span class="number">2</span>) &#123;</div><div class="line">                    cn++;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (!deps[<span class="built_in">url</span>]) &#123;</div><div class="line">                    args.push(<span class="built_in">url</span>);</div><div class="line">                    deps[<span class="built_in">url</span>] = <span class="string">"司徒正美"</span>; <span class="comment">//去重</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        modules[id] = &#123;<span class="comment">//创建一个对象,记录模块的加载情况与其他信息</span></div><div class="line">            <span class="attribute">id:</span><span class="string"> id</span>,</div><div class="line">            <span class="attribute">factory</span>: factory,</div><div class="line">            <span class="attribute">deps</span>: deps,</div><div class="line">            <span class="attribute">args</span>: args,</div><div class="line">            <span class="attribute">state</span>: <span class="number">1</span></div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">if</span> (dn === cn) &#123; <span class="comment">//如果需要安装的等于已安装好的</span></div><div class="line">            fireFactory(id, args, factory); <span class="comment">//安装到框架中</span></div><div class="line">        &#125; <span class="title">else</span> &#123;</div><div class="line">            <span class="comment">//放到检测列队中,等待checkDeps处理</span></div><div class="line">            loadings.unshift(id);</div><div class="line">        &#125;</div><div class="line">        checkDeps();</div><div class="line">    &#125;;</div><div class="line">    <span class="built_in">require</span>.config = kernel;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 定义模块</div><div class="line">     * @param &#123;String&#125; id ? 模块ID</div><div class="line">     * @param &#123;Array&#125; deps ? 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @api public</div><div class="line">     */</div><div class="line">    <span class="built_in">window</span>.define = $.define = <span class="function"><span class="keyword">function</span>(<span class="params">id, deps, factory</span>) </span>&#123; <span class="comment">//模块名,依赖列表,模块本身</span></div><div class="line">        <span class="built_in">var</span> args = $.slice(<span class="built_in">arguments</span>);</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> id === <span class="string">"string"</span>) &#123;</div><div class="line">            <span class="built_in">var</span> _id = args.shift();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> args[<span class="number">0</span>] === <span class="string">"boolean"</span>) &#123; <span class="comment">//用于文件合并, 在标准浏览器中跳过补丁模块</span></div><div class="line">            <span class="keyword">if</span> (args[<span class="number">0</span>]) &#123;</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            args.shift();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> args[<span class="number">0</span>] === <span class="string">"function"</span>) &#123;</div><div class="line">            args.unshift([]);</div><div class="line">        &#125; <span class="comment">//上线合并后能直接得到模块ID,否则寻找当前正在解析中的script节点的src作为模块ID</span></div><div class="line">        <span class="comment">//现在除了safari外，我们都能直接通过getCurrentScript一步到位得到当前执行的script节点，</span></div><div class="line">        <span class="comment">//safari可通过onload+delay闭包组合解决</span></div><div class="line">        id = modules[id] &amp;&amp; modules[id].state &gt;= <span class="number">1</span> ? <span class="attribute">_id</span> : getCurrentScript();</div><div class="line">        <span class="keyword">if</span> (!modules[name] &amp;&amp; _id ) &#123;</div><div class="line">                modules[name] = &#123;</div><div class="line">                    <span class="attribute">id:</span><span class="string"> name</span>,</div><div class="line">                    <span class="attribute">factory</span>: factory,</div><div class="line">                    <span class="attribute">state</span>: <span class="number">1</span></div><div class="line">                &#125;</div><div class="line">         &#125;</div><div class="line">        factory = args[<span class="number">1</span>];</div><div class="line">        factory.id = _id; <span class="comment">//用于调试</span></div><div class="line">        factory.delay = <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">            args.push(id);</div><div class="line">            <span class="built_in">var</span> isCycle = <span class="literal">true</span>;</div><div class="line">            <span class="title">try</span> &#123;</div><div class="line">               isCycle = checkCycle(modules[id].deps, id);</div><div class="line">            &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (isCycle) &#123;</div><div class="line">                $.error(id + <span class="string">"模块与之前的某些模块存在循环依赖"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">delete</span> factory.delay; <span class="comment">//释放内存</span></div><div class="line">            <span class="built_in">require</span>.apply(<span class="literal">null</span>, args); <span class="comment">//0,1,2 --&gt; 1,2,0</span></div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">if</span> (id) &#123;</div><div class="line">            factory.delay(id, args);</div><div class="line">        &#125; <span class="title">else</span> &#123; <span class="comment">//先进先出</span></div><div class="line">            factorys.push(factory);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    $.define.amd = modules;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 请求模块从modules对象取得依赖列表中的各模块的返回值，执行factory, 完成模块的安装</div><div class="line">     * @param &#123;String&#125; id  模块ID</div><div class="line">     * @param &#123;Array&#125; deps 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @api private</div><div class="line">     */</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fireFactory</span>(<span class="params">id, deps, factory</span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="built_in">var</span> i = <span class="number">0</span>, array = [], d; d = deps[i++]; ) &#123;</div><div class="line">            array.push(modules[d].exports);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">var</span> <span class="built_in">module</span> = <span class="built_in">Object</span>(modules[id]),</div><div class="line">                ret = factory.apply(global, array);</div><div class="line">        <span class="built_in">module</span>.state = <span class="number">2</span>;</div><div class="line">        <span class="keyword">if</span> (ret !== <span class="keyword">void</span> <span class="number">0</span>) &#123;</div><div class="line">            modules[id].exports = ret;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">    all.replace($.rword, <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">        $.config.alias[<span class="string">"$"</span> + a] = basepath + a + <span class="string">".js"</span>;</div><div class="line">    &#125;);</div><div class="line">    <span class="comment">//============================domReady机制===========================</span></div><div class="line">    <span class="built_in">var</span> readyFn, ready = W3C ? <span class="string">"DOMContentLoaded"</span> : <span class="string">"readystatechange"</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fireReady</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        modules.ready.state = <span class="number">2</span>;</div><div class="line">        checkDeps();</div><div class="line">        <span class="keyword">if</span> (readyFn) &#123;</div><div class="line">            $.unbind(DOC, ready, readyFn);</div><div class="line">        &#125;</div><div class="line">        fireReady = $.noop; <span class="comment">//隋性函数，防止IE9二次调用_checkDeps</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">doScrollCheck</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="title">try</span> &#123; <span class="comment">//IE下通过doScrollCheck检测DOM树是否建完</span></div><div class="line">            html.doScroll(<span class="string">"left"</span>);</div><div class="line">            fireReady();</div><div class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">            setTimeout(doScrollCheck);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ;</div><div class="line">    <span class="comment">//在firefox3.6之前，不存在readyState属性</span></div><div class="line">    <span class="comment">//http://www.cnblogs.com/rubylouvre/archive/2012/12/18/2822912.html</span></div><div class="line">    <span class="keyword">if</span> (!DOC.readyState) &#123;</div><div class="line">        <span class="built_in">var</span> readyState = DOC.readyState = DOC.body ? <span class="string">"complete"</span> : <span class="string">"loading"</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (DOC.readyState === <span class="string">"complete"</span>) &#123;</div><div class="line">        fireReady(); <span class="comment">//如果在domReady之外加载</span></div><div class="line">    &#125; <span class="title">else</span> &#123;</div><div class="line">        $.bind(DOC, ready, readyFn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (W3C || DOC.readyState === <span class="string">"complete"</span>) &#123;</div><div class="line">                fireReady();</div><div class="line">                <span class="keyword">if</span> (readyState) &#123; <span class="comment">//IE下不能改写DOC.readyState</span></div><div class="line">                    DOC.readyState = <span class="string">"complete"</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">if</span> (html.doScroll) &#123;</div><div class="line">            <span class="title">try</span> &#123; <span class="comment">//如果跨域会报错，那时肯定证明是存在两个窗口</span></div><div class="line">                <span class="keyword">if</span> (self.eval === <span class="built_in">parent</span>.eval) &#123;</div><div class="line">                    doScrollCheck();</div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">                doScrollCheck();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;(self, self.document);</div></pre></td></tr></table></figure></p>
+<p>接下来看下mass.js是怎么实现模块化加载<br><br><em>注意：下面的代码由mass.js源代码剥离其他功能而成。全部源代码请浏览<a href="https://github.com/RubyLouvre/mass-Framework/blob/master/mass.js" target="_blank" rel="external">mass.js</a></em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div></pre></td><td class="code"><pre><div class="line">void function(global, DOC) &#123;</div><div class="line">    var $$ = global.$; //保存已有同名变量</div><div class="line">    var rmakeid = /(#.+|\W)/g; //用于处理掉href中的hash与所有特殊符号，生成长命名空间</div><div class="line">    var NsKey = DOC.URL.replace(rmakeid, &quot;&quot;); //长命名空间（字符串）</div><div class="line">    var NsVal = global[NsKey]; //长命名空间（mass对象）</div><div class="line">    var W3C = DOC.dispatchEvent; //IE9开始支持W3C的事件模型与getComputedStyle取样式值</div><div class="line">    var html = DOC.documentElement; //HTML元素</div><div class="line">    var head = DOC.head || DOC.getElementsByTagName(&quot;head&quot;)[0]; //HEAD元素</div><div class="line">    var loadings = []; //正在加载中的模块列表</div><div class="line">    var factorys = []; //储存需要绑定ID与factory对应关系的模块（标准浏览器下，先parse的script节点会先onload）</div><div class="line">    var mass = 1; //当前框架的版本号</div><div class="line">    var postfix = &quot;&quot;; //用于强制别名</div><div class="line">    var all = &quot;mass,lang,class,flow,data,support,query,node,attr,css,event,ajax,fx&quot;;</div><div class="line">    var moduleClass = &quot;mass&quot; + (new Date - 0);</div><div class="line">    var hasOwn = Object.prototype.hasOwnProperty;</div><div class="line">   </div><div class="line">    //============================加载系统===========================</div><div class="line">    var modules = $.modules = &#123;</div><div class="line">        ready: &#123;</div><div class="line">            exports: $</div><div class="line">        &#125;,</div><div class="line">        mass: &#123;</div><div class="line">            state: 2,</div><div class="line">            exports: $</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    function getCurrentScript(base) &#123;</div><div class="line">        // 参考 https://github.com/samyk/jiagra/blob/master/jiagra.js</div><div class="line">        var stack;</div><div class="line">        try &#123;</div><div class="line">            a.b.c(); //强制报错,以便捕获e.stack</div><div class="line">        &#125; catch (e) &#123; //safari的错误对象只有line,sourceId,sourceURL</div><div class="line">            stack = e.stack;</div><div class="line">            if (!stack &amp;&amp; window.opera) &#123;</div><div class="line">                //opera 9没有e.stack,但有e.Backtrace,但不能直接取得,需要对e对象转字符串进行抽取</div><div class="line">                stack = (String(e).match(/of linked script \S+/g) || []).join(&quot; &quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        if (stack) &#123;</div><div class="line">            /**e.stack最后一行在所有支持的浏览器大致如下:</div><div class="line">             *chrome23:</div><div class="line">             * at http://113.93.50.63/data.js:4:1</div><div class="line">             *firefox17:</div><div class="line">             *@http://113.93.50.63/query.js:4</div><div class="line">             *opera12:http://www.oldapps.com/opera.php?system=Windows_XP</div><div class="line">             *@http://113.93.50.63/data.js:4</div><div class="line">             *IE10:</div><div class="line">             *  at Global code (http://113.93.50.63/data.js:4:1)</div><div class="line">             *  //firefox4+ 可以用document.currentScript</div><div class="line">             */</div><div class="line">            stack = stack.split(/[@ ]/g).pop(); //取得最后一行,最后一个空格或@之后的部分</div><div class="line">            stack = stack[0] === &quot;(&quot; ? stack.slice(1, -1) : stack.replace(/\s/, &quot;&quot;); //去掉换行符</div><div class="line">            return stack.replace(/(:\d+)?:\d+$/i, &quot;&quot;); //去掉行号与或许存在的出错字符起始位置</div><div class="line">        &#125;</div><div class="line">        var nodes = (base ? document : head).getElementsByTagName(&quot;script&quot;); //只在head标签中寻找</div><div class="line">        for (var i = nodes.length, node; node = nodes[--i]; ) &#123;</div><div class="line">            if ((base || node.className === moduleClass) &amp;&amp; node.readyState === &quot;interactive&quot;) &#123;</div><div class="line">                return node.className = node.src;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function checkCycle(deps, nick) &#123;</div><div class="line">        //检测是否存在循环依赖</div><div class="line">        for (var id in deps) &#123;</div><div class="line">            if (deps[id] === &quot;司徒正美&quot; &amp;&amp; modules[id].state !== 2 &amp;&amp; (id === nick || checkCycle(modules[id].deps, nick))) &#123;</div><div class="line">                return true;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function checkDeps() &#123;</div><div class="line">        //检测此JS模块的依赖是否都已安装完毕,是则安装自身</div><div class="line">        loop: for (var i = loadings.length, id; id = loadings[--i]; ) &#123;</div><div class="line">            var obj = modules[id],</div><div class="line">                    deps = obj.deps;</div><div class="line">            for (var key in deps) &#123;</div><div class="line">                if (hasOwn.call(deps, key) &amp;&amp; modules[key].state !== 2) &#123;</div><div class="line">                    continue loop;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            //如果deps是空对象或者其依赖的模块的状态都是2</div><div class="line">            if (obj.state !== 2) &#123;</div><div class="line">                loadings.splice(i, 1); //必须先移除再安装，防止在IE下DOM树建完后手动刷新页面，会多次执行它</div><div class="line">                fireFactory(obj.id, obj.args, obj.factory);</div><div class="line">                checkDeps();//如果成功,则再执行一次,以防有些模块就差本模块没有安装好</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function checkFail(node, onError, fuckIE) &#123;</div><div class="line">        var id = node.src;//检测是否死链</div><div class="line">        node.onload = node.onreadystatechange = node.onerror = null;</div><div class="line">        if (onError || (fuckIE &amp;&amp; !modules[id].state)) &#123;</div><div class="line">            setTimeout(function() &#123;</div><div class="line">                head.removeChild(node);</div><div class="line">            &#125;);</div><div class="line">            $.log(&quot;加载 &quot; + id + &quot; 失败&quot; + onError + &quot; &quot; + (!modules[id].state), 7);</div><div class="line">        &#125; else &#123;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    var rdeuce = /\/\w+\/\.\./</div><div class="line">    function loadJSCSS(url, parent, ret, shim) &#123;</div><div class="line">        //1. 特别处理mass|ready标识符</div><div class="line">        if (/^(mass|ready)$/.test(url)) &#123;</div><div class="line">            return url;</div><div class="line">        &#125;</div><div class="line">        //2. 转化为完整路径</div><div class="line">        if ($.config.alias[url]) &#123;//别名机制</div><div class="line">            ret = $.config.alias[url];</div><div class="line">            if (typeof ret === &quot;object&quot;) &#123;</div><div class="line">                shim = ret;</div><div class="line">                ret = ret.src;</div><div class="line">            &#125;</div><div class="line">        &#125; else &#123;</div><div class="line">            if (/^(\w+)(\d)?:.*/.test(url)) &#123; //如果本来就是完整路径</div><div class="line">                ret = url;</div><div class="line">            &#125; else &#123;</div><div class="line">                parent = parent.substr(0, parent.lastIndexOf(&apos;/&apos;));</div><div class="line">                var tmp = url.charAt(0);</div><div class="line">                if (tmp !== &quot;.&quot; &amp;&amp; tmp !== &quot;/&quot;) &#123; //相对于根路径</div><div class="line">                    ret = basepath + url;</div><div class="line">                &#125; else if (url.slice(0, 2) === &quot;./&quot;) &#123; //相对于兄弟路径</div><div class="line">                    ret = parent + url.slice(1);</div><div class="line">                &#125; else if (url.slice(0, 2) === &quot;..&quot;) &#123; //相对于父路径</div><div class="line">                    ret = parent + &quot;/&quot; + url</div><div class="line">                    while (rdeuce.test(ret)) &#123;</div><div class="line">                        ret = ret.replace(rdeuce, &quot;&quot;)</div><div class="line">                    &#125;</div><div class="line">                &#125; else if (tmp === &quot;/&quot;) &#123;</div><div class="line">                    ret = parent + url;//相对于兄弟路径</div><div class="line">                &#125; else &#123;</div><div class="line">                    $.error(&quot;不符合模块标识规则: &quot; + url);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        var src = ret.replace(/[?#].*/, &quot;&quot;),</div><div class="line">                ext;</div><div class="line">        if (/\.(css|js)$/.test(src)) &#123; // 处理&quot;http://113.93.55.202/mass.draggable&quot;的情况</div><div class="line">            ext = RegExp.$1;</div><div class="line">        &#125;</div><div class="line">        if (!ext) &#123; //如果没有后缀名,加上后缀名</div><div class="line">            src += &quot;.js&quot;;</div><div class="line">            ext = &quot;js&quot;;</div><div class="line">        &#125;</div><div class="line">        //3. 开始加载JS或CSS</div><div class="line">        if (ext === &quot;js&quot;) &#123;</div><div class="line">            if (!modules[src]) &#123; //如果之前没有加载过</div><div class="line">                modules[src] = &#123;</div><div class="line">                    id: src,</div><div class="line">                    parent: parent,</div><div class="line">                    exports: &#123;&#125;</div><div class="line">                &#125;;</div><div class="line">                if (shim) &#123;//shim机制</div><div class="line">                    require(shim.deps || &quot;&quot;, function() &#123;</div><div class="line">                        loadJS(src, function() &#123;</div><div class="line">                            modules[src].state = 2;</div><div class="line">                            modules[src].exports = typeof shim.exports === &quot;function&quot; ?</div><div class="line">                                    shim.exports() : window[shim.exports];</div><div class="line">                            checkDeps();</div><div class="line">                        &#125;);</div><div class="line">                    &#125;);</div><div class="line">                &#125; else &#123;</div><div class="line">                    loadJS(src);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return src;</div><div class="line">        &#125; else &#123;</div><div class="line">            loadCSS(src);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function loadJS(url, callback) &#123;</div><div class="line">        //通过script节点加载目标模块</div><div class="line">        var node = DOC.createElement(&quot;script&quot;);</div><div class="line">        node.className = moduleClass; //让getCurrentScript只处理类名为moduleClass的script节点</div><div class="line">        node[W3C ? &quot;onload&quot; : &quot;onreadystatechange&quot;] = function() &#123;</div><div class="line">            if (W3C || /loaded|complete/i.test(node.readyState)) &#123;</div><div class="line">                //mass Framework会在_checkFail把它上面的回调清掉，尽可能释放回存，尽管DOM0事件写法在IE6下GC无望</div><div class="line">                var factory = factorys.pop();</div><div class="line">                factory &amp;&amp; factory.delay(node.src);</div><div class="line">                if (callback) &#123;</div><div class="line">                    callback();</div><div class="line">                &#125;</div><div class="line">                if (checkFail(node, false, !W3C)) &#123;</div><div class="line">                    $.log(&quot;已成功加载 &quot; + node.src, 7);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        node.onerror = function() &#123;</div><div class="line">            checkFail(node, true);</div><div class="line">        &#125;;</div><div class="line">        node.src = url; //插入到head的第一个节点前，防止IE6下head标签没闭合前使用appendChild抛错</div><div class="line">        head.insertBefore(node, head.firstChild); //chrome下第二个参数不能为null</div><div class="line">        $.log(&quot;正准备加载 &quot; + node.src, 7); //更重要的是IE6下可以收窄getCurrentScript的寻找范围</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function loadCSS(url) &#123;</div><div class="line">        //通过link节点加载模块需要的CSS文件</div><div class="line">        var id = url.replace(rmakeid, &quot;&quot;);</div><div class="line">        if (!DOC.getElementById(id)) &#123;</div><div class="line">            var node = DOC.createElement(&quot;link&quot;);</div><div class="line">            node.rel = &quot;stylesheet&quot;;</div><div class="line">            node.href = url;</div><div class="line">            node.id = id;</div><div class="line">            head.insertBefore(node, head.firstChild);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    /**</div><div class="line">     * 请求模块</div><div class="line">     * @param &#123;String|Array&#125; list 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @param &#123;String&#125; parent ? 父路径，没有使用种子模块的根路径或配置项</div><div class="line">     * @api public</div><div class="line">     */</div><div class="line">    window.require = $.require = function(list, factory, parent) &#123;</div><div class="line">        // 用于检测它的依赖是否都为2</div><div class="line">        var deps = &#123;&#125;,</div><div class="line">                // 用于保存依赖模块的返回值</div><div class="line">                args = [],</div><div class="line">                // 需要安装的模块数</div><div class="line">                dn = 0,</div><div class="line">                // 已安装完的模块数</div><div class="line">                cn = 0,</div><div class="line">                id = parent || &quot;callback&quot; + setTimeout(&quot;1&quot;);</div><div class="line">        parent = parent || basepath;</div><div class="line">        String(list).replace($.rword, function(el) &#123;</div><div class="line">            var url = loadJSCSS(el, parent)</div><div class="line">            if (url) &#123;</div><div class="line">                dn++;</div><div class="line">                if (modules[url] &amp;&amp; modules[url].state === 2) &#123;</div><div class="line">                    cn++;</div><div class="line">                &#125;</div><div class="line">                if (!deps[url]) &#123;</div><div class="line">                    args.push(url);</div><div class="line">                    deps[url] = &quot;司徒正美&quot;; //去重</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        modules[id] = &#123;//创建一个对象,记录模块的加载情况与其他信息</div><div class="line">            id: id,</div><div class="line">            factory: factory,</div><div class="line">            deps: deps,</div><div class="line">            args: args,</div><div class="line">            state: 1</div><div class="line">        &#125;;</div><div class="line">        if (dn === cn) &#123; //如果需要安装的等于已安装好的</div><div class="line">            fireFactory(id, args, factory); //安装到框架中</div><div class="line">        &#125; else &#123;</div><div class="line">            //放到检测列队中,等待checkDeps处理</div><div class="line">            loadings.unshift(id);</div><div class="line">        &#125;</div><div class="line">        checkDeps();</div><div class="line">    &#125;;</div><div class="line">    require.config = kernel;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 定义模块</div><div class="line">     * @param &#123;String&#125; id ? 模块ID</div><div class="line">     * @param &#123;Array&#125; deps ? 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @api public</div><div class="line">     */</div><div class="line">    window.define = $.define = function(id, deps, factory) &#123; //模块名,依赖列表,模块本身</div><div class="line">        var args = $.slice(arguments);</div><div class="line">        if (typeof id === &quot;string&quot;) &#123;</div><div class="line">            var _id = args.shift();</div><div class="line">        &#125;</div><div class="line">        if (typeof args[0] === &quot;boolean&quot;) &#123; //用于文件合并, 在标准浏览器中跳过补丁模块</div><div class="line">            if (args[0]) &#123;</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">            args.shift();</div><div class="line">        &#125;</div><div class="line">        if (typeof args[0] === &quot;function&quot;) &#123;</div><div class="line">            args.unshift([]);</div><div class="line">        &#125; //上线合并后能直接得到模块ID,否则寻找当前正在解析中的script节点的src作为模块ID</div><div class="line">        //现在除了safari外，我们都能直接通过getCurrentScript一步到位得到当前执行的script节点，</div><div class="line">        //safari可通过onload+delay闭包组合解决</div><div class="line">        id = modules[id] &amp;&amp; modules[id].state &gt;= 1 ? _id : getCurrentScript();</div><div class="line">        if (!modules[name] &amp;&amp; _id ) &#123;</div><div class="line">                modules[name] = &#123;</div><div class="line">                    id: name,</div><div class="line">                    factory: factory,</div><div class="line">                    state: 1</div><div class="line">                &#125;</div><div class="line">         &#125;</div><div class="line">        factory = args[1];</div><div class="line">        factory.id = _id; //用于调试</div><div class="line">        factory.delay = function(id) &#123;</div><div class="line">            args.push(id);</div><div class="line">            var isCycle = true;</div><div class="line">            try &#123;</div><div class="line">               isCycle = checkCycle(modules[id].deps, id);</div><div class="line">            &#125; catch (e) &#123;</div><div class="line">            &#125;</div><div class="line">            if (isCycle) &#123;</div><div class="line">                $.error(id + &quot;模块与之前的某些模块存在循环依赖&quot;);</div><div class="line">            &#125;</div><div class="line">            delete factory.delay; //释放内存</div><div class="line">            require.apply(null, args); //0,1,2 --&gt; 1,2,0</div><div class="line">        &#125;;</div><div class="line">        if (id) &#123;</div><div class="line">            factory.delay(id, args);</div><div class="line">        &#125; else &#123; //先进先出</div><div class="line">            factorys.push(factory);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    $.define.amd = modules;</div><div class="line">    /**</div><div class="line">     * 请求模块从modules对象取得依赖列表中的各模块的返回值，执行factory, 完成模块的安装</div><div class="line">     * @param &#123;String&#125; id  模块ID</div><div class="line">     * @param &#123;Array&#125; deps 依赖列表</div><div class="line">     * @param &#123;Function&#125; factory 模块工厂</div><div class="line">     * @api private</div><div class="line">     */</div><div class="line"></div><div class="line">    function fireFactory(id, deps, factory) &#123;</div><div class="line">        for (var i = 0, array = [], d; d = deps[i++]; ) &#123;</div><div class="line">            array.push(modules[d].exports);</div><div class="line">        &#125;</div><div class="line">        var module = Object(modules[id]),</div><div class="line">                ret = factory.apply(global, array);</div><div class="line">        module.state = 2;</div><div class="line">        if (ret !== void 0) &#123;</div><div class="line">            modules[id].exports = ret;</div><div class="line">        &#125;</div><div class="line">        return ret;</div><div class="line">    &#125;</div><div class="line">    all.replace($.rword, function(a) &#123;</div><div class="line">        $.config.alias[&quot;$&quot; + a] = basepath + a + &quot;.js&quot;;</div><div class="line">    &#125;);</div><div class="line">    //============================domReady机制===========================</div><div class="line">    var readyFn, ready = W3C ? &quot;DOMContentLoaded&quot; : &quot;readystatechange&quot;;</div><div class="line"></div><div class="line">    function fireReady() &#123;</div><div class="line">        modules.ready.state = 2;</div><div class="line">        checkDeps();</div><div class="line">        if (readyFn) &#123;</div><div class="line">            $.unbind(DOC, ready, readyFn);</div><div class="line">        &#125;</div><div class="line">        fireReady = $.noop; //隋性函数，防止IE9二次调用_checkDeps</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    function doScrollCheck() &#123;</div><div class="line">        try &#123; //IE下通过doScrollCheck检测DOM树是否建完</div><div class="line">            html.doScroll(&quot;left&quot;);</div><div class="line">            fireReady();</div><div class="line">        &#125; catch (e) &#123;</div><div class="line">            setTimeout(doScrollCheck);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ;</div><div class="line">    //在firefox3.6之前，不存在readyState属性</div><div class="line">    //http://www.cnblogs.com/rubylouvre/archive/2012/12/18/2822912.html</div><div class="line">    if (!DOC.readyState) &#123;</div><div class="line">        var readyState = DOC.readyState = DOC.body ? &quot;complete&quot; : &quot;loading&quot;;</div><div class="line">    &#125;</div><div class="line">    if (DOC.readyState === &quot;complete&quot;) &#123;</div><div class="line">        fireReady(); //如果在domReady之外加载</div><div class="line">    &#125; else &#123;</div><div class="line">        $.bind(DOC, ready, readyFn = function() &#123;</div><div class="line">            if (W3C || DOC.readyState === &quot;complete&quot;) &#123;</div><div class="line">                fireReady();</div><div class="line">                if (readyState) &#123; //IE下不能改写DOC.readyState</div><div class="line">                    DOC.readyState = &quot;complete&quot;;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        if (html.doScroll) &#123;</div><div class="line">            try &#123; //如果跨域会报错，那时肯定证明是存在两个窗口</div><div class="line">                if (self.eval === parent.eval) &#123;</div><div class="line">                    doScrollCheck();</div><div class="line">                &#125;</div><div class="line">            &#125; catch (e) &#123;</div><div class="line">                doScrollCheck();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">  </div><div class="line">&#125;(self, self.document);</div></pre></td></tr></table></figure></p>
 <p>通过阅读mass.js源码，我们可以看到他是怎么做到模块化加载的。</p>
 <ol>
 <li>mass.js包装在一个IIFE（立即调用函数）中，所以当mass.js文件加载完成后，框架会立刻执行。</li>
@@ -119,135 +410,356 @@
 <li>由于每个模块加载一旦加载完成就会触发checkDeps，所以实际上不需要像数据劫持那样一直监视Deps的加载情况（因为只有两种状态，全部加载完成or没有加载完成）。</li>
 </ol>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://kyjo2014.github.com/2017/03/14/AMD模块加载理解/" data-id="cj0jliwvn0000usuh6ant80we" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMD-模块/">AMD | 模块</a></li></ul>
-
-    </footer>
-  </div>
-  
     
-<nav id="article-nav">
-  
-    <a href="/2017/03/15/web安全漏洞/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          web安全漏洞
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/03/12/vue双向数据绑定/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">vue双向数据绑定</div>
-    </a>
-  
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/03/15/web安全漏洞/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/12/vue双向数据绑定/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
 </nav>
 
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD-模块/">AMD | 模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-居中/">CSS|居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-canvas/">HTML5|canvas</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-语义化/">HTML5|语义化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-优化/">JavaScript | 优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-页面/">css|页面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug-浏览器/">debug|浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-博客/">github|博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery-javascript/">jquery|javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualdom/">virtualdom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue源码/">vue源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全/">web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客-node-js/">博客|node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-html/">读书笔记 | html</a><span class="tag-list-count">1</span></li></ul>
+        </div>
     </div>
-  </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/AMD-模块/" style="font-size: 10px;">AMD | 模块</a> <a href="/tags/CSS-居中/" style="font-size: 10px;">CSS|居中</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTML5-canvas/" style="font-size: 20px;">HTML5|canvas</a> <a href="/tags/HTML5-语义化/" style="font-size: 10px;">HTML5|语义化</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-优化/" style="font-size: 10px;">JavaScript | 优化</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-页面/" style="font-size: 10px;">css|页面</a> <a href="/tags/debug-浏览器/" style="font-size: 10px;">debug|浏览器</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/github-博客/" style="font-size: 10px;">github|博客</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javaScript-lazyman/" style="font-size: 10px;">javaScript | lazyman</a> <a href="/tags/jquery-javascript/" style="font-size: 10px;">jquery|javascript</a> <a href="/tags/virtualdom/" style="font-size: 10px;">virtualdom</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue源码/" style="font-size: 10px;">vue源码</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/博客-node-js/" style="font-size: 10px;">博客|node.js</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/读书笔记-html/" style="font-size: 10px;">读书笔记 | html</a>
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="kyjo2014's avatar">
     </div>
-  </div>
 
-  
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">10</span></li></ul>
-    </div>
-  </div>
-
-  
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/03/19/snabbdom的virtual-dom/">snabbdom的virtual dom</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/16/如何实现lazyman/">如何实现lazyman</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/15/web安全漏洞/">web安全漏洞</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/14/AMD模块加载理解/">AMD模块加载理解</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/12/vue双向数据绑定/">vue双向数据绑定</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 kyjo2014<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;LTH's note book
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
 
 
-<script src="/js/script.js"></script>
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
 
-  </div>
-</body>
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
 </html>
