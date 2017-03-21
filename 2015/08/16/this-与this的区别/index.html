@@ -1,23 +1,15 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>$(this)与this的区别 | LTH&#39;s note book</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-    <meta name="author" content="kyjo2014">
-  
-  
-    <meta name="description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
-首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
 首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
 <meta property="og:type" content="article">
 <meta property="og:title" content="$(this)与this的区别">
-<meta property="og:url" content="http://yoursite.com/2015/08/16/this-与this的区别/index.html">
+<meta property="og:url" content="http://kyjo2014.github.com/2015/08/16/this-与this的区别/index.html">
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
 首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
@@ -27,64 +19,77 @@
 <meta name="twitter:description" content="相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？
 首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&amp;apos;#id&amp;apos;));时，会弹出一个[object Obje">
   
-    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
   
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.png">
   
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
-</head>
 
+</head>
 <body>
-  <div class="wrapper">
-    <header id="header">
-  <div class="title">
-    <h1><a href="/">LTH&#39;s note book</a></h1>
-    <p><a href="/">逗逼+未来の程序员</a></p>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LTH&#39;s note book</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逗逼+未来の程序员</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kyjo2014.github.com"></form>
+      </div>
+    </div>
   </div>
-  <nav class="nav">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/Reading">Reading</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-        <li><a href="/testing">TestArea</a></li>
-      
-      
-        <li><a href="/atom.xml">RSS</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
 </header>
-    <div class="content"><article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2015/08/16/this-与this的区别/">
-  <time datetime="2015-08-16T02:04:39.000Z">
-    2015-08-16
-  </time>
+      <div class="outer">
+        <section id="main"><article id="post-this-与this的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/16/this-与this的区别/" class="article-date">
+  <time datetime="2015-08-16T02:04:39.000Z" itemprop="datePublished">2015-08-16</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title">$(this)与this的区别</h1>
+    <h1 class="article-title" itemprop="name">
+      $(this)与this的区别
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <p>相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>相信很多刚接触JQuery的人，很多都会对$(this)和this的区别模糊不清，那么这两者有什么区别呢？</p>
 <pre><code>首先来看看JQuery中的  $()  这个符号，实际上这个符号在JQuery中相当于JQuery（）,即$(this)=jquery();也就是说，这样可以返回一个jquery对象。那么，当你在网页中alert($(&apos;#id&apos;));时，会弹出一个[object Object ]，这个object对象，也就是jquery对象了。
 
 那么，我们再回过头来说$(this)，这个this是什么呢？假设我们有如下的代码：
@@ -100,45 +105,133 @@ alert(this);
 <p>很简单，this操作的是HTML对象，那么，HTML对象中怎么会有val()方法了，所以，在使用中，我们不能直接用this来直接调用jquery的方法或者属性。</p>
 <p>转自：Tekkaman 的blog</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2015/08/16/this-与this的区别/" data-id="cj0jliwxh000wusuho0bvn83e" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
-  <footer>
+  
     
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+<nav id="article-nav">
+  
+    <a href="/2015/08/17/githubpage个人博客教程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          githubpage个人博客教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/15/HTML5-canvas/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTML5-canvas</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-</div>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD-模块/">AMD | 模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-居中/">CSS|居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-canvas/">HTML5|canvas</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-语义化/">HTML5|语义化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-优化/">JavaScript | 优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-页面/">css|页面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug-浏览器/">debug|浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-博客/">github|博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery-javascript/">jquery|javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualdom/">virtualdom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue源码/">vue源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全/">web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客-node-js/">博客|node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-html/">读书笔记 | html</a><span class="tag-list-count">1</span></li></ul>
+    </div>
   </div>
-  <footer id="footer"><div class="copyright">
+
   
-  &copy; 2017 <a href="/">kyjo2014</a>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AMD-模块/" style="font-size: 10px;">AMD | 模块</a> <a href="/tags/CSS-居中/" style="font-size: 10px;">CSS|居中</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTML5-canvas/" style="font-size: 20px;">HTML5|canvas</a> <a href="/tags/HTML5-语义化/" style="font-size: 10px;">HTML5|语义化</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-优化/" style="font-size: 10px;">JavaScript | 优化</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-页面/" style="font-size: 10px;">css|页面</a> <a href="/tags/debug-浏览器/" style="font-size: 10px;">debug|浏览器</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/github-博客/" style="font-size: 10px;">github|博客</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javaScript-lazyman/" style="font-size: 10px;">javaScript | lazyman</a> <a href="/tags/jquery-javascript/" style="font-size: 10px;">jquery|javascript</a> <a href="/tags/virtualdom/" style="font-size: 10px;">virtualdom</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue源码/" style="font-size: 10px;">vue源码</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/博客-node-js/" style="font-size: 10px;">博客|node.js</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/读书笔记-html/" style="font-size: 10px;">读书笔记 | html</a>
+    </div>
+  </div>
+
   
-</div>
-<div class="theme-copyright">
-  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
-   | 
-  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-<script src="/js/scale.fix.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/19/snabbdom的virtual-dom/">snabbdom的virtual dom</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/16/如何实现lazyman/">如何实现lazyman</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/15/web安全漏洞/">web安全漏洞</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/AMD模块加载理解/">AMD模块加载理解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/12/vue双向数据绑定/">vue双向数据绑定</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kyjo2014<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-  (function($){
-    $('.fancybox').fancybox();
-  })(jQuery);
-</script>
+<script src="/js/script.js"></script>
 
+  </div>
 </body>
 </html>

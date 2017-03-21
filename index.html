@@ -1,89 +1,93 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
   
   <title>LTH&#39;s note book</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
-    <meta name="author" content="kyjo2014">
-  
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="html|css|javascript|LTH&apos;s blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="LTH's note book">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://kyjo2014.github.com/index.html">
 <meta property="og:site_name" content="LTH's note book">
 <meta property="og:description" content="html|css|javascript|LTH&apos;s blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LTH's note book">
 <meta name="twitter:description" content="html|css|javascript|LTH&apos;s blog">
   
-    <link rel="alternate" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="LTH&#39;s note book" type="application/atom+xml">
   
   
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.png">
   
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/style.css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+
 </head>
-
 <body>
-  <div class="wrapper">
-    <header id="header">
-  <div class="title">
-    <h1><a href="/">LTH&#39;s note book</a></h1>
-    <p><a href="/">逗逼+未来の程序员</a></p>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LTH&#39;s note book</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">逗逼+未来の程序员</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kyjo2014.github.com"></form>
+      </div>
+    </div>
   </div>
-  <nav class="nav">
-    <ul>
-      
-        <li><a href="/">Home</a></li>
-      
-        <li><a href="/archives">Archives</a></li>
-      
-        <li><a href="/Reading">Reading</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-        <li><a href="/testing">TestArea</a></li>
-      
-      
-        <li><a href="/atom.xml">RSS</a></li>
-      
-    </ul>
-    <div class="clearfix"></div>
-  </nav>
-  <div class="clearfix"></div>
 </header>
-    <div class="content">
-
-
-
-
+      <div class="outer">
+        <section id="main">
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/19/snabbdom的virtual-dom/">
-  <time datetime="2017-03-19T14:49:47.000Z">
-    2017-03-19
-  </time>
+    <article id="post-snabbdom的virtual-dom" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/19/snabbdom的virtual-dom/" class="article-date">
+  <time datetime="2017-03-19T14:49:47.000Z" itemprop="datePublished">2017-03-19</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/19/snabbdom的virtual-dom/">snabbdom的virtual dom</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/19/snabbdom的virtual-dom/">snabbdom的virtual dom</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="学习virtualdom"><a href="#学习virtualdom" class="headerlink" title="学习virtualdom"></a>学习virtualdom</h1><ol>
 <li>什么是vdom</li>
 </ol>
 <p>Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。框架使用 Virtual DOM 来渲染 UI，当组件状态  state有更改的时候，框架会自动调用组件的 render 方法重新渲染整个组件的 UI。<br>框架主要的目标是提供一套不同的, 高效的方案来更新DOM.不是通过直接把 DOM 变成可变的数据, 而是通过构建 “Virtual DOM”, 虚拟的 DOM, 随后 框架 处理真实的 DOM 上的更新来进行模拟相应的更新。</p>
@@ -95,43 +99,48 @@
 <li>如何实现vdom<br>vue2.0相比vue1.x版本增加了对vdom特性的支持。而vue2.0的vdom特性是源自于对snabbdom的魔改，接下来就看看snabbdom是怎么实现virtualdom的。</li>
 </ol>
 <blockquote>
-<p><em>转载自<a href="http://www.jianshu.com/p/b461657e49c0" target="_blank" rel="external">袁韩的博客</a></em><br>virtual dom优化开发的方式是：通过vnode,来实现无状态组件,结合单向数据流(undirectional data flow),进行UI更新,整体代码结构是：<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var newVnode = render(vnode, <span class="keyword">state</span>)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div><div class="line"><span class="keyword">state</span>.dispatch('change')</div><div class="line">var newVnode = render(vnode, <span class="keyword">state</span>)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div></pre></td></tr></table></figure></p>
+<p><em>转载自<a href="http://www.jianshu.com/p/b461657e49c0" target="_blank" rel="external">袁韩的博客</a></em><br>virtual dom优化开发的方式是：通过vnode,来实现无状态组件,结合单向数据流(undirectional data flow),进行UI更新,整体代码结构是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var newVnode = render(vnode, state)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div><div class="line">state.dispatch(&apos;change&apos;)</div><div class="line">var newVnode = render(vnode, state)</div><div class="line">var oldVnode = patch(oldVnode, newVnode)</div></pre></td></tr></table></figure></p>
 </blockquote>
 <p>我看的是<a href="https://github.com/snabbdom/snabbdom/tree/43908d81c804f91dba44e7007f3aff2bcd52efb2" target="_blank" rel="external">snabbdom</a>这个版本的代码。代码仓库中,<br>| 名字        | 种类           | 介绍  |<br>| ————- |:————-:| —–:|<br>| module     | 目录 | 存放对不同指令的解释模块 |<br>|  vnode     | 文件      |   vnode的构造函数 |<br>| h | 文件      |    负责把用户输入转化为vnode节点 |<br>|is|文件|用于提供工具函数，验证值的类型|<br>|htmldomapi|文件|对domapi用函数进行包装，方便更好使用|<br>|snabbdom|文件| 框架主体包含diff，patch，初始化函数|</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/19/snabbdom的virtual-dom/" data-id="cj0jliwxb000pusuhf3u8y5zh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualdom/">virtualdom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue源码/">vue源码</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/16/如何实现lazyman/">
-  <time datetime="2017-03-16T04:45:58.000Z">
-    2017-03-16
-  </time>
+    <article id="post-如何实现lazyman" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/16/如何实现lazyman/" class="article-date">
+  <time datetime="2017-03-16T04:45:58.000Z" itemprop="datePublished">2017-03-16</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/16/如何实现lazyman/">如何实现lazyman</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/16/如何实现lazyman/">如何实现lazyman</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <h1 id="如何实现一个lazyman"><a href="#如何实现一个lazyman" class="headerlink" title="如何实现一个lazyman"></a>如何实现一个lazyman</h1><p>这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。<br>题目的要求是这样的：</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="如何实现一个lazyman"><a href="#如何实现一个lazyman" class="headerlink" title="如何实现一个lazyman"></a>如何实现一个lazyman</h1><p>这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。<br>题目的要求是这样的：</p>
 <blockquote>
 <p>实现一个LazyMan，可以按照以下方式调用:<br>LazyMan(“Hank”)输出:<br>Hi! This is Hank!<br>LazyMan(“Hank”).sleep(10).eat(“dinner”)<br>输出<br>Hi! This is Hank!<br>//等待10秒..<br>Wake up after 10<br>Eat dinner~<br>LazyMan(“Hank”).eat(“dinner”).eat(“supper”)<br>输出<br>Hi This is Hank!<br>Eat dinner~<br>Eat supper~<br>LazyMan(“Hank”).sleepFirst(5).eat(“supper”)<br>输出<br>//等待5秒<br>Wake up after 5<br>Hi This is Hank!<br>Eat supper<br>以此类推。</p>
 </blockquote>
@@ -148,39 +157,44 @@
 <p>lzman.prototype.sleepFirst = function(time) {<br>    var self = this;<br>    var fn = (function(time) {<br>        return function() {<br>            setTimeout(function() {<br>                console.log(“Wake up after “ + time + “s!”);<br>                self.next();<br>            }, time * 1000);<br>        }<br>    })(time);<br>    this.tasks.unshift(fn);<br>    return this;<br>}<br><figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="actionscript"><span class="number">4.</span> 用工厂函数取代<span class="keyword">new</span> 方式生成lzman对象</span></div><div class="line">题目要求直接使用函数调用的方式生成对象，而之前都是用<span class="keyword">new</span> lzman（）,现在用一个工厂函数包起来就能完成。</div></pre></td></tr></table></figure></p>
 <p>function LazyMan(name){<br>    return new lzman(name);<br>}<br>```<br>通过编写lazyman能够加深对event loop的了解，以及对学习如何实现promise有很大的益处。</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/16/如何实现lazyman/" data-id="cj0jliwy0001cusuhrvmfvlr1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/15/web安全漏洞/">
-  <time datetime="2017-03-15T14:50:35.000Z">
-    2017-03-15
-  </time>
+    <article id="post-web安全漏洞" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/15/web安全漏洞/" class="article-date">
+  <time datetime="2017-03-15T14:50:35.000Z" itemprop="datePublished">2017-03-15</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/15/web安全漏洞/">web安全漏洞</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/15/web安全漏洞/">web安全漏洞</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <h1 id="web安全漏洞"><a href="#web安全漏洞" class="headerlink" title="web安全漏洞"></a>web安全漏洞</h1><p>今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《<a href="https://book.douban.com/subject/10546925/" target="_blank" rel="external">白帽子讲web安全</a>》和《<a href="https://book.douban.com/subject/25733421/" target="_blank" rel="external">web之困</a>》。<br><br>下面列出常见的web攻击</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="web安全漏洞"><a href="#web安全漏洞" class="headerlink" title="web安全漏洞"></a>web安全漏洞</h1><p>今天就来谈一下web开发的时候要注意哪些安全漏洞，了解这方面知识首推两本书，《<a href="https://book.douban.com/subject/10546925/" target="_blank" rel="external">白帽子讲web安全</a>》和《<a href="https://book.douban.com/subject/25733421/" target="_blank" rel="external">web之困</a>》。<br><br>下面列出常见的web攻击</p>
 <ol>
 <li>跨站脚本攻击（xss）</li>
 <li>dns劫持（dns缓存，dns转发）</li>
@@ -215,39 +229,44 @@
 </blockquote>
 <p>意思上就是通过传入一个DOM节点的代码，使得受攻击页面中被插入了攻击的脚本或者dom节点。相比于反射型XSS通过传入数据的方式进行影响页面，DOM base型限制了传入数据的类型。</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/15/web安全漏洞/" data-id="cj0jliwxl000yusuh9vmhtyzr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web安全/">web安全</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/14/AMD模块加载理解/">
-  <time datetime="2017-03-14T15:08:53.000Z">
-    2017-03-14
-  </time>
+    <article id="post-AMD模块加载理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/14/AMD模块加载理解/" class="article-date">
+  <time datetime="2017-03-14T15:08:53.000Z" itemprop="datePublished">2017-03-14</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/14/AMD模块加载理解/">AMD模块加载理解</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/14/AMD模块加载理解/">AMD模块加载理解</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <h1 id="AMD模块加载理解"><a href="#AMD模块加载理解" class="headerlink" title="AMD模块加载理解"></a>AMD模块加载理解</h1><p>看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 </p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="AMD模块加载理解"><a href="#AMD模块加载理解" class="headerlink" title="AMD模块加载理解"></a>AMD模块加载理解</h1><p>看了《JavaScript框架设计》一书中关于浏览器模块化加载的介绍，感觉讲解得不是很仔细，所以特地上github阅读书本作者–司徒正美开元的框架mass.js，希望通过阅读源码深入能够深入学习到AMD模块加载的原理。 </p>
 <p>先介绍浏览器AMD模块加载的规范和定义<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">主页面</div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./mass.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="comment">//require（依赖模块，回调函数，目录路径）</span></div><div class="line">        <span class="built_in">require</span>([<span class="string">'aaa'</span>,<span class="string">'bbb'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;&#125;,parentPath)</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">模块 aaa.js</div><div class="line">    //定义模块 define（模块名字，依赖模块，回调函数）</div><div class="line">    define(id?, dependencies?, factory);</div></pre></td></tr></table></figure></p>
 <p>可以看到使用者只需要在需要使用模块化加载的地方调用require即可加载经过define定义的模块。</p>
 <p>这时候有两个问题困惑着我：  </p>
@@ -277,39 +296,44 @@
 <li>由于每个模块加载一旦加载完成就会触发checkDeps，所以实际上不需要像数据劫持那样一直监视Deps的加载情况（因为只有两种状态，全部加载完成or没有加载完成）。</li>
 </ol>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/14/AMD模块加载理解/" data-id="cj0jliwvn0000usuh6ant80we" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AMD-模块/">AMD | 模块</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/12/vue双向数据绑定/">
-  <time datetime="2017-03-12T15:47:55.000Z">
-    2017-03-12
-  </time>
+    <article id="post-vue双向数据绑定" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/12/vue双向数据绑定/" class="article-date">
+  <time datetime="2017-03-12T15:47:55.000Z" itemprop="datePublished">2017-03-12</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/12/vue双向数据绑定/">vue双向数据绑定</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/12/vue双向数据绑定/">vue双向数据绑定</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <p> #Vue双向数据绑定<br> 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> #Vue双向数据绑定<br> 最近在学习vue源码，vue最核心的理念就是实现了MVVM模型下的视图层（view）与 视图模型层（ViewModel）的数据绑定。vue是通过三个步骤做到的</p>
 <ol>
 <li><p>监视数据变化<br>实现监视数据，马上就想到了使用ES5新增的Object.defineProperty()，使用这个接口能够方便的为对象中的各个属性定义一个setter和getter函数。每当对对象中的某个属性进行操作的时候，就会自动触发对应的setter或者getter函数  </p>
 <ol>
@@ -328,39 +352,44 @@
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">watcher.js</div><div class="line">   <span class="keyword">get</span>: function() &#123;</div><div class="line">       <span class="comment">//保存回调函数</span></div><div class="line">        Dep.target = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">var</span> value = <span class="keyword">this</span>.getVMVal();</div><div class="line">        Dep.target = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">return</span> value;</div><div class="line">    &#125;,</div><div class="line">     getVMVal: function() &#123;</div><div class="line">        <span class="keyword">var</span> exp = <span class="keyword">this</span>.exp.split(<span class="string">'.'</span>);</div><div class="line">        <span class="keyword">var</span> <span class="keyword">val</span> = <span class="keyword">this</span>.vm._data;</div><div class="line">        <span class="comment">//读取data中的属性并触发getter函数</span></div><div class="line">        exp.forEach(function(k) &#123;</div><div class="line">            <span class="keyword">val</span> = <span class="keyword">val</span>[k];</div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">val</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">oberver.js</div><div class="line"> defineReactive: <span class="function"><span class="keyword">function</span><span class="params">(data, key, val)</span> </span>&#123;</div><div class="line">        <span class="comment">//订阅者队列</span></div><div class="line">        <span class="keyword">var</span> dep = <span class="keyword">new</span> Dep();</div><div class="line">        <span class="keyword">var</span> childObj = observe(val);</div><div class="line"></div><div class="line">        Object.defineProperty(data, key, &#123;</div><div class="line">            enumerable: <span class="literal">true</span>, <span class="comment">// 可枚举</span></div><div class="line">            configurable: <span class="literal">false</span>, <span class="comment">// 不能再define</span></div><div class="line">            <span class="keyword">get</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="comment">//被触发时检测是否有新的depends需要注入</span></div><div class="line">                <span class="keyword">if</span> (Dep.target) &#123;</div><div class="line">                    dep.depend();</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">return</span> val;</div><div class="line">            &#125;,</div><div class="line">            <span class="keyword">set</span>: <span class="function"><span class="keyword">function</span><span class="params">(newVal)</span> </span>&#123;</div><div class="line">                <span class="keyword">if</span> (newVal === val) &#123;</div><div class="line">                    <span class="keyword">return</span>;</div><div class="line">                &#125;</div><div class="line">                val = newVal;</div><div class="line">                <span class="comment">// 新的值是object的话，进行监听</span></div><div class="line">                childObj = observe(newVal);</div><div class="line">                <span class="comment">// 通知订阅者</span></div><div class="line">                dep.notify();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/12/vue双向数据绑定/" data-id="cj0jliwxf000uusuhfx8dkelf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2017/03/08/UC实习面试/">
-  <time datetime="2017-03-08T08:05:36.000Z">
-    2017-03-08
-  </time>
+    <article id="post-UC实习面试" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/UC实习面试/" class="article-date">
+  <time datetime="2017-03-08T08:05:36.000Z" itemprop="datePublished">2017-03-08</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2017/03/08/UC实习面试/">UC实习面试</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/08/UC实习面试/">UC实习面试</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <h1 id="UC实习生面试"><a href="#UC实习生面试" class="headerlink" title="UC实习生面试"></a>UC实习生面试</h1><h4 id="下面将会分三个部分总结这次面试"><a href="#下面将会分三个部分总结这次面试" class="headerlink" title="下面将会分三个部分总结这次面试"></a>下面将会分三个部分总结这次面试</h4><ol>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="UC实习生面试"><a href="#UC实习生面试" class="headerlink" title="UC实习生面试"></a>UC实习生面试</h1><h4 id="下面将会分三个部分总结这次面试"><a href="#下面将会分三个部分总结这次面试" class="headerlink" title="下面将会分三个部分总结这次面试"></a>下面将会分三个部分总结这次面试</h4><ol>
 <li>准备面试</li>
 <li>面试过程</li>
 <li>总结经验</li>
@@ -463,39 +492,42 @@
 </code></pre><hr>
 <pre><code>历时2个半小时的面试到这里就结束了,这次面试暴露出自己深度不足的缺陷，同时缺乏对话题的导向作用。之前准备了的ES6，webpack，vue，设计模式等知识没有在面试中展现出来，而对于基础算法理解不够深入，不能够一下反应出答案。同时可以看出实习对时间要求高。因此，无论结果如何，这次面试就先当作积累经验吧。
 </code></pre>
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2017/03/08/UC实习面试/" data-id="cj0jliww70005usuhxh4ezt3a" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/10/10/《web之变》读书笔记/">
-  <time datetime="2016-10-10T15:55:37.000Z">
-    2016-10-10
-  </time>
+    <article id="post-《web之变》读书笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/10/《web之变》读书笔记/" class="article-date">
+  <time datetime="2016-10-10T15:55:37.000Z" itemprop="datePublished">2016-10-10</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2016/10/10/《web之变》读书笔记/">《web之变》读书笔记</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/10/《web之变》读书笔记/">《web之变》读书笔记</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <p>#rules</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#rules</p>
 <p>##浏览器内核种类</p>
 <p>###布局引擎<br>1.微软的Trident<br>    IE<br>2.基于开源项目的Webkit浏览器<br>    桌面端Safari、IOS端Safari、旧版Chrome、安卓默认浏览器、黑莓设备、微软收购前的诺基亚设备、<br>    PS3/4中的浏览器。<br>3.基于Blink开源项目的浏览器<br>    最新版本的chrome和opera的布局引擎<br>4.Mozilla的Gecko<br>    firefox的内核</p>
 <p>###Js解释引擎</p>
@@ -547,39 +579,44 @@
 <p>###通过flash降级<br>通过在video标签内不添加flash视频（object&gt;param+embed）同时给flashvars参数复制的方式将视频源传给Flash插件，<br>必要时对视频做格式转换，确保内容能在各种浏览器上正确播放。</p>
 <p>##注意存储与编码</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2016/10/10/《web之变》读书笔记/" data-id="cj0jliwxu0014usuho2yxdyob" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书笔记-html/">读书笔记 | html</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/07/19/effective-JS/">
-  <time datetime="2016-07-19T01:45:58.000Z">
-    2016-07-19
-  </time>
+    <article id="post-effective-JS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/19/effective-JS/" class="article-date">
+  <time datetime="2016-07-19T01:45:58.000Z" itemprop="datePublished">2016-07-19</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2016/07/19/effective-JS/">effective JS</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/19/effective-JS/">effective JS</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <p>#了解你使用的JS版本<br>1.确定你的应用程序支持JS的哪些版本。<br>2.确保你使用的任何Js的特性对于应用程序将要运行的所有环境都是支持的。<br>3.总是在执行严格模式检查的环境中测试严格代码。<br>4.当心链接那些在不同严格模式下有不同预期的脚本。</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#了解你使用的JS版本<br>1.确定你的应用程序支持JS的哪些版本。<br>2.确保你使用的任何Js的特性对于应用程序将要运行的所有环境都是支持的。<br>3.总是在执行严格模式检查的环境中测试严格代码。<br>4.当心链接那些在不同严格模式下有不同预期的脚本。</p>
 <p>#理解JS的浮点数<br>1.JS的数字都是双精度浮点数。<br>2.js中的证书仅仅是双精度浮点数的一个子集，而不是一个单独的数据类型。<br>3.位运算符将数字视为32位的有符号整数。<br>4.当心浮点运算中的精度陷阱。</p>
 <p>#当心隐式的强制类型转换<br>1.类型错误可能被隐式的强制转换所隐藏<br>2.重载的运算符+是进行加法运算还是字符串连接操作取决于其参数类型。<br>3.对象通过valueof方法强制转换为数字，通过toString方法强制转换为字符串。<br>4.对象通过valueOf方法强制转换为数字，通过toString方法强制转换为字符串。<br>5.具有valueOf方法的对象应该实现toString方法，返回一个valueOf方法产生的数字的字符串表示。<br>6.测试一个值是否为未定义的值,应该使用typeof或者与undefined进行比较而不是使用真值运算。</p>
 <p>#原始类型由于封装对象<br>1.当做相等比较时，原始类型的封装对象预期原是指行为不一样。<br>2.获取和设置原始类型值的属性会隐式地创建封装对象。</p>
@@ -661,39 +698,44 @@
 <p>#绝不要同步地调用异步的回调函数<br>1.即使可以立即得到数据，也绝不要同步地调用异步回调函数。<br>2.同步地调用异步的回调函数扰乱了预期的操作序列，并可能导致意想不到的交错代码。<br>3.同步第调用异步的回调函数可能导致栈溢出或错误地处理异常。<br>4.使用异步的API，比如setTimeOut函数来调度异步回调函数，时期运行于另一个回合。</p>
 <p>#使用Promise模式清洁异步逻辑<br>1.promise代表最终值，即并行操作完成时最终产生的结果。<br>2.使用promise组合不同的并行操作。<br>3.使用promise模式的API避免数据竞争。<br>4.在要求有意的竞争条件是使用select（也被称为choose）；</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2016/07/19/effective-JS/" data-id="cj0jliwwl000busuhkzpahssd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript-优化/">JavaScript | 优化</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/04/13/设计模式读后感/">
-  <time datetime="2016-04-13T15:04:38.000Z">
-    2016-04-13
-  </time>
+    <article id="post-设计模式读后感" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/13/设计模式读后感/" class="article-date">
+  <time datetime="2016-04-13T15:04:38.000Z" itemprop="datePublished">2016-04-13</time>
 </a>
     
+  </div>
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
   
-    <h1 class="title"><a href="/2016/04/13/设计模式读后感/">设计模式读后感</a></h1>
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/13/设计模式读后感/">设计模式读后感</a>
+    </h1>
   
 
-  </header>
-  
-  <div class="entry">
+      </header>
     
-      <p>#“组合优于继承！！！”</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#“组合优于继承！！！”</p>
 <p>##Facade（门面）模式：<br>意图：希望简化原有系统的使用方式。需要定义自己的借口。<br>问题：只需要使用某个复杂系统的子集，或者需要以一种特殊的方式与系统交互。<br>解决方案： facade为原有系统的客户提供了一个新的接口。<br>参与者与协作者：为客户提供的一个简化接口，使系统更容易使用。<br>效果：facade模式简化了对象所需子系统的使用过程。但是，由于facade并不完整，因此客户可能无法使用某些功能。<br>实现： 定义一个或多个具备所需接口的新类。<br>      让新的类使用原有的系统。<br>感悟：就是把原先的多个接口所返回的数据用一个新的类包装起来，在新类中可以对这些数据进行整合。使其能够被更方便的运用。</p>
 <hr>
 <p>##Adapter（适配者）模式：<br>意图：是控制范围外的一个原有对象与某个接口匹配。<br>问题：系统的数据和行为都正确，单接口不服。通常用于必须从抽象类派生时。<br>解决方案：Adapter模式提供了具有所需接口的包装类。<br>参与者与协作者：Adapter改变了Adaptee的接口，使Adaptee与Adapter的基础类型Target匹配。<br>这样用户就可以使用Adaptee了，好像它是Target类型。<br>效果：Adapter模式使原有对象能够适应新的类结构，不受其接口的限制。<br>实现：将原有的类包含在另一个类之中。让曝韩磊与需要的接口匹配，调用被包容类的方法。<br>感悟：就是原有的接口所返回的数据可能是有冗余或者格式不符合使用者的要求，这时候就需要建立一个中间层，来把这些数据进行适当的转换。</p>
@@ -706,90 +748,160 @@
 <hr>
 <p>##Decorator 模式<br>意图 动态地给一个对象添加职责<br>问题 要使用的对象将执行所需的基本功能。 但是，可能需要为这个对象将添加某些功能，这些附加功能可能发生在对象的基础功能之前或之后<br>。<br>解决方案 可以无需创建子类，而扩展一个对象的功能<br>参与者与协作者 concreteComonent让Decorator对形象为自己添加功能。有时候用ConcreteComonent的爱生类提供核心功能，在这种情况加ConcreteComonent累就不再是具体的，而是抽象的，comonentlei<br>comonent类定义了在所有这些类所使用的接口。<br>效果 所添加的功能放在小对象中。好处是可以在concretecomonent对象的功能之前或之后动态添加功能。单对象连总是终与concretecomonent对象。<br>实现 创建一个抽象类来表示原类喝药要添加到这个类的新功能。在装饰类中，将对新功能的调用放在对紧随其后对象的之后，以获得正确的顺序。</p>
 
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2016/04/13/设计模式读后感/" data-id="cj0jliwyv001yusuhh3wc36c0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+    </footer>
   </div>
-  <footer class="end-sep">
-    
-      
-      
-    
-    <div class="clearfix"></div>
-  </footer>
+  
 </article>
 
 
   
-    <article class="post">
-  <header>
-    
-      <div class="icon"></div>
-      <a href="/2016/03/18/div居中技巧/">
-  <time datetime="2016-03-17T16:22:32.000Z">
-    2016-03-18
-  </time>
+    <article id="post-div居中技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/18/div居中技巧/" class="article-date">
+  <time datetime="2016-03-17T16:22:32.000Z" itemprop="datePublished">2016-03-18</time>
 </a>
     
-    
-  
-    <h1 class="title"><a href="/2016/03/18/div居中技巧/">元素居中技巧</a></h1>
-  
-
-  </header>
-  
-  <div class="entry">
-    
-      <p>首先先提供一个有趣的工具，这个工具能够很容易生成各种元素的居中代码。<br><a href="http://howtocenterincss.com/#contentType=text&amp;horizontal=center&amp;vertical=middle&amp;browser.IE=none" target="_blank" rel="external">http://howtocenterincss.com/#contentType=text&amp;horizontal=center&amp;vertical=middle&amp;browser.IE=none</a></p>
-
-    
   </div>
-  <footer class="end-sep">
+  <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/div居中技巧/">元素居中技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先先提供一个有趣的工具，这个工具能够很容易生成各种元素的居中代码。<br><a href="http://howtocenterincss.com/#contentType=text&amp;horizontal=center&amp;vertical=middle&amp;browser.IE=none" target="_blank" rel="external">http://howtocenterincss.com/#contentType=text&amp;horizontal=center&amp;vertical=middle&amp;browser.IE=none</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kyjo2014.github.com/2016/03/18/div居中技巧/" data-id="cj0jliwwh0009usuhjglmltzt" class="article-share-link">Share</a>
       
       
-    
-    <div class="clearfix"></div>
-  </footer>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-居中/">CSS|居中</a></li></ul>
+
+    </footer>
+  </div>
+  
 </article>
 
 
   
-
-  <nav id="pagination">
   
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
-    <a href="/page/2/" class="next">下一页</a>
+</section>
+        
+          <aside id="sidebar">
   
-  <div class="clearfix"></div>
-</nav>
-
-</div>
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD-模块/">AMD | 模块</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-居中/">CSS|居中</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5/">HTML5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-canvas/">HTML5|canvas</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML5-语义化/">HTML5|语义化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript-优化/">JavaScript | 优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css-页面/">css|页面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug-浏览器/">debug|浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-博客/">github|博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery-javascript/">jquery|javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualdom/">virtualdom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue源码/">vue源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web安全/">web安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客-node-js/">博客|node.js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书笔记-html/">读书笔记 | html</a><span class="tag-list-count">1</span></li></ul>
+    </div>
   </div>
-  <footer id="footer"><div class="copyright">
+
   
-  &copy; 2017 <a href="/">kyjo2014</a>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AMD-模块/" style="font-size: 10px;">AMD | 模块</a> <a href="/tags/CSS-居中/" style="font-size: 10px;">CSS|居中</a> <a href="/tags/HTML5/" style="font-size: 10px;">HTML5</a> <a href="/tags/HTML5-canvas/" style="font-size: 20px;">HTML5|canvas</a> <a href="/tags/HTML5-语义化/" style="font-size: 10px;">HTML5|语义化</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/JavaScript-优化/" style="font-size: 10px;">JavaScript | 优化</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css-页面/" style="font-size: 10px;">css|页面</a> <a href="/tags/debug-浏览器/" style="font-size: 10px;">debug|浏览器</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/github-博客/" style="font-size: 10px;">github|博客</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/javaScript-lazyman/" style="font-size: 10px;">javaScript | lazyman</a> <a href="/tags/jquery-javascript/" style="font-size: 10px;">jquery|javascript</a> <a href="/tags/virtualdom/" style="font-size: 10px;">virtualdom</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/vue源码/" style="font-size: 10px;">vue源码</a> <a href="/tags/web安全/" style="font-size: 10px;">web安全</a> <a href="/tags/博客-node-js/" style="font-size: 10px;">博客|node.js</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/读书笔记-html/" style="font-size: 10px;">读书笔记 | html</a>
+    </div>
+  </div>
+
   
-</div>
-<div class="theme-copyright">
-  Theme by <a href="https://github.com/orderedlist" target="_blank">orderedlist</a>
-   | 
-  Redesign by <a href="http://heroicyang.com/" target="_blank">Heroic Yang</a>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-<script src="/js/scale.fix.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/19/snabbdom的virtual-dom/">snabbdom的virtual dom</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/16/如何实现lazyman/">如何实现lazyman</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/15/web安全漏洞/">web安全漏洞</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/14/AMD模块加载理解/">AMD模块加载理解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/12/vue双向数据绑定/">vue双向数据绑定</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 kyjo2014<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-  (function($){
-    $('.fancybox').fancybox();
-  })(jQuery);
-</script>
+<script src="/js/script.js"></script>
 
+  </div>
 </body>
 </html>
