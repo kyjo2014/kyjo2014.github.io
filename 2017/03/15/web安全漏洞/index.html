@@ -480,6 +480,9 @@
 <p>针对富文本的特殊性，我们可以使用XSS规则引擎对用户输入进行编码过滤，只允许用户输入安全的HTML标签，如\<b\>, \<i\>, \<p\>等，对其他数据进行HTML编码。需要注意的是，经过规则引擎编码过滤后的内容只能放在\<div\>, \<p\>等安全的HTML标签里，不要放到HTML标签的属性值里，更不要放到HTML事件处理属性里，或者放到\<script\> 标签里。</script\></p\></div\></p\></i\></b\></p>
 <h2 id="2-csrf"><a href="#2-csrf" class="headerlink" title="2. csrf"></a>2. csrf</h2><p>flash在跨域时唯一的限制策略就是crossdomain.xml文件，该文件限制了flash是否可以跨域读写数据以及允许从什么地方跨域读写数据。</p>
 <p>位于www.a.com域中的SWF文件要访问www.b.com的文件时，SWF首先会检查www.b.com服务器目录下是否有crossdomain.xml文件，如果没有，则访问不成功；若crossdomain.xml文件存在，且里边设置了允许www.a.com域访问，那么通信正常。所以要使Flash可以跨域传输数据，其关键就是crossdomain.xml。</p>
+<p>自flash 10以后，如有跨域访问需求，必须在目标域的根目录下放置crossdomain.xml文件，且该根目录下的配置文件称为“主策略文件”。若不存在主策略文件，则该域将禁止任何第三方域的flash跨域请求。</p>
+<p>主策略文件对全站的跨域访问起控制作用。</p>
+<p>也可以单独在某路径下放置仅对该路径及其子路径生效的crossdomain.xml配置文件，这需要在flash的AS脚本中使用如下语句来加载该配置文件：[具体的加载权限限制，将受后文中site-control策略的影响]</p>
 
     
 
