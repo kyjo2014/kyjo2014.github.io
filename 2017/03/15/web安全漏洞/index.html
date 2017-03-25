@@ -483,6 +483,13 @@
 <p>自flash 10以后，如有跨域访问需求，必须在目标域的根目录下放置crossdomain.xml文件，且该根目录下的配置文件称为“主策略文件”。若不存在主策略文件，则该域将禁止任何第三方域的flash跨域请求。</p>
 <p>主策略文件对全站的跨域访问起控制作用。</p>
 <p>也可以单独在某路径下放置仅对该路径及其子路径生效的crossdomain.xml配置文件，这需要在flash的AS脚本中使用如下语句来加载该配置文件：[具体的加载权限限制，将受后文中site-control策略的影响]</p>
+<p>crossdomain.xml需严格遵守XML语法，有且仅有一个根节点cross-domain-policy，且不包含任何属性。在此根节点下只能包含如下的子节点：site-control、allow-access-from、allow-access-from-identity、allow-http-request-headers-from。下面将分别介绍这四个子节点：<br>2.2.1site-control：通过检查该节点的属性值，确认是否可以允许加载其他策略文件。[如果该策略文件并非主策略文件，则此节点被自动忽略]</p>
+<p>每个site-control标签有且仅有属性permitted-cross-domain-policies，该属性指定相对于非主策略文件的其他策略文件的加载策略。permitted-cross-domain-policies属性值有如下情况：</p>
+<p>none: 不允许使用loadPolicyFile方法加载任何策略文件，包括此主策略文件。</p>
+<p>master-only: 只允许使用主策略文件[默认值]。</p>
+<p>by-content-type:只允许使用loadPolicyFile方法加载HTTP/HTTPS协议下Content-Type 为text/x-cross-domain-policy的文件作为跨域策略文件。</p>
+<p>by-ftp-filename:只允许使用loadPolicyFile方法加载FTP协议下文件名为       crossdomain.xml的文件作为跨域策略文件。</p>
+<p>all: 可使用loadPolicyFile方法加载目标域上的任何文件作为跨域策略文件，甚至是一 个JPG也可被加载为策略文件！[使用此选项那就等着被xx吧！]</p>
 
     
 
