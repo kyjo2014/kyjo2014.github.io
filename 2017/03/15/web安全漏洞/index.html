@@ -490,6 +490,16 @@
 <p>by-content-type:只允许使用loadPolicyFile方法加载HTTP/HTTPS协议下Content-Type 为text/x-cross-domain-policy的文件作为跨域策略文件。</p>
 <p>by-ftp-filename:只允许使用loadPolicyFile方法加载FTP协议下文件名为       crossdomain.xml的文件作为跨域策略文件。</p>
 <p>all: 可使用loadPolicyFile方法加载目标域上的任何文件作为跨域策略文件，甚至是一 个JPG也可被加载为策略文件！[使用此选项那就等着被xx吧！]</p>
+<p>llow-access-from：通过检查该节点的属性值，确认能够读取本域内容的flash文件来源域。</p>
+<p>allow-access-from标签有三个属性：</p>
+<p>·domain：该属性指定一个确切的 IP 地址、一个确切的域或一个通配符域（任何域）。只有domain中指定的域，才有权限通过flash读取本域中的内容。</p>
+<p>可采用下列两种方式之一来表示通配符域：</p>
+<p>1）单个星号（<em>），如：&lt;allow-access-fromdomain=”</em>“ /&gt;，表示匹配所有域和所有IP 地     址，此时任何域均可跨域访问本域上的内容。[这是极不安全的！]</p>
+<p>2）后接后缀的星号，表示只匹配那些以指定后缀结尾的域，如<em>.qq.com可匹配            game.qq.com、qq.com。形如www.q</em>.com或www.qq.*的为无效配置。</p>
+<p>Tips：当domain被指定为IP地址时，只接受使用该IP作为网址来访问的来源请求[此时ip地址也就相当于一个域名而已]，如domain被设置为192.168.1.100时，使用<a href="http://192.168.1.100/flash.swf" target="_blank" rel="external">http://192.168.1.100/flash.swf</a> 来请求该域内容是允许的，但是使用指向192.168.1.100的域名www.a.com来访问时[<a href="http://www.a.com/flash.swf]将会被拒绝，因为flash不懂得dns解析：）" target="_blank" rel="external">http://www.a.com/flash.swf]将会被拒绝，因为flash不懂得dns解析：）</a></p>
+<p>·to-ports：该属性值表明允许访问读取本域内容的socket连接端口范围。可使用to-ports=”1100,1120-1125”这样的形式来限定端口范围，也可使用通配符（*）表示允许所有端口。</p>
+<p>·secure：该属性值指明信息是否经加密传输。当crossdomain.xml文件使用https加载时，secure默认设为true。此时将不允许flash传输非https加密内容。若手工设置为false则允许flash传输非https加密内容。</p>
+<p>下面的例子配置为允许所有qq.com下的所有二级域名[包括qq.com本身]通过https访问本域中的内容。 </p>
 
     
 
