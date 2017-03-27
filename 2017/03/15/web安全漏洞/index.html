@@ -500,6 +500,12 @@
 <p>·to-ports：该属性值表明允许访问读取本域内容的socket连接端口范围。可使用to-ports=”1100,1120-1125”这样的形式来限定端口范围，也可使用通配符（*）表示允许所有端口。</p>
 <p>·secure：该属性值指明信息是否经加密传输。当crossdomain.xml文件使用https加载时，secure默认设为true。此时将不允许flash传输非https加密内容。若手工设置为false则允许flash传输非https加密内容。</p>
 <p>下面的例子配置为允许所有qq.com下的所有二级域名[包括qq.com本身]通过https访问本域中的内容。 </p>
+<p>allow-http-request-headers-from：此节点授权第三方域flash向本域发送用户定义的http头。</p>
+<p>allow-access-from节点授权第三域提取本域中的数据，而 allow-http-request-headers-from 节点授权第三方域将数据以http头的形式发送到本域中。[简而言之，allow-access-from是控制读取权限，allow-http-request-headers-from是控制以http头形式的写入权限]</p>
+<p>allow-http-request-headers-from包含三个属性：</p>
+<p>·domain：作用及参数格式与allow-access-from节点中的domain类似。</p>
+<p>·headers：以逗号隔开的列表，表明允许发送的http头。可用通配符（*）表示全部    http头。</p>
+<p>·secure：作用及用法与allow-access-from节点中的secure相同。</p>
 
     
 
