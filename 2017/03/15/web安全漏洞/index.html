@@ -478,7 +478,11 @@
 <p>2) 不要对整个URL进行编码，因为不可信数据可能会被插入到href, src或者其他以URL为基础的属性里，这时需要对数据的起始部分的协议字段进行验证，否则攻击者可以改变URL的协议，例如从HTTP协议改为DATA伪协议，或者javascript伪协议。</p>
 <h3 id="7-使用富文本时，使用XSS规则引擎进行编码过滤"><a href="#7-使用富文本时，使用XSS规则引擎进行编码过滤" class="headerlink" title="7. 使用富文本时，使用XSS规则引擎进行编码过滤"></a>7. 使用富文本时，使用XSS规则引擎进行编码过滤</h3><p>Web应用一般都会提供用户输入富文本信息的功能，比如BBS发帖，写博客文章等，用户提交的富文本信息里往往包含了HTML标签，甚至是 JavaScript脚本，如果不对其进行适当的编码过滤的话，则会形成XSS漏洞。但我们又不能因为害怕产生XSS漏洞，所以就不允许用户输入富文本， 这样对用户体验伤害很大。</p>
 <p>针对富文本的特殊性，我们可以使用XSS规则引擎对用户输入进行编码过滤，只允许用户输入安全的HTML标签，如\<b\>, \<i\>, \<p\>等，对其他数据进行HTML编码。需要注意的是，经过规则引擎编码过滤后的内容只能放在\<div\>, \<p\>等安全的HTML标签里，不要放到HTML标签的属性值里，更不要放到HTML事件处理属性里，或者放到\<script\> 标签里。</script\></p\></div\></p\></i\></b\></p>
-<h2 id="2-csrf"><a href="#2-csrf" class="headerlink" title="2. csrf"></a>2. csrf</h2><p>flash在跨域时唯一的限制策略就是crossdomain.xml文件，该文件限制了flash是否可以跨域读写数据以及允许从什么地方跨域读写数据。</p>
+<h2 id="2-csrf"><a href="#2-csrf" class="headerlink" title="2. csrf"></a>2. csrf</h2><p><em>之前在阿里面试的时候，这个问题被面试官问得哑口无言，特别回来总结一波</em></p>
+<blockquote>
+<p>CSRF的全名是Cross site RequestForgery,翻译成中文就是跨站点请求伪造。是一种常见的web攻击方式。</p>
+</blockquote>
+<p>与前面介绍的“跨站脚本攻击”（XSS）有关，当时在《白帽子》一书中讲述了一个“删除搜狐博客文章”的例子，当时是使用了一个攻击链接，但仍需要用户是处于自己正常登录的博客页面当中才能进行攻击。而进行csrf攻击的话是根本不需要用户保持上述的状态。即使用户在攻击者提供的虚假页面上，也能对“搜狐博客”进行攻击。<br>flash在跨域时唯一的限制策略就是crossdomain.xml文件，该文件限制了flash是否可以跨域读写数据以及允许从什么地方跨域读写数据。</p>
 <p>位于www.a.com域中的SWF文件要访问www.b.com的文件时，SWF首先会检查www.b.com服务器目录下是否有crossdomain.xml文件，如果没有，则访问不成功；若crossdomain.xml文件存在，且里边设置了允许www.a.com域访问，那么通信正常。所以要使Flash可以跨域传输数据，其关键就是crossdomain.xml。</p>
 <p>自flash 10以后，如有跨域访问需求，必须在目标域的根目录下放置crossdomain.xml文件，且该根目录下的配置文件称为“主策略文件”。若不存在主策略文件，则该域将禁止任何第三方域的flash跨域请求。</p>
 <p>主策略文件对全站的跨域访问起控制作用。</p>
@@ -639,7 +643,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">10</span></a>
+                <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">10</span></a>
             </ul>
         </li>
         
