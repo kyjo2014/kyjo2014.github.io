@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HTML基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">HTML基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-DOCTYPE的作用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. DOCTYPE的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-XHTML和HTML的区别"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. XHTML和HTML的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-HTML5设计思想"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. HTML5设计思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-语义化"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 语义化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-选择器权重"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1. 选择器权重</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-属性继承"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">2. 属性继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-安全字体"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">3. 安全字体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-杂项"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">4. 杂项</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HTML基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">HTML基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-DOCTYPE的作用"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. DOCTYPE的作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-XHTML和HTML的区别"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. XHTML和HTML的区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-HTML5设计思想"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. HTML5设计思想</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-语义化"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. 语义化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-选择器权重"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">1. 选择器权重</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-属性继承"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">2. 属性继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-安全字体"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">3. 安全字体</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-杂项"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">4. 杂项</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#定位模型"><span class="post-toc-number">2.</span> <span class="post-toc-text">定位模型</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -424,7 +424,12 @@
 <li>BFC内部margin折叠的问题可以用BFC解决，因为BFC之间不会有margin折叠的问题</li>
 <li>zoom：1生成layout（IE）</li>
 </ol>
-<p>IFC：<br>了解： line-height是两行的baseLine的间距<br>vertical-align 对其line-box的基准线默认是baseline对齐<br>不同元素的基线位置不一</p>
+<p>IFC：<br>了解： line-height是两行的baseLine的间距<br>vertical-align 对其line-box的基准线默认是baseline对齐<br>不同元素的基线位置不一,所以如果行内元素图片有出现外面包裹的div大于图片的高度。是因为图片默认的对齐基线<br>是baseline，而下面还有bottomline。而图片的base line是底边</p>
+<h1 id="定位模型"><a href="#定位模型" class="headerlink" title="定位模型"></a>定位模型</h1><p>定位可以用绝对定位确定基点在使用margin来进行微调。  </p>
+<p>定位的默认值是原来所处位置</p>
+<p>z-index的值越大不一定月上，要看堆叠上下文（renderlayer层） （机非兄弟元素不可直接用z-index进行比较）</p>
+<p>了解绘制顺序（ppt） </p>
+<p>object-fit属性，让img/video标签也能像background：contain那样保持宽高比。<br>新属性： tranclate3D will-change 可以启动GPU硬件加速，硬件加速的有时是使（layout-&gt;paint-&gt;composite）<br>只需要做最后一步的合成，而不需要做前面的重排和重绘。</p>
 
     
 
