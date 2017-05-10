@@ -381,6 +381,40 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><ol>
+<li><p>initShaders(gl,vertexShaderId,fragmentShaderId) <strong>这是经过封装后的api</strong><br>`<br> function initShaders(gl,vertexShaderId,fragmentShaderId) {</p>
+<pre><code>var vertShdr;
+var fragShdr;
+var vertElem = document.getElementById(vertexShaderId);
+if(!vertElem) {
+    alert(&quot;Unable toload vertex shader&quot; + vertexShaderId)
+    return -1
+}
+else {
+    vertShdr = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertShdr,vertElem.text)
+    gl.compileShader(vertShdr)
+    if(!gl.getShaderParameter(vertShdr,gl.COMPILE_STATUS)){
+        var msg = &quot;Vertex shader failed tocompile&quot;
+        return -1
+    }
+
+}
+var fragElem = document.getElementById(fragmentShaderId)
+if(!fragElem) {
+    return -1
+} else {
+    fragShdr = gl.createShader(gl.FRAGMENT_SHADER)
+    gl.shaderSource(fragShdr,fragElem.text)
+    gl.compileShader(fragShdr)
+
+}
+var program = gl.createProgram()
+gl.attachShader(program,vertShdr)
+gl.attachShader(program,fragShdr)
+gl.linkProgram(program)
+return program
+</code></pre><p> }<br>`</p>
+</li>
 <li>vec4</li>
 <li>drawArrays(mode,first,count)<br>参数： <em>mode</em> 指定绘制的方式，可接收以下常量符号: gl.POINTS,gl.LINES,gl.LINE_STRIP,gl.LINE_LOOP,gl.TRIANGLES,gl.TRIANGLE_STRIP,gl.TRIANGLE_FAN<br><em>first</em> 指定从哪个顶点开始绘制（整型数）<br><em>count</em> 指定绘制需要用到多少个顶点（整形数）<br>返回值 无<br>错误　 INVBALID_ENUM 传入的mode参数不是前述参数之一<br>  INVALID_VALUE 参数first或count 是负数</li>
 <li>getAttribLocation(program, name)<br>获取由name参数指定的attribute变量的存储地址<br>参数 program 指定包含定点着色器和片元着色器的着色器程序对象<br>name 指定想要获取其存储地址的attribute 变量的名称<br>返回值 大于等于0 attribute变量的存储地址<br>   -1 指定的attribute变量不存在，或者其命名具有gl_或者webgl_前缀<br>错误 INVALID_OPERATION 程序对象未能成功连接<br> INVALID_VALUE name参数的长度大于attribute变量名的最大长度(默认为256字节)</li>
