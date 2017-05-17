@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.</span> <span class="post-toc-text">API</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#着色器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">着色器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定点着色器"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">定点着色器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#片元着色器"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">片元着色器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webGL坐标系统"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">webGL坐标系统</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.</span> <span class="post-toc-text">API</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#着色器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">着色器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定点着色器"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">定点着色器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#片元着色器"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">片元着色器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webGL坐标系统"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">webGL坐标系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Three-js学习"><span class="post-toc-number">3.</span> <span class="post-toc-text">Three.js学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">概念：</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -431,6 +431,13 @@ return program
         &#39;   gl_FRagColor = vec4(1.0,0.0,0.0,1.0);\n&#39; + 
         &#39;}\n&#39;;</code></p>
 <h2 id="webGL坐标系统"><a href="#webGL坐标系统" class="headerlink" title="webGL坐标系统"></a>webGL坐标系统</h2><p>以绘图区域中心为坐标原点的右手坐标系，垂直屏幕向外的是坐标系的Z轴正方向。与canvas的坐标系不一样，canvas是以绘图区域的左上角为坐标原点，y轴正方向是向下的。</p>
+<hr>
+<h1 id="Three-js学习"><a href="#Three-js学习" class="headerlink" title="Three.js学习"></a>Three.js学习</h1><h2 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h2><ol>
+<li>scence(场景)</li>
+<li>camera(相机)</li>
+<li>renderer(渲染器)  </li>
+</ol>
+<p>Scence: 一个容器，用来保存并跟踪所有我们想渲染的物体。一般不会涉及到很复杂的操作，只需要在程序最开始的时候进行初始化即可。</p>
 
     
 
