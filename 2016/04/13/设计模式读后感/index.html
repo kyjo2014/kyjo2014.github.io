@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建型设计模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">创建型设计模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单工厂模式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">简单工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工厂方法模式"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">工厂方法模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#抽象工厂模式"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">抽象工厂模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建造者模式"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">建造者模式</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -392,6 +392,60 @@
 <p>##Abstract Factory模式<br>意图 需要为特定的客户（或情况 提供对象组。<br>问题 需要实例化一组相关的对象<br>解决方案 协调对象组的创建。提供一种方式，将如何执行对象实例化的规则从使用这些对象的客户对象提取出来。<br>参与者与协作者 AbstractFactory为如何创建对象组的每个成员定义接口。一般每个组都有独立的ConcreteFactory 进行创建。<br>效果 这个模式将 使用哪些对象 的规则与 如何使用这些对象 的逻辑分离开来。<br>实现 定义一个抽象类来制定创建那些对象。然后为每个组实现一个具体类。可以用表或文件完成同样的任务。</p>
 <hr>
 <p>##Decorator 模式<br>意图 动态地给一个对象添加职责<br>问题 要使用的对象将执行所需的基本功能。 但是，可能需要为这个对象将添加某些功能，这些附加功能可能发生在对象的基础功能之前或之后<br>。<br>解决方案 可以无需创建子类，而扩展一个对象的功能<br>参与者与协作者 concreteComonent让Decorator对形象为自己添加功能。有时候用ConcreteComonent的爱生类提供核心功能，在这种情况加ConcreteComonent累就不再是具体的，而是抽象的，comonentlei<br>comonent类定义了在所有这些类所使用的接口。<br>效果 所添加的功能放在小对象中。好处是可以在concretecomonent对象的功能之前或之后动态添加功能。单对象连总是终与concretecomonent对象。<br>实现 创建一个抽象类来表示原类喝药要添加到这个类的新功能。在装饰类中，将对新功能的调用放在对紧随其后对象的之后，以获得正确的顺序。</p>
+<hr>
+<p><strong>下列内容来自《JavaScript设计模式》</strong></p>
+<h2 id="创建型设计模式"><a href="#创建型设计模式" class="headerlink" title="创建型设计模式"></a>创建型设计模式</h2><ol>
+<li>简单工厂模式</li>
+<li>工厂方法模式</li>
+<li>抽象工厂模式</li>
+<li>建造者模式</li>
+<li>原型模式</li>
+<li>单例模式</li>
+</ol>
+<h3 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h3><p>原理： 有一个工厂对象决定创建某种产品对象类的实例。<br>用途： 主要用来创建同一类对象。<br>代码：<br><code>function (类名) {
+            switch (类名) {
+                  case 
+                        return 对应类的实例
+            }
+      }</code><br>注意： 因为工厂生产出来的是一系列的类，所以可以把新类的共同部分抽取出来，<br>把不同部分以参数形式传进去。</p>
+<h3 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h3><p>原理： 通过对产品类的抽象使其创建业务主要负责用于创建<em>多类（不同系列）</em>产品的实例。返回的是对应不同类的工厂函数<br>代码：<br><code>var Factory = function (type,content) {
+            if(this instance of Factory) {
+                  var s = new this[type](content)
+                  return s
+            }else {
+                  return new Factory(type,content)
+            }
+      }</code><br>在工厂原型中设置基类：<br><code>Factory.prototype = {
+      Java: function (content) {
+            ...
+      },
+      JS: function (content) {
+            ...
+      }
+}</code><br>注意： 与简单工厂的区别在于，基类是放在工厂的原型当中，所以工厂不需要再用switch而直接使用<br>this[type]查找即可。<br>优点： 以后添加基类只需要在原型上添加（修改一处）而简单工厂需要写多一个基类+在switch中添加case<br>（修改两处）</p>
+<h3 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h3><p>原理： 通过对类的工厂抽象使其业务用于对产品类的创建，而不负责创建实例。<br>描述： 基类提供接口名和提示接口”未实现”。工厂方法通过直接添加属性的方式,直接让基类作为工厂方法的属性。<br>而工厂函数内部实际行为是使用寄生式继承，让父类方法添加到子类上，这时如果子类未将父类（接口类）中的接口实现<br>（覆盖）那么实例使用时就会提醒用户。<br>优点： 对抽象工厂添加抽象类是直接放在工厂函数的属性当中，所以不用生成父类实例。<br>注意： 接口类要有一个属性，描述自己的种类！<br>代码：<br>`<br>      var vechicleFactory = function (subType,superType) {<br>            if(typeof VechicleFactory[superType] === ‘function’) {<br>                  function F() {}<br>                        F.prototype = new VechicleFactory<a href="">subperType</a><br>                        subType.constructor = subType<br>                        subType.prototype = new F()</p>
+<pre><code>      } else {
+            throw new Error(&apos;未创建抽象类&apos;)
+      }
+
+}
+VechicleFactroy.car = function（） {
+</code></pre><p> //抽象类型           this.type = ‘car’<br>      }<br>`<br>总结： 简单工厂生成实例，工厂方法生成多类对象，抽象工厂生成有接口的子类</p>
+<h3 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h3><p>原理： 将一个复杂对象的构建层与其表示层相互分离，同样的构建过程可以采用不同的表示。（即把多个类的内容合并为一个类）<br>目的： 也与工厂模式一样关注产出。但同时也关注创建对象的过程。<br>代码：<br>`<br>      var human = function () {</p>
+<pre><code>}//类1
+var user = function () {
+
+}//类2
+var check  = function (){
+
+}//类3
+var worker = function (name) {
+      var person = new Person(name)
+      person.check = new check()
+      ...
+      return person
+}
+</code></pre><p>`<br>因此：不单能控制结果中的数据还能控制结果中应该有哪些属性。</p>
 
     
 
