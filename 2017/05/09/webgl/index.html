@@ -454,7 +454,17 @@ return program
 </ol>
 <p>生成几何体：</p>
 <ol>
-<li>可以用于定义函数生成预设的几何体，<br>如: 立方体（cubegeometry），平面（planeGeometry）等</li>
+<li><p>可以用于定义函数生成预设的几何体，<br>如: 立方体（cubegeometry），平面（planeGeometry）等<br><strong>留意参数中的detail</strong></p>
+</li>
+<li><p>自定义几何体</p>
+</li>
+<li>先指定几何体的顶点<br><code>var vertis = [new THREE.vector(1,3,1)...]</code></li>
+<li>再以顶点顺序标定表面<br><code>new THREE.FACE3(0,2,1)//数字是顶点序号</code></li>
+<li>生成自定义”空”几何体（无任何数据）<br><code>geo = new THREE.Geometryc</code></li>
+<li>把顶点和表面作为属性传入对象<br><code>geo.vertices = vertices
+ geo.faces = faces</code></li>
+<li>调用对象进行几何体生成（计算重心）<br><code>geo.compute(entroidsc)</code></li>
+<li>顶点合并<br><code>geo.mergeverticese()</code></li>
 </ol>
 
     
