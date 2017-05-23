@@ -397,7 +397,26 @@
 <li>流程</li>
 <li>兼容性和细节<br>从5-6步骤需要考虑功能，效率，性能，扩展性  </li>
 </ol>
-<h2 id="技术选型："><a href="#技术选型：" class="headerlink" title="技术选型："></a>技术选型：</h2>
+<h2 id="技术选型："><a href="#技术选型：" class="headerlink" title="技术选型："></a>技术选型：</h2><ol>
+<li>DOM<br>优点：定位容易<br>缺点: 不容易画斜线  </li>
+<li>canvas<br>优点: 容易画斜线<br>缺点：渲染效率要优化，需要坐标换算。</li>
+</ol>
+<p>注意：用translate + scale 实现视网膜绘图更清晰。  </p>
+<ol>
+<li><p>SVG<br>优点： 绘图效率高而且可以不做坐标转换<br>缺点： 原生JSAPI少用库可以解决，手机不支持SVG  </p>
+</li>
+<li><p>结构，数据，api设计</p>
+<ol>
+<li>考虑需求变更时不用修改组件<br>分成三层<br>圆点-&gt;就轨迹-&gt;新的未完成的轨迹<br>理由：  </li>
+</ol>
+</li>
+<li>小圆点要盖住线  </li>
+<li>减少对canvas的清空面积  </li>
+<li>touchend要在document，因为用户会把手指移除canvas  </li>
+</ol>
+<p>行为： 切面方式暴露API给用户看update中的before…和after…实现开闭原则（拓展开放，封闭修改）（最重要）！！！</p>
+<p>用async await 来拆分原来同步的各个阶段用来方便暴露接口给用户，减少时间的耦合度。自定义事件，状态机可以代替async await</p>
+
     
 
     
