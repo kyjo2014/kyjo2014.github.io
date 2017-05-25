@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.</span> <span class="post-toc-text">API</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#着色器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">着色器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定点着色器"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">定点着色器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#片元着色器"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">片元着色器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webGL坐标系统"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">webGL坐标系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Three-js学习"><span class="post-toc-number">3.</span> <span class="post-toc-text">Three.js学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">概念：</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#API"><span class="post-toc-number">1.</span> <span class="post-toc-text">API</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.</span> <span class="post-toc-text">概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#着色器"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">着色器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定点着色器"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">定点着色器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#片元着色器"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">片元着色器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#webGL坐标系统"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">webGL坐标系统</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Three-js学习"><span class="post-toc-number">3.</span> <span class="post-toc-text">Three.js学习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概念："><span class="post-toc-number">3.1.</span> <span class="post-toc-text">概念：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#场景："><span class="post-toc-number">3.1.0.1.</span> <span class="post-toc-text">场景：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#相机"><span class="post-toc-number">3.1.0.2.</span> <span class="post-toc-text">相机</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#渲染器"><span class="post-toc-number">3.1.0.3.</span> <span class="post-toc-text">渲染器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#几何体"><span class="post-toc-number">3.1.1.</span> <span class="post-toc-text">几何体</span></a></li></ol></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -437,12 +437,7 @@ return program
 <li>camera(相机)</li>
 <li>renderer(渲染器)  </li>
 </ol>
-<p>Scence: 一个容器，用来保存并跟踪所有我们想渲染的物体。一般不会涉及到很复杂的操作，只需要在程序最开始的时候进行初始化即可。<br>camera: webgl和three.js都是使用右手坐标系的，坐标原点在canvas绘图中央。同时，照相机也需要添加进入场景之中。注意：坐标系中的长度是没有单位的。所以绝对长度不重要，只是代表相对长度。<br>renderer：将内容与canvas元素进行绑定。<br>代码：<br><code>var renderer = new THREE.webGLRenderer(
-        {
-            canvas: document.getElementById(名字)
-        }
-    )</code><br>当定义好场景而且添加了照相机后就可以调用渲染器函数，对canvas进行一次渲染了。  </p>
-<p>场景：方法： </p>
+<h4 id="场景："><a href="#场景：" class="headerlink" title="场景："></a>场景：</h4><p>Scence: 一个容器，用来保存并跟踪所有我们想渲染的物体。一般不会涉及到很复杂的操作，只需要在程序最开始的时候进行初始化即可。<br>方法： </p>
 <ol>
 <li>add在场景中添加对象</li>
 <li>children 返回场景中所有对象，包括相机和光源</li>
@@ -452,7 +447,13 @@ return program
 <li>fog设置场景中的雾化效果</li>
 <li>overrideMaterial 强制所有物体使用相同材质。</li>
 </ol>
-<p>生成几何体：</p>
+<h4 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h4><p>camera: webgl和three.js都是使用右手坐标系的，坐标原点在canvas绘图中央。同时，照相机也需要添加进入场景之中。注意：坐标系中的长度是没有单位的。所以绝对长度不重要，只是代表相对长度。</p>
+<h4 id="渲染器"><a href="#渲染器" class="headerlink" title="渲染器"></a>渲染器</h4><p>renderer：将内容与canvas元素进行绑定。<br>代码：<br><code>var renderer = new THREE.webGLRenderer(
+        {
+            canvas: document.getElementById(名字)
+        }
+    )</code><br>当定义好场景而且添加了照相机后就可以调用渲染器函数，对canvas进行一次渲染了。 </p>
+<h3 id="几何体"><a href="#几何体" class="headerlink" title="几何体"></a>几何体</h3><p>生成几何体：</p>
 <ol>
 <li><p>可以用于定义函数生成预设的几何体，<br>如: 立方体（cubegeometry），平面（planeGeometry）等<br><strong>留意参数中的detail</strong></p>
 </li>
@@ -465,6 +466,12 @@ return program
  geo.faces = faces</code></li>
 <li>调用对象进行几何体生成（计算重心）<br><code>geo.compute(entroidsc)</code></li>
 <li>顶点合并<br><code>geo.mergeverticese()</code></li>
+</ol>
+<ol>
+<li>高级几何体  </li>
+<li>凸面体(convexGeometry)<br> 给一堆顶点，生成一个包含这些顶点的凸包</li>
+<li>管状几何(TubeGeometry)<br> 沿着一条三维样条曲线拉伸出来的一条管子</li>
+<li>扫描体(LatheGeometry)<br> 沿着一条光滑曲线开始创建图形，就像花瓶的一条边360度扫描后生成一个花瓶。  </li>
 </ol>
 <p><strong>区分bufferGeometry 和 planeGeometry</strong></p>
 
