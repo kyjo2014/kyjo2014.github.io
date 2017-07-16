@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#这个效果。下面先介绍canvas-的混合模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">这个效果。下面先介绍canvas 的混合模式:</span></a></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -380,7 +380,18 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
+        <p>最近在写一个视频切换的轮播组件，切换效果类似于视频1溶解然后变换为视频2。<br>一开始比较懵逼,在参考了网上的案列后发现。使用canvas的混合模式能够非常容易的实现</p>
+<h2 id="这个效果。下面先介绍canvas-的混合模式"><a href="#这个效果。下面先介绍canvas-的混合模式" class="headerlink" title="这个效果。下面先介绍canvas 的混合模式:"></a>这个效果。下面先介绍canvas 的混合模式:</h2><p>source-over    默认。在先绘制的图形上显示后绘制的图形。相交部分由后绘制的图形填充(颜色,渐变,纹理)覆盖<br>source-atop    在先绘制的图形顶部显示后绘制的图形。后绘制的图形位于先绘制的图形之外的部分是不可见的。<br>source-in    在先绘制的图形中显示后绘制的图形。只绘制相交部分,由后绘制图形的填充覆盖,其余部分透明。<br>source-out    在先绘制的图形之外后绘制的图形。只绘制后绘制图形不相交的部分,由后绘制图形的填充覆盖,其余部分透明。<br>destination-over    在后绘制的图形上方显示先绘制的图形, 相交部分由先绘制图形的填充(颜色,渐变,纹理)覆盖.<br>destination-atop    在后绘制的图形顶部显示先绘制的图形。源图像之外的目标图像部分不会被显示。<br>destination-in    在后绘制的图形中显示先绘制的图形。只绘制相交部分,由先绘制图形的填充覆盖,其余部分透明<br>destination-out    在后绘制的图形外显示先绘制的图形。只有后绘制的图形外的目标图像部分会被显示，源图像是透明的。<br>lighter    相交部分由根据先后图形填充来增加亮度。<br>copy    显示后绘制的图形。只绘制后绘制图形。<br>xor    相交部分透明</p>
+<hr>
+<p>因此这里需要进行：</p>
+<ol>
+<li>把视频1绘制到canvas上（当前gco = ‘source-over’)</li>
+<li>设置gco = ‘destination-in’</li>
+<li>把遮罩层绘制在canvas上,截取出需要的部分</li>
+<li>把gco设置为‘source-out’</li>
+<li>把视频2绘制在canvas上即可</li>
+</ol>
+
     
 
     
