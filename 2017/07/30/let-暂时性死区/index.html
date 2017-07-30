@@ -383,13 +383,24 @@
         <p>今天在逛知乎的时候看到一个有趣的问题。<br>猜猜看下面的代码会输出什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//在浏览器控制台中直接输入</div><div class="line">x</div><div class="line">let x=x</div><div class="line">x</div><div class="line">let x</div></pre></td></tr></table></figure></p>
 <p>先不说答案，let作为ES6新增的语法，有一个新的概念‘暂时性死区’。</p>
 <blockquote>
-<p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。<br>这个性质导致上面的代码会输出这样的结果：</p>
+<p>ES6明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明后且<em>初始化</em>之前就使用这些变量，就会报错。在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。<br>这个性质导致上面的代码会输出这样的结果：</p>
 <ol>
 <li>第一行，由于console默认使用严格模式所以所有变量都要先定义再使用。所以会报<code>Uncaught ReferenceError: x is not defined</code></li>
 <li>第二行，由于在声明x时需要对表达式右边值x进行求值，而那时候x还未被定义，所以依然会报<code>Uncaught ReferenceError: x is not defined</code></li>
-<li>第三行，这里依然报<code>Uncaught ReferenceError: x is not defined</code>就具有迷惑性了，上面不是声明了x了吗？这里就涉及到初始化问题，一个变量如果</li>
+<li>第三行，这里依然报<code>Uncaught ReferenceError: x is not defined</code>就具有迷惑性了，上面不是声明了x了吗？这里就涉及到初始化问题，一个let变量如果在初始化过程中失败了的话就将永远处于created状态，而且无法再次对x进行初始化。在ES规范中规定，一个已经声明但未初始化的变量不能被赋值甚至不能被引用。</li>
+<li>第四行，那既然没有x那就重新声明个x吧，可是这里依然会报错<code>Uncaught SyntaxError: Identifier &#39;x&#39; has already been declared</code> 因为x是的确被声明了但由于其未完成初始化所以会一直处于TDZ中不能使用。</li>
 </ol>
 </blockquote>
+<p>总结：</p>
+<ol>
+<li>处于TDZ中的变量不能使用且重声明</li>
+<li>let变量和var变量有一个不同点在于：let是声明，初始化分开的，而var是在声明时默认初始化undefined</li>
+</ol>
+<p>参考文章：</p>
+<ol>
+<li>如何理解 let x = x 报错之后，再次 let x 依然会报错？ <a href="http://www.zhihu.com/question/62966713" target="_blank" rel="external">http://www.zhihu.com/question/62966713</a> （分享自知乎网）</li>
+<li><img src="http://www.cnblogs.com/ziyunfei/p/6063426.html" alt=""></li>
+</ol>
 
     
 
