@@ -10,7 +10,7 @@
     
     <title>
         
-            canvas混合模式 | 
+            动态规划 | 
         
         LTH&#39;s note book
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="kyjo2014">
     <meta name="description" content="html|css|javascript|LTH&#39;s blog">
-    <meta name="keywords" content="123,canvas">
+    <meta name="keywords" content="123">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://kyjo2014.github.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="canvas混合模式 | LTH&#39;s note book">
+    <meta property="og:title" content="动态规划 | LTH&#39;s note book">
     <meta property="og:description" content="html|css|javascript|LTH&#39;s blog">
-    <meta property="og:article:tag" content="canvas"> 
+    
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#这个效果。下面先介绍canvas-的混合模式"><span class="post-toc-number">1.</span> <span class="post-toc-text">这个效果。下面先介绍canvas 的混合模式:</span></a></li></ol>
+        
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                canvas混合模式
+                动态规划
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>kyjo2014</strong>
-        <span>7月 13, 2017</span>
+        <span>8月 04, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -313,7 +313,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/canvas/">canvas</a>
+        
     </ul>
     
 
@@ -329,7 +329,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=canvas混合模式&url=http://kyjo2014.github.com//2017/07/13/canvas混合模式/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=动态规划&url=http://kyjo2014.github.com//2017/08/04/动态规划/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -338,7 +338,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=canvas混合模式&url=http://kyjo2014.github.com//2017/07/13/canvas混合模式/index.html&via=kyjo2014" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=动态规划&url=http://kyjo2014.github.com//2017/08/04/动态规划/index.html&via=kyjo2014" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -347,7 +347,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2017/07/13/canvas混合模式/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2017/08/04/动态规划/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -356,7 +356,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2017/07/13/canvas混合模式/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2017/08/04/动态规划/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -380,17 +380,8 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>最近在写一个视频切换的轮播组件，切换效果类似于视频1溶解然后变换为视频2。<br>一开始比较懵逼,在参考了网上的案列后发现。使用canvas的混合模式能够非常容易的实现</p>
-<h2 id="这个效果。下面先介绍canvas-的混合模式"><a href="#这个效果。下面先介绍canvas-的混合模式" class="headerlink" title="这个效果。下面先介绍canvas 的混合模式:"></a>这个效果。下面先介绍canvas 的混合模式:</h2><p>source-over    默认。在先绘制的图形上显示后绘制的图形。相交部分由后绘制的图形填充(颜色,渐变,纹理)覆盖<br>source-atop    在先绘制的图形顶部显示后绘制的图形。后绘制的图形位于先绘制的图形之外的部分是不可见的。<br>source-in    在先绘制的图形中显示后绘制的图形。只绘制相交部分,由后绘制图形的填充覆盖,其余部分透明。<br>source-out    在先绘制的图形之外后绘制的图形。只绘制后绘制图形不相交的部分,由后绘制图形的填充覆盖,其余部分透明。<br>destination-over    在后绘制的图形上方显示先绘制的图形, 相交部分由先绘制图形的填充(颜色,渐变,纹理)覆盖.<br>destination-atop    在后绘制的图形顶部显示先绘制的图形。源图像之外的目标图像部分不会被显示。<br>destination-in    在后绘制的图形中显示先绘制的图形。只绘制相交部分,由先绘制图形的填充覆盖,其余部分透明<br>destination-out    在后绘制的图形外显示先绘制的图形。只有后绘制的图形外的目标图像部分会被显示，源图像是透明的。<br>lighter    相交部分由根据先后图形填充来增加亮度。<br>copy    显示后绘制的图形。只绘制后绘制图形。<br>xor    相交部分透明</p>
-<hr>
-<p>因此这里需要进行：</p>
-<ol>
-<li>把视频1绘制到canvas上（当前gco = ‘source-over’)</li>
-<li>设置gco = ‘destination-in’</li>
-<li>把遮罩层绘制在canvas上,截取出需要的部分</li>
-<li>把gco设置为‘source-out’</li>
-<li>把视频2绘制在canvas上即可</li>
-</ol>
+        <p>作者：徐凯强 Andy<br>链接：<a href="https://www.zhihu.com/question/23995189/answer/35324479" target="_blank" rel="external">https://www.zhihu.com/question/23995189/answer/35324479</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>动态规划中递推式的求解方法不是动态规划的本质。我曾经作为省队成员参加过NOI，保送之后也给学校参加NOIP的同学多次讲过动态规划，我试着讲一下我理解的动态规划，争取深入浅出。希望你看了我的答案，能够喜欢上动态规划。0. 动态规划的本质，是对问题状态的定义和状态转移方程的定义。引自维基百科dynamic programming is a method for solving a complex problem by breaking it down into a collection of simpler subproblems.动态规划是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推（或者说分治）的方式去解决。本题下的其他答案，大多都是在说递推的求解方法，但如何拆分问题，才是动态规划的核心。而拆分问题，靠的就是状态的定义和状态转移方程的定义。1. 什么是状态的定义？首先想说大家千万不要被下面的数学式吓到，这里只涉及到了函数相关的知识。我们先来看一个动态规划的教学必备题：给定一个数列，长度为N，求这个数列的最长上升（递增）子数列（LIS）的长度.以1 7 2 8 3 4为例。这个数列的最长递增子数列是 1 2 3 4，长度为4；次长的长度为3， 包括 1 7 8; 1 2 3 等.要解决这个问题，我们首先要定义这个问题和这个问题的子问题。有人可能会问了，题目都已经在这了，我们还需定义这个问题吗？需要，原因就是这个问题在字面上看，找不出子问题，而没有子问题，这个题目就没办法解决。所以我们来重新定义这个问题：给定一个数列，长度为N，设为：以数列中第k项结尾的最长递增子序列的长度.求 中的最大值.显然，这个新问题与原问题等价。而对于来讲，都是的子问题：因为以第k项结尾的最长递增子序列（下称LIS），包含着以第中某项结尾的LIS。上述的新问题也可以叫做状态，定义中的“为数列中第k项结尾的LIS的长度”，就叫做对状态的定义。之所以把做“状态”而不是“问题” ，一是因为避免跟原问题中“问题”混淆，二是因为这个新问题是数学化定义的。对状态的定义只有一种吗？当然不是。我们甚至可以二维的，以完全不同的视角定义这个问题：给定一个数列，长度为N，设为：在前i项中的，长度为k的最长递增子序列中，最后一位的最小值. .若在前i项中，不存在长度为k的最长递增子序列，则为正无穷.求最大的x，使得不为正无穷。这个新定义与原问题的等价性也不难证明，请读者体会一下。上述的就是状态，定义中的“为：在前i项中，长度为k的最长递增子序列中，最后一位的最小值”就是对状态的定义。2. 什么是状态转移方程？上述状态定义好之后，状态和状态之间的关系式，就叫做状态转移方程。比如，对于LIS问题，我们的第一种定义：设为：以数列中第k项结尾的最长递增子序列的长度.设A为题中数列，状态转移方程为： （根据状态定义导出边界情况）用文字解释一下是：以第k项结尾的LIS的长度是：保证第i项比第k项小的情况下，以第i项结尾的LIS长度加一的最大值，取遍i的所有值（i小于k）。第二种定义：设为：在数列前i项中，长度为k的递增子序列中，最后一位的最小值设A为题中数列，状态转移方程为：若则否则：（边界情况需要分类讨论较多，在此不列出，需要根据状态定义导出边界情况。）大家套着定义读一下公式就可以了，应该不难理解，就是有点绕。这里可以看出，这里的状态转移方程，就是定义了问题和子问题之间的关系。可以看出，状态转移方程就是带有条件的递推式。3. 动态规划迷思本题下其他用户的回答跟动态规划都有或多或少的联系，我也讲一下与本答案的联系。a. “缓存”，“重叠子问题”，“记忆化”：这三个名词，都是在阐述递推式求解的技巧。以Fibonacci数列为例，计算第100项的时候，需要计算第99项和98项；在计算第101项的时候，需要第100项和第99项，这时候你还需要重新计算第99项吗？不需要，你只需要在第一次计算的时候把它记下来就可以了。上述的需要再次计算的“第99项”，就叫“重叠子问题”。如果没有计算过，就按照递推式计算，如果计算过，直接使用，就像“缓存”一样，这种方法，叫做“记忆化”，这是递推式求解的技巧。这种技巧，通俗的说叫“花费空间来节省时间”。都不是动态规划的本质，不是动态规划的核心。b. “递归”：递归是递推式求解的方法，连技巧都算不上。c. “无后效性”，“最优子结构”：上述的状态转移方程中，等式右边不会用到下标大于左边i或者k的值，这是”无后效性”的通俗上的数学定义，符合这种定义的状态定义，我们可以说它具有“最优子结构”的性质，在动态规划中我们要做的，就是找到这种“最优子结构”。在对状态和状态转移方程的定义过程中，满足“最优子结构”是一个隐含的条件（否则根本定义不出来）。对状态和“最优子结构”的关系的进一步解释，什么是动态规划？动态规划的意义是什么？ - 王勐的回答 写的很好，大家可以去读一下。需要注意的是，一个问题可能有多种不同的状态定义和状态转移方程定义，存在一个有后效性的定义，不代表该问题不适用动态规划。这也是其他几个答案中出现的逻辑误区：动态规划方法要寻找符合“最优子结构“的状态和状态转移方程的定义，在找到之后，这个问题就可以以“记忆化地求解递推式”的方法来解决。而寻找到的定义，才是动态规划的本质。有位答主说：分治在求解每个子问题的时候，都要进行一遍计算动态规划则存储了子问题的结果，查表时间为常数这就像说多加辣椒的菜就叫川菜，多加酱油的菜就叫鲁菜一样，是存在误解的。文艺的说，动态规划是寻找一种对问题的观察角度，让问题能够以递推（或者说分治）的方式去解决。寻找看问题的角度，才是动态规划中最耀眼的宝石！（大雾）</p>
 
     
 
@@ -414,21 +405,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/07/19/使用jquery实现双向数据绑定/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/06/04/connect源码分析/" id="post_nav-older" class="next-content">
+        <a href="/2017/07/30/let-暂时性死区/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
