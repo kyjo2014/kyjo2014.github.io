@@ -380,7 +380,15 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        
+        <ol>
+<li><code>var const let</code> 统一变成<em>var</em><br> const的不可变是在编译期进行检测。<br> 未初始化变量直接变成<code>var a = undefined</code></li>
+<li>块级作用域：通过改变作用域中变量名的方式<br> 规则： <pre><code>1. 全局作用域下保持原命名
+2. 块级作用域中变量名前面加“_”
+3. 按同名变量在代码中出现的先后顺序&gt;按块级作用域中嵌套层次的深度变量后加数字。
+</code></pre></li>
+<li>赋值解构：<br> 直接把属性以变量方式在作用域中保存<br> <code>let {a,b} = {a:1,b:2}=&gt;a=_a$b(生成中间变量指向原对象(由属性生成)).a</code>如果是深嵌套就要用一个自带函数slicedToArray进行解析。不过兼容性不好因为需要用到symbol.iterator</li>
+</ol>
+
     
 
     
