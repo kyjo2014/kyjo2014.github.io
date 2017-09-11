@@ -396,7 +396,10 @@
 </li>
 <li><p>对象属性快速定义：<br> 把相应位置改成{a:a,b:b}即可<br> 用一组语句来实现动态的计算属性名<br> “（新增临时对象，用私有函数计算属性名和值再加进去Object.defineproperty对对象的值）”</p>
 </li>
-<li>用super取得父类:<br> babel自己写了一个函数，用递归的方式一层一层在父类的prototype中找对应属性，方法并用call方式执行。</li>
+<li><p>用super取得父类:<br> babel自己写了一个函数，用递归的方式一层一层在父类的prototype中找对应属性，方法并用call方式执行。</p>
+</li>
+<li><p>object.assigin,object.is不会编译（编译语法但不会编译新的api）</p>
+</li>
 </ol>
 
     
