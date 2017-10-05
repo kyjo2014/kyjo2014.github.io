@@ -399,7 +399,7 @@
 <li><p>用super取得父类:<br> babel自己写了一个函数，用递归的方式一层一层在父类的prototype中找对应属性，方法并用call方式执行。</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function _inherits(subClass, superClass) &#123;</div><div class="line"> if (typeof superClass !== &quot;function&quot; &amp;&amp; superClass !== null) &#123;</div><div class="line">     throw new TypeError(&quot;Super expression must either be null or a function, not &quot; + typeof superClass);</div><div class="line"> &#125;</div><div class="line"> subClass.prototype = Object.create(superClass &amp;&amp; superClass.prototype, &#123;</div><div class="line">     constructor: &#123;</div><div class="line">         value: subClass,</div><div class="line">         enumerable: false,</div><div class="line">         writable: true,</div><div class="line">         configurable: true</div><div class="line">     &#125;</div><div class="line"> &#125;);</div><div class="line"> if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>object.assigin,object.is不会编译（编译语法但不会编译新的api）</p>
+<li><p>object.assigin,object.is不会编译（编译语法但不会编译新的api），所以诸如proxy，reflect等新增加的特性是无法进行编译的。</p>
 </li>
 </ol>
 <ol>
