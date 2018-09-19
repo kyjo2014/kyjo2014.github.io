@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Typescript deep dive 翻译 | 
+        
+        LTH&#39;s note book
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="kyjo2014">
+    <meta name="description" content="html|css|javascript|LTH&#39;s blog">
+    <meta name="keywords" content="123,翻译">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="LTH&#39;s note book">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://kyjo2014.github.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Typescript deep dive 翻译 | LTH&#39;s note book">
+    <meta property="og:description" content="html|css|javascript|LTH&#39;s blog">
+    <meta property="og:article:tag" content="翻译"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#深入TypeScript"><span class="post-toc-number">1.</span> <span class="post-toc-text">深入TypeScript</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开始使用TypeScript"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">开始使用TypeScript</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TypeScript-版本"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">TypeScript 版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取源码"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">获取源码</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为什么使用TypeScript"><span class="post-toc-number">1.0.3.1.</span> <span class="post-toc-text">为什么使用TypeScript</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#TypeScript的类型系统"><span class="post-toc-number">1.0.3.2.</span> <span class="post-toc-text">TypeScript的类型系统</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#你的-JavaScript-就是-TypeScript"><span class="post-toc-number">1.0.3.3.</span> <span class="post-toc-text">你的 JavaScript 就是 TypeScript</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型可以是隐含的"><span class="post-toc-number">1.0.3.4.</span> <span class="post-toc-text">类型可以是隐含的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型可以是显性的"><span class="post-toc-number">1.0.3.5.</span> <span class="post-toc-text">类型可以是显性的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型是结构性的"><span class="post-toc-number">1.0.3.6.</span> <span class="post-toc-text">类型是结构性的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型出错不会阻止JavaScript生成"><span class="post-toc-number">1.0.3.7.</span> <span class="post-toc-text">类型出错不会阻止JavaScript生成</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类型可以用于环境的"><span class="post-toc-number">1.0.3.8.</span> <span class="post-toc-text">类型可以用于环境的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#未来的JavaScript-gt-现在的"><span class="post-toc-number">1.0.3.9.</span> <span class="post-toc-text">未来的JavaScript=>现在的</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#你依然需要学习JavaScript"><span class="post-toc-number">1.0.3.10.</span> <span class="post-toc-text">你依然需要学习JavaScript</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相等和全等"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">相等和全等</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#结构变量的相等"><span class="post-toc-number">1.0.4.1.</span> <span class="post-toc-text">结构变量的相等</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">引用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象的修改会影响到所有引用的变量"><span class="post-toc-number">1.0.5.1.</span> <span class="post-toc-text">对象的修改会影响到所有引用的变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象间通过引用判断相等"><span class="post-toc-number">1.0.5.2.</span> <span class="post-toc-text">对象间通过引用判断相等</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Null和undefined"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">Null和undefined</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#两者的类型检查"><span class="post-toc-number">1.0.6.1.</span> <span class="post-toc-text">两者的类型检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#检查对象根（最顶）级的值为undefined"><span class="post-toc-number">1.0.7.</span> <span class="post-toc-text">检查对象根（最顶）级的值为undefined</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#强制明确使用undefined的地方"><span class="post-toc-number">1.0.8.</span> <span class="post-toc-text">强制明确使用undefined的地方</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Node形式的回调函数"><span class="post-toc-number">1.0.9.</span> <span class="post-toc-text">Node形式的回调函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#不要使用undefined作为变量不可用的标志"><span class="post-toc-number">1.0.10.</span> <span class="post-toc-text">不要使用undefined作为变量不可用的标志</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最后的思考"><span class="post-toc-number">1.0.11.</span> <span class="post-toc-text">最后的思考</span></a></li></ol></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Typescript deep dive 翻译
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/myavatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>kyjo2014</strong>
+        <span>6月 16, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/翻译/">翻译</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Typescript deep dive 翻译&url=http://kyjo2014.github.com//2018/06/16/Typescript-deep-dive-翻译/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Typescript deep dive 翻译&url=http://kyjo2014.github.com//2018/06/16/Typescript-deep-dive-翻译/index.html&via=kyjo2014" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2018/06/16/Typescript-deep-dive-翻译/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2018/06/16/Typescript-deep-dive-翻译/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="深入TypeScript"><a href="#深入TypeScript" class="headerlink" title="深入TypeScript"></a>深入TypeScript</h1><h3 id="开始使用TypeScript"><a href="#开始使用TypeScript" class="headerlink" title="开始使用TypeScript"></a>开始使用TypeScript</h3><p>TypeScript代码会编译成 JavaScript代码。无论是在浏览器还是服务器上JavaScript才是真正执行的代码。所以在阅读本文之前你将需要下面的工具:</p>
+<ul>
+<li>TypeScript编译器（可以从<a href="https://github.com/Microsoft/TypeScript/" target="_blank" rel="external">源码仓库</a>和<a href="https://www.npmjs.com/package/typescript" target="_blank" rel="external">NPM</a>中下载）</li>
+<li>TypeScript编辑器 （你可以使用任何编辑器。当然也可以参考<a href="https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support" target="_blank" rel="external">更好支持的编辑器</a></li>
+</ul>
+<h3 id="TypeScript-版本"><a href="#TypeScript-版本" class="headerlink" title="TypeScript 版本"></a>TypeScript 版本</h3><p>本文不会使用<em>稳定版本的</em>TypeScript编译器，因为我们将会在文中展示许多尚未被确定以后版本加入的新东西。我通常推荐人们使用nightly版本(最新但不稳定的版本)的编译器，因为<strong>随着时间的推移编译器测试套件能够找出更多Bug</strong>。</p>
+<p>使用命令行方式安装最新版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g typescript@next</div></pre></td></tr></table></figure>
+<p>现在控制台命令<code>tsc</code> 会使用最新的也是最好的TypeScript编译器。许多IDE也支持使用最新的TypeScript编译器,例如：</p>
+<ul>
+<li><p><code>alm</code> 总是附带最新版本的TypeScript</p>
+</li>
+<li><p>vscode可以通过在<code>.vscode/settings.json</code> 文件中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;typescript.tsdk&quot;: &quot;./node_modules/typescript/lib&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用最新版本编译器</p>
+</li>
+</ul>
+<h3 id="获取源码"><a href="#获取源码" class="headerlink" title="获取源码"></a>获取源码</h3><p> 本书的源代码可在github存储库中获得<a href="https://github.com/basarat/typescript-book/tree/master/code，大多数代码示例都可以直接复制到alm中运行。对于需要额外设置(例如npm模块)的代码示例，我们会在展示代码前提供代码运行样例的链接。例如，" target="_blank" rel="external">https://github.com/basarat/typescript-book/tree/master/code，大多数代码示例都可以直接复制到alm中运行。对于需要额外设置(例如npm模块)的代码示例，我们会在展示代码前提供代码运行样例的链接。例如，</a></p>
+<p><code>this/will/be/the/link/to/the/code.ts</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">// This will be the code under discussion</div></pre></td></tr></table></figure>
+<p>介绍完开发环境的配置，接下来让我们开始介绍TypeScript的语法。 </p>
+<h4 id="为什么使用TypeScript"><a href="#为什么使用TypeScript" class="headerlink" title="为什么使用TypeScript"></a>为什么使用TypeScript</h4><p>TypeScript的出现是为了实现两个目标：</p>
+<ol>
+<li>为JavaScript提供一个<em>可选的</em>类型系统。</li>
+<li>提供了从现在到未来的JavaScript版本计划实现的特性。<h4 id="TypeScript的类型系统"><a href="#TypeScript的类型系统" class="headerlink" title="TypeScript的类型系统"></a>TypeScript的类型系统</h4>你可能有疑问:<strong>为什么要给JavaScript增加静态类型？</strong><br>在代码中使用静态类型已经证明可以提升代码质量和可读性。许多大型团队（谷歌，微软，脸书）已经一再验证了这个结论。<br>不仅如此：</li>
+</ol>
+<ul>
+<li>静态类型可以提升你重构的速度。因为在编译时报错比运行时遇到错误更容易解决。</li>
+<li>静态类型是最好的文档类型之一。函数的签名相当于一条定理，而函数体相当于定理的证明。<br>但是静态类型有时候也会显得不必要的繁杂难以上手。因此TypeScript非常注重降低入门门槛。下面展示TypeScript是如何做到的。</li>
+</ul>
+<h4 id="你的-JavaScript-就是-TypeScript"><a href="#你的-JavaScript-就是-TypeScript" class="headerlink" title="你的 JavaScript 就是 TypeScript"></a>你的 JavaScript 就是 TypeScript</h4><p>TypeScript为JavaScript代码提供了编译时的类型安全。这就是TypeScript名字的由来（类型 + JavaScript）。而最有趣的是这个类型检测是完全可选的。所以任何JavaScript代码的<code>.js</code>文件都可以直接重命名为<code>.ts</code>文件，TypeScript编译后仍然会返回与原来的JavaScript文件等效的<code>.js</code>文件。TypeScript是<em>有意</em>且<em>严格地</em>具有可选的类型检查的JavaScript超集。</p>
+<h4 id="类型可以是隐含的"><a href="#类型可以是隐含的" class="headerlink" title="类型可以是隐含的"></a>类型可以是隐含的</h4><p>TypeScript会尽可能尝试去推断类型信息，以便在代码开发过程中以最小的成本提供类型安全性。例如，在下面的示例中，TypeScript推断出foo是number的类型，并将在第二行给出错误，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = 123;</div><div class="line">foo = &apos;456&apos;; // Error: cannot assign `string` to `number`</div><div class="line"></div><div class="line">// Is foo a number or a string?</div></pre></td></tr></table></figure></p>
+<p>这种类型的推断是很积极的。如果你用JavaScript的方式执行此示例中显示的内容，则在其余代码中，您无法确定foo是number类型还是 string类型。这些问题经常出现在大型多文件代码库中。我们稍后将深入探讨类型推断规则。</p>
+<h4 id="类型可以是显性的"><a href="#类型可以是显性的" class="headerlink" title="类型可以是显性的"></a>类型可以是显性的</h4><p>就像我们之前提到的，TypeScript会在保证代码安全性的情况下尽可能尝试推断类型信息。但是，你可以通过使用注释来做到以下内容:</p>
+<ol>
+<li>帮助编译器，更重要的是为下一个阅读代码的开发者（或许是未来的你）提供文档。</li>
+<li>强制执行编译器理解的内容和你认为他应该理解的内容一致。也就是您对代码的理解与代码的算法分析（由编译器完成）相匹配。<br>TypeScript使用在其他可选带注释的语言（例如ActionScript和F＃）中流行的后缀类型注释。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var foo: number = 123;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>因此如果你变量的类型和注释声明的类型不一致，那么编译器就会报错。如下例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var foo: number = &apos;123&apos;; // Error: cannot assign a `string` to a `number`</div></pre></td></tr></table></figure></p>
+<p>我们会在后面的章节中讨论TypeScript支持的所有注释语法的所有细节。</p>
+<h4 id="类型是结构性的"><a href="#类型是结构性的" class="headerlink" title="类型是结构性的"></a>类型是结构性的</h4><p>在某些编程语言中()使用静态类型会导致不必要的繁复。因为尽管你知道代码能够正常工作，语言语义学依然会迫使你把内容拷贝到到处都是。这就是为什么automapper对于C#至关重要了。因为我们真的希望能够让TypeScript更容易被JavaScript开发者们使用，且更少思维负担，所以在TypeScript中，类型是结构化的。这意味着鸭式辨型是语言构造的基础。思考下面的例子。函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">interface Point2D &#123;</div><div class="line">    x: number;</div><div class="line">    y: number;</div><div class="line">&#125;</div><div class="line">interface Point3D &#123;</div><div class="line">    x: number;</div><div class="line">    y: number;</div><div class="line">    z: number;</div><div class="line">&#125;</div><div class="line">var point2D: Point2D = &#123; x: 0, y: 10 &#125;</div><div class="line">var point3D: Point3D = &#123; x: 0, y: 10, z: 20 &#125;</div><div class="line">function iTakePoint2D(point: Point2D) &#123; /* do something */ &#125;</div><div class="line"></div><div class="line">iTakePoint2D(point2D); // exact match okay</div><div class="line">iTakePoint2D(point3D); // extra information okay</div><div class="line">iTakePoint2D(&#123; x: 0 &#125;); // Error: missing information `y`</div></pre></td></tr></table></figure></p>
+<h4 id="类型出错不会阻止JavaScript生成"><a href="#类型出错不会阻止JavaScript生成" class="headerlink" title="类型出错不会阻止JavaScript生成"></a>类型出错不会阻止JavaScript生成</h4><p>为了使迁移JavaScript代码到TypeScript更容易，尽管有编译报错，TypeScript默认会尽量生成可用的JavaScript代码。如下例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var foo = 123;</div><div class="line">foo = &apos;456&apos;; // Error: cannot assign a `string` to a `number`</div></pre></td></tr></table></figure></p>
+<p>会生成下面的JS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var foo = 123;</div><div class="line">foo = &apos;456&apos;;</div></pre></td></tr></table></figure></p>
+<p>因此你可以将JavaScript代码逐步升级为TypeScript。这种对报错的处理方式与其他语言编译器的工作方式有很大不同，这也是转向TypeScript的另一个原因。</p>
+<h4 id="类型可以用于环境的"><a href="#类型可以用于环境的" class="headerlink" title="类型可以用于环境的"></a>类型可以用于环境的</h4><p>TypeScript的一个主要设计目标就是用户可以安全，容易地在TypeScript中使用现存的JavaScript工具库。对此TypeScript借助于<em>declaration</em>（声明）这个特性。开发者能够通过为工具库编写声明，来获得更多类型检测，安全性和智能代码提示。声明的编写是弹性的，由开发者自行决定声明的能力范围，工具库的声明越详细类型检测等功能就越强。注意：大多数常用的JavaScript工具库的定义文件（声明写在定义文件中）已经由<a href="https://github.com/borisyankov/DefinitelyTyped" target="_blank" rel="external">DefinitelyTyped community</a>完成编写。因此对于大多数工具库:</p>
+<ol>
+<li>定义文件已经存在。</li>
+<li>或者至少你有大量可供参考的TypeScript定义编写模板。<br>作为如何编写自己的声明文件的快速示例，请参考一个简单的JQuery示例。默认情况下（正如预期的良好JS代码）TypeScript要求您var在使用变量之前声明（即使用某处）<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;.awesome&apos;).show(); // Error: cannot find name `$`</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>你可以通过告诉TypeScript这里有个东西叫做<code>$</code>来修复错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">declare var $: any;</div><div class="line">$(&apos;.awesome&apos;).show(); // Okay!</div></pre></td></tr></table></figure></p>
+<p>如果您愿意，可以基于此基本定义构建并提供更多信息以帮助保护您免受错误的影响：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">declare var $: &#123;</div><div class="line">    (selector:string): any;</div><div class="line">&#125;;</div><div class="line">$(&apos;.awesome&apos;).show(); // Okay!</div><div class="line">$(123).show(); // Error: selector needs to be a string</div></pre></td></tr></table></figure></p>
+<p>当你了解有关TypeScript的更多信息（像interface和any关键字）后我们将更详细介绍如何为现有JavaScript库创建TypeScript定义文件。</p>
+<h4 id="未来的JavaScript-gt-现在的"><a href="#未来的JavaScript-gt-现在的" class="headerlink" title="未来的JavaScript=&gt;现在的"></a>未来的JavaScript=&gt;现在的</h4><p>TypeScript对许多当前版本JavaScript引擎(仅支持ES5等)计划实现的ES6特性提供了支持。TypeScript的开发团队正在积极地添加对新特性的支持。随着时间迁移，TypeScript所支持的特性会越来越多，我们会在接下来的章节中介绍这些特性。这里先以ES6的类特性简单做个例子:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Point &#123;</div><div class="line">    constructor(public x: number, public y: number) &#123;</div><div class="line">    &#125;</div><div class="line">    add(point: Point) &#123;</div><div class="line">        return new Point(this.x + point.x, this.y + point.y);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1 = new Point(0, 10);</div><div class="line">var p2 = new Point(10, 20);</div><div class="line">var p3 = p1.add(p2); // &#123; x: 10, y: 30 &#125;</div></pre></td></tr></table></figure></p>
+<p>以及非常可爱的胖箭头函数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var inc = x =&gt; x+1;</div></pre></td></tr></table></figure></p>
+<p>####总结<br>在本章节中我们已经介绍了TypeScript的出现的背景以及其要达成的目标。接下来我们会深入了解TypeScript的细节。</p>
+<p>###你的JavaScript是TypeScript<br>在JavaScript语法编译器领域，未来会有越来越多与TypeScript相似的竞争者。而TypeScript和他们的特别之处在于<em>你的JavaScript代码</em>就是TypeScript代码。下面展示图表:<br><img src="https://raw.githubusercontent.com/basarat/typescript-book/master/images/venn.png" alt=""><br>但是，学习TypeScript依然需要有JavaScript基础(好消息是你只需要学习JavaScript)。TypeScript只是标准化有关JavaScript标准化的良好文档的所有方法。</p>
+<ul>
+<li>只是给你一个新的语法无法帮助修复错误（看着你的CoffeeScript）。</li>
+<li>创建一种新语言将您抽象到您的运行时，社区（看着Dart）。<br>TypeScript只是带有文档的JavaScript。<br>####让JavaScript变得更好<br>TypeScript会对JavaScript中一些没有什么用的语法直接报错（这样你就不需要记住这些没有用的语法）：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[] + []; // JavaScript will give you &quot;&quot; (which makes little sense), TypeScript will error</div><div class="line"></div><div class="line">//</div><div class="line">// other things that are nonsensical in JavaScript</div><div class="line">// - don&apos;t give a runtime error (making debugging hard)</div><div class="line">// - but TypeScript will give a compile time error (making debugging unnecessary)</div><div class="line">//</div><div class="line">&#123;&#125; + []; // JS : 0, TS Error</div><div class="line">[] + &#123;&#125;; // JS : &quot;[object Object]&quot;, TS Error</div><div class="line">&#123;&#125; + &#123;&#125;; // JS : NaN or [object Object][object Object] depending upon browser, TS Error</div><div class="line">&quot;hello&quot; - 1; // JS : NaN, TS Error</div><div class="line"></div><div class="line">function add(a,b) &#123;</div><div class="line">  return</div><div class="line">    a + b; // JS : undefined, TS Error &apos;unreachable code detected&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>本质上TypeScript就是对JavaScript进行规范化，只不过比那些没有<em>类型信息</em>的代码扫描分析工具完成得更好。</p>
+<h4 id="你依然需要学习JavaScript"><a href="#你依然需要学习JavaScript" class="headerlink" title="你依然需要学习JavaScript"></a>你依然需要学习JavaScript</h4><p>在写TypeScript代码时实际上就是在写JavaScript代码，因此有一些JavaScript的东西你仍然需要知道才不会在遇到的时候不知所措。我们会在接下来的章节讨论它们。<br><em>注意：TypeScript是JavaScript的超集。只不过增加了编译器/代码编辑器可以使用的文档</em></p>
+<h3 id="相等和全等"><a href="#相等和全等" class="headerlink" title="相等和全等"></a>相等和全等</h3><p>JavaScript中需要特别留意<code>==</code>（相等）和<code>===</code>（全等）的区别。因为JavaScript在使用<code>==</code>进行比较操作时会尽量通过隐式类型转换统一比较的两个变量类型来避免报错。例如，将字符串类型变量转换为数字类型，以便您可以与数字类型变量进行比较。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console.log(5 == &quot;5&quot;); // true   , TS Error</div><div class="line">console.log(5 === &quot;5&quot;); // false , TS Error</div></pre></td></tr></table></figure></p>
+<p>但是JavaScript的类型转换原则不是完美的。例如在下面的样例中，第一条语句返回假（false）是因为””和”0”都是字符串，并且明显不相等。然而，在第二条语句的情况下，因为0和空的字符串（””）都是假的（即在JavaScript的隐式类型转换原则下都可转换为false），所以这两个值被判断为相等<code>==</code>。而在使用<code>===</code>（全等）时，这两个语句都会返回false（不相等），因为<code>===</code>不会对变量进行类型转换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.log(&quot;&quot; == &quot;0&quot;); // false</div><div class="line">console.log(0 == &quot;&quot;); // true</div><div class="line"></div><div class="line">console.log(&quot;&quot; === &quot;0&quot;); // false</div><div class="line">console.log(0 === &quot;&quot;); // false</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：TypeScript在像<code>string == number</code>和<code>string === number</code>的情况会在编译时就报错，所以通常情况下你不需要担心报错会阻塞你的程序执行。<br>就像<code>==</code>和<code>===</code>的关系，<code>！=</code>（不相等）和<code>！==</code>（绝对不等）也是一样的关系。<br>所以小贴士：代码中应该使用<code>===</code>和<code>！==</code>，除非额外进行null（空）值检查。我们稍后会介绍。</p>
+<h4 id="结构变量的相等"><a href="#结构变量的相等" class="headerlink" title="结构变量的相等"></a>结构变量的相等</h4><p>使用<code>==/===</code>去判断两个结构变量是否相等是无效的。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console.log(&#123;a:123&#125; == &#123;a:123&#125;); // False</div><div class="line">console.log(&#123;a:123&#125; === &#123;a:123&#125;); // False</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>（因为<code>==/===</code>在比较对象时是对对象的地址进行比较，详细介绍请参考《JavaScript权威指南》）。因此通常使用<a href="">deep-equal</a>这个npm包去判断结构变量是否相等。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import * as deepEqual from &quot;deep-equal&quot;;</div><div class="line"></div><div class="line">console.log(deepEqual(&#123;a:123&#125;,&#123;a:123&#125;)); // True</div></pre></td></tr></table></figure></p>
+<p>但是，还有许多情况下开发者只想检查结构变量中的某个属性是否相等而不需要所有属性都相等。举个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">type IdDisplay = &#123;</div><div class="line">  id: string,</div><div class="line">  display: string</div><div class="line">&#125;</div><div class="line">const list: IdDisplay[] = [</div><div class="line">  &#123;</div><div class="line">    id: &apos;foo&apos;,</div><div class="line">    display: &apos;Foo Select&apos;</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    id: &apos;bar&apos;,</div><div class="line">    display: &apos;Bar Select&apos;</div><div class="line">  &#125;,</div><div class="line">]</div><div class="line"></div><div class="line">const fooIndex = list.map(i =&gt; i.id).indexOf(&apos;foo&apos;);</div><div class="line">console.log(fooIndex); // 0</div></pre></td></tr></table></figure></p>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p>除了字符串常量外，JavaScript中的所有对象（包括函数，数组，正则表达式等）都是引用类型的。这意味着下面的特性。</p>
+<h4 id="对象的修改会影响到所有引用的变量"><a href="#对象的修改会影响到所有引用的变量" class="headerlink" title="对象的修改会影响到所有引用的变量"></a>对象的修改会影响到所有引用的变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;&#125;;</div><div class="line">var bar = foo; // bar is a reference to the same object</div><div class="line"></div><div class="line">foo.baz = 123;</div><div class="line">console.log(bar.baz); // 123</div></pre></td></tr></table></figure>
+<h4 id="对象间通过引用判断相等"><a href="#对象间通过引用判断相等" class="headerlink" title="对象间通过引用判断相等"></a>对象间通过引用判断相等</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var foo = &#123;&#125;;</div><div class="line">var bar = foo; // bar is a reference</div><div class="line">var baz = &#123;&#125;; // baz is a *new object* distinct from `foo`</div><div class="line"></div><div class="line">console.log(foo === bar); // true</div><div class="line">console.log(foo === baz); // false</div></pre></td></tr></table></figure>
+<h3 id="Null和undefined"><a href="#Null和undefined" class="headerlink" title="Null和undefined"></a>Null和undefined</h3><p>JavaScript（以及其扩展TypeScript）有两种底层类型：null和undefined。他们有着不同的含义。</p>
+<ul>
+<li>有些东西还没有被初始化：undefined。</li>
+<li>有些东西目前无法使用（已经初始化）：null。</li>
+</ul>
+<h4 id="两者的类型检查"><a href="#两者的类型检查" class="headerlink" title="两者的类型检查"></a>两者的类型检查</h4><p>事实上你可以把两者的检查等同起来。只需要使用<code>==</code>就能同时检查变量是否为Null或undefined。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/// 想象你使用`foo.bar == undefined`对foo.bar的类型进行判断时bar的值可能会是以下情况之一:</div><div class="line">console.log(undefined == undefined); // true</div><div class="line">console.log(null == undefined); // true</div><div class="line"></div><div class="line">// 你不需要担心假值通过==的检查</div><div class="line">console.log(0 == undefined); // false</div><div class="line">console.log(&apos;&apos; == undefined); // false</div><div class="line">console.log(false == undefined); // false</div></pre></td></tr></table></figure></p>
+<p>建议使用<code>==null</code>去检查变量是否为<code>undefined</code>和<code>null</code>。通常情况下你不需要区分这两者。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function foo(arg: string | null | undefined) &#123;</div><div class="line">  if (arg != null) &#123;</div><div class="line">    // arg must be a string as `!=` rules out both null and undefined. </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>只有一个例外，当对象的根（最顶）级的值为undefined的时候。我们接下来会讨论这种情况。</p>
+<h3 id="检查对象根（最顶）级的值为undefined"><a href="#检查对象根（最顶）级的值为undefined" class="headerlink" title="检查对象根（最顶）级的值为undefined"></a>检查对象根（最顶）级的值为undefined</h3><p>记得我之前说过应该使用<code>==null</code>来检测。当然你可以这样做（因为我刚刚才说过xD）。但千万不要用在顶级属性上。在严格模式下如果你使用了<code>foo</code>变量，而<code>foo</code>是undefined那么就会触发一个<code>ReferenceError</code>异常同时整个调用栈会展开。（抛出异常时，将暂停当前函数的执行，开始查找匹配的catch子句。首先检查throw本身是否在try块内部，如果是，检查与该try相关的catch子句，看是否可以处理该异常。如果不能处理，就退出当前函数，并且释放当前函数的内存并销毁局部对象，继续到上层的调用函数中查找，直到找到一个可以处理该异常的catch。这个过程称为栈展开（stack unwinding））</p>
+<blockquote>
+<p>你应该使用严格模式……事实上，如果你使用模块，TS编译器会为你插入…更多关于本书后面的内容，所以你不必明白它:)<br>因此，检查全局级别定义的变量是否定义通常使用<code>typeof</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">if (typeof someglobal !== &apos;undefined&apos;) &#123;</div><div class="line">  // someglobal is now safe to use</div><div class="line">  console.log(someglobal);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="强制明确使用undefined的地方"><a href="#强制明确使用undefined的地方" class="headerlink" title="强制明确使用undefined的地方"></a>强制明确使用undefined的地方</h3><p>有时候函数的返回值会因为函数内部存在条件结构而不同，TypeScript为这种情况提供了编写文档的机会。这样就可以避免其他人要猜测函数返回的值。就像下面这个例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function foo()</div><div class="line">  // if Something</div><div class="line">  return &#123;a:1,b:2&#125;;</div><div class="line">  // else</div><div class="line">  return &#123;a:1,b:undefined&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在这种情况下你应该使用类型声明表示b变量可能为undefined:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function foo():&#123;a:number,b?:number&#125;&#123;</div><div class="line">  // if Something</div><div class="line">  return &#123;a:1,b:2&#125;;</div><div class="line">  // else</div><div class="line">  return &#123;a:1&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Node形式的回调函数"><a href="#Node形式的回调函数" class="headerlink" title="Node形式的回调函数"></a>Node形式的回调函数</h3><p>Node形式回调函数（形式如:<code>(err,somethingElse)=&gt;{ /* something */ }</code>）在前面代码没有报错的情况下<code>err</code>参数通常为null。所以你通常只需要使用一个真值检查去拆分正常情况的执行流程和出现错误时的执行流程。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">fs.readFile(&apos;someFile&apos;, &apos;utf8&apos;, (err,data) =&gt; &#123;</div><div class="line">  if (err) &#123;</div><div class="line">    // do something</div><div class="line">  &#125; else &#123;</div><div class="line">    // no error</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>当你写自己的API时，在这种情况下也应该在err返回null值保证与约定相同。另外，我们真心建议使用Promise，在这种情况下你不再需要关心缺少的err值（你可以使用<code>.then</code>和<code>.catch</code>完成流程的拆分）。</p>
+<h3 id="不要使用undefined作为变量不可用的标志"><a href="#不要使用undefined作为变量不可用的标志" class="headerlink" title="不要使用undefined作为变量不可用的标志"></a>不要使用<code>undefined</code>作为变量不可用的标志</h3><p>举个例子，这样的函数是很糟糕的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function toInt(str:string) &#123;</div><div class="line">  return str ? parseInt(str) : undefined;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>因为undefined的语义是变量未定义，所以这个函数无法通过返回值给予使用者更多信息（特别当str是空字符串时还会给使用者传递错误的信息）。这个函数按照下面的方式修改会更好：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function toInt(str: string): &#123; valid: boolean, int?: number &#125; &#123;</div><div class="line">  const int = parseInt(str);</div><div class="line">  if (isNaN(int)) &#123;</div><div class="line">    return &#123; valid: false &#125;;</div><div class="line">  &#125;</div><div class="line">  else &#123;</div><div class="line">    return &#123; valid: true, int &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样使用者通过变量名立刻就能理解返回值的含义。</p>
+<h3 id="最后的思考"><a href="#最后的思考" class="headerlink" title="最后的思考"></a>最后的思考</h3><p>TypeScript团队不使用null(参考 <img src="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined" alt="TypeScript编码指南">），它没有造成任何问题。道格拉斯克罗克福德认为这null是一个坏主意，我们都应该使用undefined。<br>但是，NodeJS样式代码库在Error参数用null值作为标准表示Something is currently unavailable。我个人并不在意区分这两者，因为大多数项目对使用null或undefined都有各自的意见，并且只两者的判断都可以直接用<code>== null</code>代替。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/06/04/zepto源码分析/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/myavatar.jpg" alt="kyjo2014's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        467346087@qq.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/10/">十月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/07/">七月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/10/">十月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">10</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="bestkyjo" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-github.png);">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;LTH's note book
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
