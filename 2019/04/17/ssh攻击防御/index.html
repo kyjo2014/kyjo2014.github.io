@@ -10,7 +10,7 @@
     
     <title>
         
-            如何实现lazyman | 
+            ssh攻击防御 | 
         
         LTH&#39;s note book
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="kyjo2014">
     <meta name="description" content="html|css|javascript|LTH&#39;s blog">
-    <meta name="keywords" content="123,javaScript | lazyman">
+    <meta name="keywords" content="123,安全 | SSH">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://kyjo2014.github.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="如何实现lazyman | LTH&#39;s note book">
+    <meta property="og:title" content="ssh攻击防御 | LTH&#39;s note book">
     <meta property="og:description" content="html|css|javascript|LTH&#39;s blog">
-    <meta property="og:article:tag" content="javaScript | lazyman"> 
+    <meta property="og:article:tag" content="安全 | SSH"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#如何实现一个lazyman"><span class="post-toc-number">1.</span> <span class="post-toc-text">如何实现一个lazyman</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSH攻击目的"><span class="post-toc-number">1.</span> <span class="post-toc-text">SSH攻击目的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#防御方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">防御方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改端口"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">修改端口</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                如何实现lazyman
+                ssh攻击防御
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>kyjo2014</strong>
-        <span>3月 16, 2017</span>
+        <span>4月 17, 2019</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -313,7 +313,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/javaScript-lazyman/">javaScript | lazyman</a>
+        <a class="post_tag-link" href="/tags/安全-SSH/">安全 | SSH</a>
     </ul>
     
 
@@ -329,7 +329,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=如何实现lazyman&url=http://kyjo2014.github.com//2017/03/16/如何实现lazyman/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=ssh攻击防御&url=http://kyjo2014.github.com//2019/04/17/ssh攻击防御/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -338,7 +338,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=如何实现lazyman&url=http://kyjo2014.github.com//2017/03/16/如何实现lazyman/index.html&via=kyjo2014" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=ssh攻击防御&url=http://kyjo2014.github.com//2019/04/17/ssh攻击防御/index.html&via=kyjo2014" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -347,7 +347,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2017/03/16/如何实现lazyman/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://kyjo2014.github.com//2019/04/17/ssh攻击防御/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -356,7 +356,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2017/03/16/如何实现lazyman/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://kyjo2014.github.com//2019/04/17/ssh攻击防御/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -380,22 +380,9 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="如何实现一个lazyman"><a href="#如何实现一个lazyman" class="headerlink" title="如何实现一个lazyman"></a>如何实现一个lazyman</h1><p>这两天听到同学参加面试的时候被问到了这个问题，非常有趣。特别上网搜资料记录下来。<br>题目的要求是这样的：</p>
-<blockquote>
-<p>实现一个LazyMan，可以按照以下方式调用:<br>LazyMan(“Hank”)输出:<br>Hi! This is Hank!<br>LazyMan(“Hank”).sleep(10).eat(“dinner”)<br>输出<br>Hi! This is Hank!<br>//等待10秒..<br>Wake up after 10<br>Eat dinner~<br>LazyMan(“Hank”).eat(“dinner”).eat(“supper”)<br>输出<br>Hi This is Hank!<br>Eat dinner~<br>Eat supper~<br>LazyMan(“Hank”).sleepFirst(5).eat(“supper”)<br>输出<br>//等待5秒<br>Wake up after 5<br>Hi This is Hank!<br>Eat supper<br>以此类推。</p>
-</blockquote>
-<p>代码参考了：<a href="http://web.jobbole.com/89626/" target="_blank" rel="external">lazyman实现</a><br>完成这个题目有以下几个要点:</p>
-<p>1.解决链式调用  </p>
-<p>在jquery对象中会通过<code>return this</code>的方式，把自身不断返回出去，从而让下一次调用能够成功。根据这个原理我就可以先写下这样的代码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function lzman(info) &#123;</div><div class="line">   console.log(`this is $&#123;info&#125;`)</div><div class="line">   return this//注意：用new的方式调用函数会默认返回this，这句可以省略</div><div class="line">&#125;</div><div class="line">var a = new lzman(&apos;hank&apos;)</div><div class="line"></div><div class="line">执行情况：</div><div class="line">   this is hank</div></pre></td></tr></table></figure>
-<p>这样题目的第一步就完成了。但这时候还没进行链式调用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">lzman.prototype.eat = function (meal) &#123;</div><div class="line">    console.log(`eat $&#123;meal&#125;` )</div><div class="line">    return this</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">function lzman(info) &#123;</div><div class="line">    console.log(`this is $&#123;info&#125;`)</div><div class="line">    return this//注意：用new的方式调用函数会默认返回this，这句可以省略</div><div class="line"> &#125;</div><div class="line"> var a = (new lzman(&apos;hank&apos;)).eat(&apos;supper&apos;).eat(&apos;dinner&apos;)</div><div class="line"> 执行情况:</div><div class="line">    this is hank</div><div class="line">    eat supper</div><div class="line">    eat dinner</div></pre></td></tr></table></figure></p>
-<p> 现在可以看到链式调用执行成功，hank可以按照调用顺序先吃午饭再吃晚饭了。<br> 但这个时候遇到了个问题，题目中说hank可以进行sleep操作，函数的执行过程需要进行等待。</p>
-<ol>
-<li>行为流程要进行延时操作<br>一想到延时立马就想到了setTimeout函数，然而这个函数与c语言的sleep函数不一样。这个函数并不会对进程进行堵塞。而是把延时函数放在任务队列中，<br>一旦执行完函数依然会立刻进行返回，从而导致接下来的函数继续立刻执行。所以要求函数的实际行为不能够与函数的执行同步。这样子应该怎么做呢？很容易，既然setTimeout是把一个函数放在任务队列中，让延时执行函数与外部函数的执行时机不一致。那么我也去实现一个任务队列就好啦。这样就可以写成这样的函数。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">  //这里eat也要改写下</div><div class="line">  lzman.prototype.eat = function (name) &#123;</div><div class="line">     var self = this;</div><div class="line">        var fn =(function(name)&#123;</div><div class="line">            return function()&#123;</div><div class="line">                console.log(&quot;Eat &quot; + name + &quot;~&quot;);</div><div class="line">                self.next()</div><div class="line">            &#125;</div><div class="line">        &#125;)(name);</div><div class="line">        this.tasks.push(fn);</div><div class="line">    return this; // 实现链式调用</div><div class="line"></div><div class="line">&#125;</div><div class="line">lzman.prototype.next = function() &#123; </div><div class="line">    var fn = this.tasks.shift();</div><div class="line">    fn &amp;&amp; fn();</div><div class="line">&#125;</div><div class="line">lzman.prototype.sleep = function (time) &#123;</div><div class="line">     var self = this;</div><div class="line">    var fn = (function(time)&#123;</div><div class="line">        return function() &#123;</div><div class="line">            setTimeout(function()&#123;</div><div class="line">                console.log(&quot;Wake up after &quot; + time + &quot;s!&quot;);</div><div class="line">                self.next();</div><div class="line">            &#125;, time * 1000);</div><div class="line">        &#125;</div><div class="line">    &#125;)(time);//由于setTimeout执行内部函数的时候作用域环境已经发生改变所以需要使用self和闭包来保存变量，否则下次调用sleep的时候上一次的time会被覆盖，同时由于函数完成时有可能上一次sleep操作未完成，所以tasks队列保存的是一个函数，不立刻进行setTImeout的调用</div><div class="line">    this.tasks.push(fn);</div><div class="line">   return this;</div><div class="line">&#125;</div><div class="line">//为了统一行为，这里也要把主要行为分拆</div><div class="line">function lzman(info) &#123;</div><div class="line">    this.tasks = [];</div><div class="line">     this.tasks = [];   </div><div class="line">    var self = this;</div><div class="line">    var fn =(function(n)&#123;</div><div class="line">        var name = n;</div><div class="line">        return function()&#123;</div><div class="line">            console.log(&quot;Hi! This is &quot; + name + &quot;!&quot;);</div><div class="line">            self.next();</div><div class="line">        &#125;</div><div class="line">    &#125;)(name);</div><div class="line">    this.tasks.push(fn);</div><div class="line">    self.next();//注意这里</div><div class="line">   </div><div class="line"></div><div class="line">    return this//注意：用new的方式调用函数会默认返回this，这句可以省略</div><div class="line"> &#125;</div><div class="line"> var a = (new lzman(&apos;hank&apos;)).sleep(10).eat(&apos;supper&apos;).eat(&apos;dinner&apos;)</div><div class="line"></div><div class="line"> 执行结果:</div><div class="line">    Hi! This is hank!</div><div class="line">    Wake up after 10s!</div><div class="line">    Eat supper~</div><div class="line">    Eat dinner~</div><div class="line">```  </div><div class="line"></div><div class="line">这时候，主体已经能够跑起来了，还有一个问题，如何实现sleepfirst函数</div><div class="line"></div><div class="line">3. 实现sleepfirst函数</div><div class="line">从题目中可以看到，sleepfirst函数的优先级是最高的。其他行为函数都是使用push的方式向tasks队列  </div><div class="line">中插入的，这时候只需要改为用unshift函数插入就可以了。所以实现跟上面的sleep函数差不多。</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>lzman.prototype.sleepFirst = function(time) {<br>    var self = this;<br>    var fn = (function(time) {<br>        return function() {<br>            setTimeout(function() {<br>                console.log(“Wake up after “ + time + “s!”);<br>                self.next();<br>            }, time * 1000);<br>        }<br>    })(time);<br>    this.tasks.unshift(fn);<br>    return this;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">4. 用工厂函数取代new 方式生成lzman对象</div><div class="line">题目要求直接使用函数调用的方式生成对象，而之前都是用new lzman（）,现在用一个工厂函数包起来就能完成。</div></pre></td></tr></table></figure></p>
-<p>function LazyMan(name){<br>    return new lzman(name);<br>}<br>```<br>通过编写lazyman能够加深对event loop的了解，以及对学习如何实现promise有很大的益处。</p>
+        <p>自从在腾讯云买了服务器后，不知道是因为IP是在高危段还是腾讯云泄漏了IP。才用没过几天，账户登录就发现<br>有几千次ssh登录失败。虽然root账户的密码是随机的，但也禁不住被这样随机猜测。所以就研究了下ssh攻击的防御方式。</p>
+<h2 id="SSH攻击目的"><a href="#SSH攻击目的" class="headerlink" title="SSH攻击目的"></a>SSH攻击目的</h2><p>ssh攻击的目的是试图猜出服务器账户的密码从而获得登录服务器的权限。</p>
+<h2 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h2><h3 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h3><p>默认ssh登录的端口是22，所以</p>
 
     
 
@@ -419,21 +406,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/19/snabbdom的virtual-dom/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/03/15/web安全漏洞/" id="post_nav-older" class="next-content">
+        <a href="/2019/04/07/服务器上搭建code-server/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
